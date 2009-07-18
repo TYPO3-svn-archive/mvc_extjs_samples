@@ -22,6 +22,6 @@ Tx_Extbase_Utility_Plugin::registerTypoScript(
 	'MvcExtjsSamples',
 	'Pi3',
 	array('Twitter' => 'index'),
-	array()			// Action 'genres' is used for AJAX and thus should not be cached
+	array()
 );
 ?>

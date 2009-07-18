@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
 	
 	/**
 	 * Index action for this controller.
@@ -40,54 +40,49 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_Extbase_MVC_
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
-			// Load ExtJS libraries and stylesheets
-		$GLOBALS['TSFE']->pageIncludes->loadExtJS();
+		$this->initializeExtJSAction();
 		
 		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'genres');
 		
-			// Create a form with a textbox and a combobox (content loaded with AJAX)
-	$GLOBALS['TSFE']->pageIncludes->addJsInlineCode('mvc_extjs_samples.SimpleForm', '
-		Ext.ns("mvc_extjs_samples.SimpleForm");
-		mvc_extjs_samples.SimpleForm = function() {
-			return {
-				init: function() {
-					var genres = new Ext.data.Store({
-						reader: new Ext.data.JsonReader({
-							fields: ["id", "genre_name"],
-							root: "rows"
-						}),
-						proxy: new Ext.data.HttpProxy({
-							url: "' . $ajaxUrl . '"
-						}),
-						autoLoad: true
-					});
-				
-					var movie_form = new Ext.FormPanel({
-						title: "Movie Information Form",
-						width: 250,
-						items: [{
-							xtype: "textfield",
-							fieldLabel: "Title",
-							name: "title",
-							allowBlank: false
-						},{
-							xtype: "combo",
-							name: "genre",
-							fieldLabel: "Genre",
-							mode: "local",
-							store: genres,
-							displayField: "genre_name",
-							width: 120
-						}]
-					});
-		
-					movie_form.render("MvcExtjsSamples-SimpleForm");
-				}
-			}
-		}();
-		Ext.onReady(mvc_extjs_samples.SimpleForm.init, mvc_extjs_samples.SimpleForm);
+			// Create a data store with movie genres
+		$this->addJsInlineCode('
+			var genres = new Ext.data.Store({
+				reader: new Ext.data.JsonReader({
+					fields: ["id", "genre_name"],
+					root: "rows"
+				}),
+				proxy: new Ext.data.HttpProxy({
+					url: "' . $ajaxUrl . '"
+				}),
+				autoLoad: true
+			});
 		');
 		
+			// Create a form with a textbox and a combobox
+		$this->addJsInlineCode('
+			var movie_form = new Ext.FormPanel({
+				title: ' . $this->getExtJSLabelKey('index.caption') . ',
+				width: 250,
+				items: [{
+					xtype: "textfield",
+					fieldLabel: "Title",
+					name: "title",
+					allowBlank: false
+				},{
+					xtype: "combo",
+					name: "genre",
+					fieldLabel: "Genre",
+					mode: "local",
+					store: genres,
+					displayField: "genre_name",
+					width: 120
+				}]
+			});
+
+			movie_form.render("MvcExtjsSamples-SimpleForm");
+		');
+		
+		$this->outputJsCode();
 	}
 	
 	/**
