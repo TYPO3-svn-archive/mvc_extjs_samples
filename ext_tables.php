@@ -18,7 +18,7 @@ Tx_Extbase_Utility_Plugin::registerPlugin(
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
 	'MvcExtjsSamples',
-	'Pi2',
+	'Pi3',
 	'MVC ExtJS Samples - Twitter'
 );
 
