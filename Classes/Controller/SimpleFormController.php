@@ -46,40 +46,48 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_Extbase_MVC_
 		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'genres');
 		
 			// Create a form with a textbox and a combobox (content loaded with AJAX)
-		$GLOBALS['TSFE']->pageIncludes->addJsHandlerCode(
-			'var genres = new Ext.data.Store({
-				reader: new Ext.data.JsonReader({
-					fields: ["id", "genre_name"],
-					root: "rows"
-				}),
-				proxy: new Ext.data.HttpProxy({
-					url: "' . $ajaxUrl . '"
-				}),
-				autoLoad: true
-			});
-			
-			var movie_form = new Ext.FormPanel({
-				title: "Movie Information Form",
-				width: 250,
-				items: [{
-					xtype: "textfield",
-					fieldLabel: "Title",
-					name: "title",
-					allowBlank: false
-				},{
-					xtype: "combo",
-					name: "genre",
-					fieldLabel: "Genre",
-					mode: "local",
-					store: genres,
-					displayField: "genre_name",
-					width: 120
-				}]
-			});
-			
-			movie_form.render("MvcExtjsSamples-SimpleForm");',
-			t3lib_pageIncludes::JSHANDLER_EXTONREADY
-		);
+	$GLOBALS['TSFE']->pageIncludes->addJsInlineCode('mvc_extjs_samples.SimpleForm', '
+		Ext.ns("mvc_extjs_samples.SimpleForm");
+		mvc_extjs_samples.SimpleForm = function() {
+			return {
+				init: function() {
+					var genres = new Ext.data.Store({
+						reader: new Ext.data.JsonReader({
+							fields: ["id", "genre_name"],
+							root: "rows"
+						}),
+						proxy: new Ext.data.HttpProxy({
+							url: "' . $ajaxUrl . '"
+						}),
+						autoLoad: true
+					});
+				
+					var movie_form = new Ext.FormPanel({
+						title: "Movie Information Form",
+						width: 250,
+						items: [{
+							xtype: "textfield",
+							fieldLabel: "Title",
+							name: "title",
+							allowBlank: false
+						},{
+							xtype: "combo",
+							name: "genre",
+							fieldLabel: "Genre",
+							mode: "local",
+							store: genres,
+							displayField: "genre_name",
+							width: 120
+						}]
+					});
+		
+					movie_form.render("MvcExtjsSamples-SimpleForm");
+				}
+			}
+		}();
+		Ext.onReady(mvc_extjs_samples.SimpleForm.init, mvc_extjs_samples.SimpleForm);
+		');
+		
 	}
 	
 	/**
