@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>plugin</type>
+		<description>Language labels for flexform Feeds</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="width">Width:</label>
+			<label index="height">Height:</label>
+			<label index="title">Title:</label>
+			<label index="interval">Refresh Interval (seconds):</label>
+			<label index="url">Url:</label>
+			<label index="count">Record Amount</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
+			
+		</languageKey>
+	</data>
+</T3locallang>

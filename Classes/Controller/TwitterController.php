@@ -41,7 +41,7 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjsSamples
 	 */
 	public function indexAction() {
 		$this->initializeExtJSAction();
-		$this->addJsLibrary('Ext.ux.TYPO3.twitter', 'ux.typo3.twitter.js');
+		$this->addJsLibrary('Ext.ux.TYPO3.Twitter', 'ux.TYPO3.Twitter.js');
 		
 		$GLOBALS['TSFE']->pageIncludes->addInlineComment('These examples show the possibility to work with ExtJS based on extbase plugin');
 		
