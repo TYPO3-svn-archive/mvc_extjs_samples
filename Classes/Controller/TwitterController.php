@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id: SimpleFormController.php 22442 2009-07-18 11:11:19Z xperseguers $
  */
-class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
 	
 	/**
 	 * Index action for this controller.
@@ -40,36 +40,30 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_Extbase_MVC_Con
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
+		$this->initializeExtJSAction();
+		$this->addJsLibrary('Ext.ux.TYPO3.twitter', 'ux.typo3.twitter.js');
+		
 		$GLOBALS['TSFE']->pageIncludes->addInlineComment('These examples show the possibility to work with ExtJS based on extbase plugin');
 		
-			// Load ExtJS libraries and stylesheets
-		$GLOBALS['TSFE']->pageIncludes->loadExtJS();
-		$GLOBALS['TSFE']->pageIncludes->addJsLibrary('Ext.ux.TYPO3.twitter', 'typo3conf/ext/mvc_extjs_samples/Resources/Public/Javascript/ux.typo3.twitter.js');
-		
-		
-		
 		$twitter = '
-		  interval: ' . $this->settings['twitterInterval'] . ',
-		  width: ' . $this->settings['twitterWidth'] . ',
-		  height: ' . $this->settings['twitterHeight'] . ',
-		  imageWidth: ' . $this->settings['twitterImageWidth'] . ',
-		  columnHeader: ["User", "Message"]';
+			interval: ' . $this->settings['twitterInterval'] . ',
+			width: ' . $this->settings['twitterWidth'] . ',
+			height: ' . $this->settings['twitterHeight'] . ',
+			imageWidth: ' . $this->settings['twitterImageWidth'] . ',
+			columnHeader: ["User", "Message"]';
 		if ($this->settings['twitterType'] == 1 && $this->settings['twitterKeyword']) {
+			$this->settingsExtJS->assign('twitterKeyword', $this->settings['twitterKeyword']);
 			$twitter .= ',
 			keyword: "' . $this->settings['twitterKeyword'] . '"';	
-		}
-		#debug($this->settings); 
-		
-		// read the settings from flexform
+		} 
 		
 			// Create twitter plugin
-		$GLOBALS['TSFE']->pageIncludes->addJsHandlerCode(
-			'
-			new Ext.ux.TYPO3.Twitter("MvcExtjsSamples-Twitter", {' . $twitter . '});',
-			t3lib_pageIncludes::JSHANDLER_EXTONREADY
+		$this->addJsInlineCode('
+			new Ext.ux.TYPO3.Twitter("MvcExtjsSamples-Twitter", {' . $twitter . '});'
 		);
+		
+		$this->outputJsCode();
 	}
-	
 	
 }
 ?>
