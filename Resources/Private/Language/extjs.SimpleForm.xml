@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>plugin</type>
+		<description>Language labels for controller SimpleForm</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="index.caption">Movie Information Form</label>
+			<label index="index.title">Title:</label>
+			<label index="index.genre">Genre:</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="index.caption">Formulaire d'information sur les films</label>
+			<label index="index.title">Titre:</label>
+			<label index="index.genre">Genre:</label>
+		</languageKey>
+	</data>
+</T3locallang>
