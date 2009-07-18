@@ -47,6 +47,11 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	protected $jsInline = array();
 	
 	/**
+	 * @var Tx_MvcExtjsSamples_ExtJS_SettingsService
+	 */
+	protected $settingsExtJS;
+	
+	/**
 	 * Should be called in an action method, before doing anything else.
 	 */
 	protected function initializeExtJSAction() {
@@ -55,6 +60,9 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 		
 			// Namespace will be registered in ExtJS when calling method outputJsCode
 		$this->extJSNamespace = $this->extensionName . '.' . $this->request->getControllerName();
+		
+			// Initialize the ExtJS settings service 
+		$this->settingsExtJS = t3lib_div::makeInstance('Tx_MvcExtjsSamples_ExtJS_SettingsService', $this->extJSNamespace);
 	}
 	
 	/**
@@ -67,8 +75,30 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	}
 	
 	/**
+	* Adds a JavaScript library.
+	* 
+	* @param string $name
+	* @param string $file file to be included, relative to this extension's Javascript directory
+	* @param string $type
+	* @param int $section 	t3lib_pageIncludes::PART_HEADER (0) or t3lib_pageIncludes::PART_FOOTER (1)
+	* @param boolean $compressed	flag if library is compressed
+	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block	
+	*/
+	protected function addJsLibrary($name, $file, $type = 'text/javascript', $section = t3lib_pageIncludes::PART_HEADER, $compressed = TRUE, $forceOnTop = FALSE) {
+		$extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
+		$relPath = substr($extPath, strlen(PATH_site));
+		$jsFile = 'Resources/Public/Javascript/' . $file;
+		
+		if (!@is_file($extPath . $jsFile)) {
+			die('File "' . $extPath . $jsFile . '" not found!');
+		}
+		
+		$GLOBALS['TSFE']->pageIncludes->addJsLibrary($name, $relPath . $jsFile);
+	}
+	
+	/**
 	 * Outputs JS code to the page
-	 *
+	 * 
 	 * @param boolean $compressed
 	 * @param boolean $forceOnTop
 	 */
@@ -81,6 +111,10 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			// Register localized labels
 		if (count($labels) > 0) {
 			$block .= $this->extJSNamespace . '.lang = ' . json_encode($labels) . ';' . chr(10);
+		}
+		
+		if ($this->settingsExtJS->count() > 0) {
+			$block .= $this->settingsExtJS->serialize() . chr(10);
 		}
 		
 			// Put JS code into the namespace
