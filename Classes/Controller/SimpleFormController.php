@@ -45,7 +45,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_Extbase_MVC_
 		
 		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'genres');
 		
-			// Show a message box when the page is ready
+			// Create a form with a textbox and a combobox (content loaded with AJAX)
 		$GLOBALS['TSFE']->pageIncludes->addJsHandlerCode(
 			'var genres = new Ext.data.Store({
 				reader: new Ext.data.JsonReader({
