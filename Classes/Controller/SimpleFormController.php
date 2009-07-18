@@ -65,13 +65,13 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 				width: 250,
 				items: [{
 					xtype: "textfield",
-					fieldLabel: "Title",
+					fieldLabel: ' . $this->getExtJSLabelKey('index.title') . ',
 					name: "title",
 					allowBlank: false
 				},{
 					xtype: "combo",
 					name: "genre",
-					fieldLabel: "Genre",
+					fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
 					mode: "local",
 					store: genres,
 					displayField: "genre_name",

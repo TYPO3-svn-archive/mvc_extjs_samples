@@ -85,7 +85,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 		
 			// Put JS code into the namespace
 		$block .=
-			$this->extJSNamespace . ' = function() {
+			$this->extJSNamespace . '.plugin = function() {
 				return {
 					init: function() {
 						' . join(chr(10), $this->jsInline) . '
@@ -95,7 +95,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 		';
 		
 			// Start code when ExtJS is ready 
-		$block .= 'Ext.onReady(' . $this->extJSNamespace . '.init, ' . $this->extJSNamespace . ');';
+		$block .= 'Ext.onReady(' . $this->extJSNamespace . '.plugin.init, ' . $this->extJSNamespace . '.plugin);';
 		
 		$GLOBALS['TSFE']->pageIncludes->addJsInlineCode($this->extJSNamespace, $block, $compressed, $forceOnTop);
 	}
