@@ -10,4 +10,11 @@ Tx_Extbase_Utility_Plugin::registerTypoScript(
 	array('HelloWorld' => 'index'),
 	array()
 );
+
+Tx_Extbase_Utility_Plugin::registerTypoScript(
+	'MvcExtjsSamples',
+	'Pi2',
+	array('SimpleForm' => 'index,genres'),
+	array('SimpleForm' => 'genres')			// Action 'genres' is used for AJAX and thus should not be cached
+);
 ?>
