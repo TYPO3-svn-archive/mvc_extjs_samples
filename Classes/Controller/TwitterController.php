@@ -58,8 +58,8 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_Extbase_MVC_Con
 			$twitter .= ',
 			keyword: "' . $this->settings['twitterKeyword'] . '"';	
 		}
-		debug($this->settings); 
-		debug(json_encode($twitter)); 
+		#debug($this->settings); 
+		
 		// read the settings from flexform
 		
 			// Create twitter plugin
