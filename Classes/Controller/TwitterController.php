@@ -47,21 +47,25 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_Extbase_MVC_Con
 		$GLOBALS['TSFE']->pageIncludes->addJsLibrary('Ext.ux.TYPO3.twitter', 'typo3conf/ext/mvc_extjs_samples/Resources/Public/Javascript/ux.typo3.twitter.js');
 		
 		
+		
+		$twitter = '
+		  interval: ' . $this->settings['twitterInterval'] . ',
+		  width: ' . $this->settings['twitterWidth'] . ',
+		  height: ' . $this->settings['twitterHeight'] . ',
+		  imageWidth: ' . $this->settings['twitterImageWidth'] . ',
+		  columnHeader: ["User", "Message"]';
+		if ($this->settings['twitterType'] == 1 && $this->settings['twitterKeyword']) {
+			$twitter .= ',
+			keyword: "' . $this->settings['twitterKeyword'] . '"';	
+		}
+		debug($this->settings); 
+		debug(json_encode($twitter)); 
 		// read the settings from flexform
 		
 			// Create twitter plugin
 		$GLOBALS['TSFE']->pageIncludes->addJsHandlerCode(
 			'
-			new Ext.ux.TYPO3.Twitter("MvcExtjsSamples-Twitter", {
-				interval: 0,
-				width: 300,
-				height: 600,
-				imageWidth: 70,
-				columnHeader: ["User", "Message"],
-				keyword: "extbase"
-			});
-
-			',
+			new Ext.ux.TYPO3.Twitter("MvcExtjsSamples-Twitter", {' . $twitter . '});',
 			t3lib_pageIncludes::JSHANDLER_EXTONREADY
 		);
 	}
