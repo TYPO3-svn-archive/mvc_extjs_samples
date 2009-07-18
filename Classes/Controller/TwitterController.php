@@ -44,7 +44,7 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_Extbase_MVC_Con
 		
 			// Load ExtJS libraries and stylesheets
 		$GLOBALS['TSFE']->pageIncludes->loadExtJS();
-		$GLOBALS['TSFE']->pageIncludes->addJsLibrary('Ext.ux.TYPO3.twitter', 'typo3conf/ext/mvc_extjs_samples/Public/Javascript/ux.typo3.twitter.js');
+		$GLOBALS['TSFE']->pageIncludes->addJsLibrary('Ext.ux.TYPO3.twitter', 'typo3conf/ext/mvc_extjs_samples/Resources/Public/Javascript/ux.typo3.twitter.js');
 		
 		
 		// read the settings from flexform
