@@ -8,7 +8,7 @@
 		<el>
 			<twitterWidth>
 				<TCEforms>
-					<label>Width:</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:width</label>
 					<config>
 						<type>input</type>
 						<size>8</size>
@@ -20,7 +20,7 @@
 			</twitterWidth>
 			<twitterHeight>
 				<TCEforms>
-					<label>Height:</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:height</label>
 					<config>
 						<type>input</type>
 						<size>8</size>
@@ -32,7 +32,7 @@
 			</twitterHeight>
 			<twitterImageWidth>
 				<TCEforms>
-					<label>Image width:</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:imageWidth</label>
 					<config>
 						<type>input</type>
 						<size>8</size>
@@ -44,7 +44,7 @@
 			</twitterImageWidth>
 			<twitterInterval>
 				<TCEforms>
-					<label>Refresh Interval (seconds):</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:interval</label>
 					<config>
 						<type>input</type>
 						<size>8</size>
@@ -56,16 +56,16 @@
 			</twitterInterval>
 			<twitterType>
 				<TCEforms>
-					<label>Type:</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type</label>
 					<config>
 						<type>select</type>
 						<items>
 							<numIndex index="0">
-								<numIndex index="0">Public Timeline</numIndex>
+								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type.publicTimeline</numIndex>
 								<numIndex index="1">0</numIndex>
 							</numIndex> 
 							<numIndex index="1">
-								<numIndex index="0">Search</numIndex>
+								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type.search</numIndex>
 								<numIndex index="1">0</numIndex>
 							</numIndex> 
 						</items>
@@ -74,7 +74,7 @@
 			</twitterType>
 			<twitterKeyword>
 				<TCEforms>
-					<label>Keyword:</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:keyword</label>
 					<config>
 						<type>input</type>
 						<size>30</size>
