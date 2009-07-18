@@ -87,7 +87,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	protected function addJsLibrary($name, $file, $type = 'text/javascript', $section = t3lib_pageIncludes::PART_HEADER, $compressed = TRUE, $forceOnTop = FALSE) {
 		$extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
 		$relPath = substr($extPath, strlen(PATH_site));
-		$jsFile = 'Resources/Public/Javascript/' . $file;
+		$jsFile = 'Resources/Public/JavaScript/' . $file;
 		
 		if (!@is_file($extPath . $jsFile)) {
 			die('File "' . $extPath . $jsFile . '" not found!');
