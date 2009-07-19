@@ -168,7 +168,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			// Extract label keys available for current action
 		$keys = array();
 		foreach ($allLabels['default'] as $key => $value) {
-			if (substr($key, 0, strlen($action) + 1) === $action . '.') {
+			if (strpos($key, $action . '.') === 0) {
 				$keys[] = substr($key, strlen($action) + 1);
 			}
 		}

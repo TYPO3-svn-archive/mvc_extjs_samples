@@ -90,6 +90,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 	 * 
 	 * @see typo3/classes/class.typo3ajax.php
 	 * @return void
+	 * @ajax
 	 */
 	public function genresAction() {
 		$arr = array(

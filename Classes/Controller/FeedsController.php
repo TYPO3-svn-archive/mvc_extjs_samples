@@ -58,31 +58,34 @@ class Tx_MvcExtjsSamples_Controller_FeedsController extends Tx_MvcExtjsSamples_E
 			});   
 		');
 		
-			// Create a form with a textbox and a combobox
-		
-		
 		$this->outputJsCode();
 	}
 	
 	/**
-	 * Returns a list of movive genres as JSON.
+	 * Reads a list of feed articles from an external website and
+	 * returns them as XML for the Feeds plugin.
 	 * 
-	 * @see typo3/classes/class.typo3ajax.php
 	 * @return void
+	 * @ajax
 	 */
 	public function feedsAction() {
 		$feed = t3lib_div::_GP('tx_mvcextjssamples_pi4');
 				
-			// Prepare the JSON response
-		if($feed['feed'] != '' && strpos($feed['feed'], 'http') === 0){
+			// Prepare the XML response
+		if ($feed['feed'] != '' && strpos($feed['feed'], 'http') === 0) {
 			header('Content-Type: text/xml');
+			
 			$xml = file_get_contents($feed['feed']);
 			$xml = str_replace('<content:encoded>', '<content>', $xml);
 			$xml = str_replace('</content:encoded>', '</content>', $xml);
 			$xml = str_replace('</dc:creator>', '</author>', $xml);
 			echo str_replace('<dc:creator', '<author', $xml);
-			exit;
+		} else {
+			header(t3lib_div::HTTP_STATUS_404);
 		}
+		
+			// Do not do further processing
+		exit;
 	}
 	
 }
