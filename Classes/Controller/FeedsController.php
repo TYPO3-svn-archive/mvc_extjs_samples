@@ -69,13 +69,17 @@ class Tx_MvcExtjsSamples_Controller_FeedsController extends Tx_MvcExtjsSamples_E
 	 * @ajax
 	 */
 	public function feedsAction() {
-		$feed = t3lib_div::_GP('tx_mvcextjssamples_feeds');
-				
+		if (!$this->request->hasArgument('feed')) {
+			exit;	
+		}
+		#$feed = t3lib_div::_GP('tx_mvcextjssamples_feeds');
+		$feed = $this->request->getArgument('feed');
+
 			// Prepare the XML response
-		if ($feed['feed'] != '' && strpos($feed['feed'], 'http') === 0) {
+		if (strpos($feed, 'http') === 0) {
 			header('Content-Type: text/xml');
 			
-			$xml = file_get_contents($feed['feed']);
+			$xml = file_get_contents($feed);
 			$xml = str_replace('<content:encoded>', '<content>', $xml);
 			$xml = str_replace('</content:encoded>', '</content>', $xml);
 			$xml = str_replace('</dc:creator>', '</author>', $xml);
