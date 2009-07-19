@@ -59,8 +59,9 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 		$GLOBALS['TBE_STYLES']['extJS']['theme'] =  t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';
 			// Load ExtJS libraries and stylesheets
 		$GLOBALS['TSFE']->pageIncludes->loadExtJS();
-		
+
 			// Namespace will be registered in ExtJS when calling method outputJsCode
+			// TODO: add id of controller for multiple usage
 		$this->extJSNamespace = $this->extensionName . '.' . $this->request->getControllerName();
 		
 			// Initialize the ExtJS settings service 

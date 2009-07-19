@@ -1,5 +1,11 @@
-plugin.tx_mvcextjssamples_pi3 {
+plugin.tx_mvcextjssamples_twitter {
  	_CSS_DEFAULT_STYLE (
  		 p.getMessage { white-space:normal;}
+ 	)
+}
+
+plugin.tx_mvcextjssamples_feeds {
+ 	_CSS_DEFAULT_STYLE (
+ 		 p.message { white-space:normal;}
  	)
 }

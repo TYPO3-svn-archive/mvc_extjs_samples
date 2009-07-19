@@ -27,7 +27,7 @@ Ext.ux.TYPO3.Feeds = Ext.extend(Ext.util.Observable, {
 	width: 400,
 	height: 300,
 	interval: 0,
-	resultsPerPage: 15,
+	resultsPerPage: 10,
 	url: '',
 	title: 'RSS Feed',
 	cropMsg: 50,
@@ -44,11 +44,11 @@ Ext.ux.TYPO3.Feeds = Ext.extend(Ext.util.Observable, {
 
 		this.el = Ext.get(elId);
 
-		if (this.width < 250) {
-			this.width = 250;
+		if (this.width < 50) {
+			this.width = 50;
 		}
-		if (this.height < 250) {
-			this.height = 250;
+		if (this.height < 50) {
+			this.height = 50;
 		}
 		this.msgWidth = this.width - 8; 
 		
@@ -70,11 +70,15 @@ Ext.ux.TYPO3.Feeds = Ext.extend(Ext.util.Observable, {
 			reader: new Ext.data.XmlReader(
 				{record: 'item'},
 				['title', 'author', {name:'pubDate', type:'date'}, 'link', 'description']
-			)
+			),
+			listeners: {
+			    load: function(store, records, options){
+			      
+			    }
+  			}
+
 		});
-		if (this.mode === 1) {
-			this.store.root = 'results';
-		}
+		
 		// create the grid
 		this.grid = new Ext.grid.GridPanel({
 			store: this.store,
@@ -102,7 +106,7 @@ Ext.ux.TYPO3.Feeds = Ext.extend(Ext.util.Observable, {
 	loadComponents: function() {
 		this.loadingTask = {
 			run: function(){
-				this.store.reload();
+				this.store.reload({start:0, limit:this.resultsPerPage});
 			},
 			interval: this.interval * 1000,
 			scope: this
@@ -112,7 +116,7 @@ Ext.ux.TYPO3.Feeds = Ext.extend(Ext.util.Observable, {
 		if (this.interval > 0) {
 			Ext.TaskMgr.start(this.loadingTask);
 		} else {
-			this.store.load();
+			this.store.load({start:0, limit:this.resultsPerPage});
 		}
 	
 	},

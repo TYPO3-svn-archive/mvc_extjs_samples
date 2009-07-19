@@ -6,39 +6,39 @@ if (!defined ('TYPO3_MODE')) {
 	// Plugin registration (listing in backend)
 Tx_Extbase_Utility_Plugin::registerPlugin(
 	'MvcExtjsSamples',
-	'Pi1',
+	'HelloWorld',
 	'MVC ExtJS Samples - Hello World'
 );
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
 	'MvcExtjsSamples',
-	'Pi2',
+	'SimpleForm',
 	'MVC ExtJS Samples - Simple Form'
 );
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
 	'MvcExtjsSamples',
-	'Pi3',
+	'Twitter',
 	'MVC ExtJS Samples - Twitter'
 );
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
 	'MvcExtjsSamples',
-	'Pi4',
+	'Feeds',
 	'MVC ExtJS Samples - Feeds'
 );
 
 	// Disable the display of layout, select_key and page fields
-$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_pi1'] = 'layout,select_key,pages';
-$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_pi2'] = 'layout,select_key,pages';
+$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_helloworld'] = 'layout,select_key,pages';
+$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_simpleform'] = 'layout,select_key,pages';
 
-$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_pi3'] = 'layout,select_key,pages';
-$TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_pi3'] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_pi3', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/Twitter.xml');
+$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_twitter'] = 'layout,select_key,pages';
+$TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples__twitter'] = 'pi_flexform';
+t3lib_extMgm::addPiFlexFormValue('mvcextjssamples__twitter', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/Twitter.xml');
 
-$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_pi4'] = 'layout,select_key,pages';
-$TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_pi4'] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_pi4', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/Feeds.xml');
+$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feeds'] = 'layout,select_key,pages';
+$TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_feeds'] = 'pi_flexform';
+t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_feeds', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/Feeds.xml');
 
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Mvc ExtJS Samples');   
 

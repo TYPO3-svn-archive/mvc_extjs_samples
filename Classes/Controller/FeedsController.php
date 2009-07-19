@@ -49,12 +49,12 @@ class Tx_MvcExtjsSamples_Controller_FeedsController extends Tx_MvcExtjsSamples_E
 			// Create a data store with movie genres
 		$this->addJsInlineCode('
 			new Ext.ux.TYPO3.Feeds("MvcExtjsSamples-Feed", {
-				interval: 0,
-				width: 450,
-				height: 300,
+				interval: ' . $this->settings['feedsInterval'] . ',
+				width: ' . $this->settings['feedsWidth'] . ',
+				height: ' . $this->settings['feedsHeight'] . ',
 				url: "' . $ajaxUrl . '",
 				title: "' . $this->settings['feedsTitle'] . '",
-				cropMsg: 100
+				cropMsg: 100' . ($this->settings['feedsCount'] ? ',resultsPerPage: ' . $this->settings['feedsCount'] : '') . '
 			});   
 		');
 		
@@ -69,7 +69,7 @@ class Tx_MvcExtjsSamples_Controller_FeedsController extends Tx_MvcExtjsSamples_E
 	 * @ajax
 	 */
 	public function feedsAction() {
-		$feed = t3lib_div::_GP('tx_mvcextjssamples_pi4');
+		$feed = t3lib_div::_GP('tx_mvcextjssamples_feeds');
 				
 			// Prepare the XML response
 		if ($feed['feed'] != '' && strpos($feed['feed'], 'http') === 0) {
