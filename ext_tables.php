@@ -33,8 +33,8 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_hel
 $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_simpleform'] = 'layout,select_key,pages';
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_twitter'] = 'layout,select_key,pages';
-$TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples__twitter'] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue('mvcextjssamples__twitter', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/Twitter.xml');
+$TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_twitter'] = 'pi_flexform';
+t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_twitter', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/Twitter.xml');
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feeds'] = 'layout,select_key,pages';
 $TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_feeds'] = 'pi_flexform';
