@@ -72,7 +72,6 @@ class Tx_MvcExtjsSamples_Controller_FeedsController extends Tx_MvcExtjsSamples_E
 		if (!$this->request->hasArgument('feed')) {
 			exit;	
 		}
-		#$feed = t3lib_div::_GP('tx_mvcextjssamples_feeds');
 		$feed = $this->request->getArgument('feed');
 
 			// Prepare the XML response

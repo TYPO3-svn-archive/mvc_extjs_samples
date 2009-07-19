@@ -59,6 +59,19 @@ $TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_feeds']
 t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_feeds', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/Feeds.xml');
 
 
+// ========== Plugin PictureSlideShow
+
+Tx_Extbase_Utility_Plugin::registerPlugin(
+	'MvcExtjsSamples',
+	'PictureSlideShow',
+	'MVC ExtJS Samples - Picture Slide Show'
+);
+
+	// Disable the display of layout, select_key and page fields
+$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_pictureslideshow'] = 'layout,select_key,pages';
+$TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_pictureslideshow'] = 'image,imagecaption';
+
+
 // ========== Plugin Movie
 
 Tx_Extbase_Utility_Plugin::registerPlugin(

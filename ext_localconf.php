@@ -38,4 +38,11 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 	array('Movie' => 'index'),
 	array()
 );
+
+Tx_Extbase_Utility_Plugin::configureDispatcher(
+	'MvcExtjsSamples',
+	'PictureSlideShow',
+	array('PictureSlideShow' => 'index'),
+	array()
+);
 ?>

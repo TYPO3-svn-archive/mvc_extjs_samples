@@ -52,14 +52,24 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	protected $settingsExtJS;
 	
 	/**
+	 * @var boolean
+	 */
+	protected $useExtCore = false;
+	
+	/**
 	 * Should be called in an action method, before doing anything else.
 	 */
-	protected function initializeExtJSAction() {
-			// temporary fix for t3style		
-		$GLOBALS['TBE_STYLES']['extJS']['theme'] =  t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';
-			// Load ExtJS libraries and stylesheets
-		$GLOBALS['TSFE']->pageIncludes->loadExtJS();
-
+	protected function initializeExtJSAction($useExtCore = false) {
+		if ($useExtCore) {
+			$this->useExtCore = TRUE;
+				// Load ExtCore library
+			$GLOBALS['TSFE']->pageIncludes->loadExtCore();		
+		} else {
+				// temporary fix for t3style		
+			$GLOBALS['TBE_STYLES']['extJS']['theme'] =  t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';
+				// Load ExtJS libraries and stylesheets
+			$GLOBALS['TSFE']->pageIncludes->loadExtJS();
+		}
 			// Namespace will be registered in ExtJS when calling method outputJsCode
 			// TODO: add id of controller for multiple usage
 		$this->extJSNamespace = $this->extensionName . '.' . $this->request->getControllerName();

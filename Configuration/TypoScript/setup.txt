@@ -9,3 +9,9 @@ plugin.tx_mvcextjssamples_feeds {
  		 p.message { white-space:normal;}
  	)
 }
+
+plugin.tx_mvcextjssamples_pictureslideshow {
+ 	_CSS_DEFAULT_STYLE (
+ 		 div.PictureSlideShow { padding: 5px; height: 280px; width: 420px; background-color: #E6E6E0; }
+ 	)
+}
