@@ -1,0 +1,5 @@
+plugin.tx_mvcextjssamples_pi3 {
+ 	_CSS_DEFAULT_STYLE (
+ 		 p.getMessage { white-space:normal; padding-right: 10px;}
+ 	)
+}

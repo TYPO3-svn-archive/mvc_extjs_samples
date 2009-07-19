@@ -40,5 +40,6 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_pi4
 $TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_pi4'] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_pi4', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/Feeds.xml');
 
+t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Mvc ExtJS Samples');   
 
 ?>
