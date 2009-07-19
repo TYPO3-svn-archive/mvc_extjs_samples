@@ -59,6 +59,36 @@ $TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_feeds']
 t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_feeds', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/Feeds.xml');
 
 
+// ========== Plugin Movie
+
+Tx_Extbase_Utility_Plugin::registerPlugin(
+	'MvcExtjsSamples',
+	'Movie',
+	'MVC ExtJS Samples - Movie'
+);
+
+	// Disable the display of layout, select_key and page fields
+$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_movie'] = 'layout,select_key,pages';
+
+	// Database configuration
+t3lib_extMgm::allowTableOnStandardPages('tx_mvcextjssamples_domain_model_movie');
+$TCA['tx_mvcextjssamples_domain_model_movie'] = array(
+    'ctrl' => array(
+        'title'     => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_movie',        
+        'label'     => 'title',    
+        'tstamp'    => 'tstamp',
+        'crdate'    => 'crdate',
+        'cruser_id' => 'cruser_id',
+        'default_sortby' => 'ORDER BY title',    
+        'enablecolumns' => array(
+            'disabled' => 'hidden',
+        ),
+        'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/tca.php',
+		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_mvcextjssamples_domain_model_movie.gif',
+    ),
+);
+
+
 // ========== Common
 
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'MVC ExtJS Samples');   

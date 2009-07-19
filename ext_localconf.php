@@ -31,4 +31,11 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 	array('Feeds' => 'index,feeds'),
 	array('Feeds' => 'feeds')
 );
+
+Tx_Extbase_Utility_Plugin::configureDispatcher(
+	'MvcExtjsSamples',
+	'Movie',
+	array('Movie' => 'index'),
+	array()
+);
 ?>
