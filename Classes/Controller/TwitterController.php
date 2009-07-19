@@ -50,7 +50,8 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjsSamples
 			width: ' . $this->settings['twitterWidth'] . ',
 			height: ' . $this->settings['twitterHeight'] . ',
 			imageWidth: ' . $this->settings['twitterImageWidth'] . ',
-			columnHeader: ["User", "Message"]';
+			columnHeader: ["User", "Message"],
+			fuzzyTime: true';
 		if ($this->settings['twitterType'] == 1 && $this->settings['twitterKeyword']) {
 			$this->settingsExtJS->assign('twitterKeyword', $this->settings['twitterKeyword']);
 			$twitter .= ',
