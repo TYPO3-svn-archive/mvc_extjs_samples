@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_BlogExample_Controller_BlogController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
 	 * @var Tx_MvcExtjsSamples_Domain_Model_MovieRepository
