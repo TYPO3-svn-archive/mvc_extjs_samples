@@ -3,13 +3,17 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-	// Plugin registration (frontend rendering)
+// ========== Plugin HelloWorld
+
 Tx_Extbase_Utility_Plugin::configureDispatcher(
 	'MvcExtjsSamples',
 	'HelloWorld',
 	array('HelloWorld' => 'index'),
 	array()
 );
+
+
+// ========== Plugin SimpleForm
 
 Tx_Extbase_Utility_Plugin::configureDispatcher(
 	'MvcExtjsSamples',
@@ -18,12 +22,18 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 	array('SimpleForm' => 'genres')			// Action 'genres' is used for AJAX and thus should not be cached
 );
 
+
+// ========== Plugin Twitter
+
 Tx_Extbase_Utility_Plugin::configureDispatcher(
 	'MvcExtjsSamples',
 	'Twitter',
 	array('Twitter' => 'index'),
 	array()
 );
+
+
+// ========== Plugin Feeds
 
 Tx_Extbase_Utility_Plugin::configureDispatcher(
 	'MvcExtjsSamples',
@@ -32,17 +42,23 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 	array('Feeds' => 'feeds')
 );
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
-	'MvcExtjsSamples',
-	'Movie',
-	array('Movie' => 'index'),
-	array()
-);
+
+// ========== Plugin PictureSlideShow
 
 Tx_Extbase_Utility_Plugin::configureDispatcher(
 	'MvcExtjsSamples',
 	'PictureSlideShow',
 	array('PictureSlideShow' => 'index'),
+	array()
+);
+
+
+// ========== Plugin Movie
+
+Tx_Extbase_Utility_Plugin::configureDispatcher(
+	'MvcExtjsSamples',
+	'Movie',
+	array('Movie' => 'index'),
 	array()
 );
 ?>
