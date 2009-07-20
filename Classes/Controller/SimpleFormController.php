@@ -48,7 +48,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 		$this->addJsInlineCode('
 			var genres = new Ext.data.Store({
 				reader: new Ext.data.JsonReader({
-					fields: ["id", "genre_name"],
+					fields: ["name", "uid"],
 					root: "rows"
 				}),
 				proxy: new Ext.data.HttpProxy({
@@ -74,7 +74,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 					fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
 					mode: "local",
 					store: genres,
-					displayField: "genre_name",
+					displayField: "name",
 					width: 120
 				}]
 			});
@@ -93,13 +93,15 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 	 * @ajax
 	 */
 	public function genresAction() {
-		$arr = array(
-			array('id' => 1, 'genre_name' => 'Comedy'),
-			array('id' => 2, 'genre_name' => 'Drama'),
-			array('id' => 3, 'genre_name' => 'Action'),
-			array('id' => 4, 'genre_name' => 'Mystery'),
-		);
-				
+		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_GenreRepository');
+		/* @var $genreRepository Tx_MvcExtjsSamples_Domain_Model_GenreRepository */
+		
+			// Retrieve all genres from repository
+		$genres = $genreRepository->findAll();
+		
+			// Convert Tx_MvcExtjsSamples_Domain_Model_Genre objects to an array
+		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::decodeArrayForJSON($genres);
+		
 			// Prepare the JSON response
 		header('Content-type: text/html; charset=utf-8');
 		header('X-JSON: true');
