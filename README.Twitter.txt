@@ -9,8 +9,10 @@ Frontend plugin Twitter needs following files:
 |       |   `-- ActionController.php
 |       `-- SettingsService.php
 |-- Configuration
-|   `-- FlexForms
-|       `-- Twitter.xml
+|   |-- FlexForms
+|   |   `-- Twitter.xml
+|   `-- TypoScript
+|       `-- setup.txt (partial)
 |-- Resources
 |   |-- Private
 |   |   |-- Language

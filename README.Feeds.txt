@@ -9,8 +9,10 @@ Frontend plugin Feeds needs following files:
 |       |   `-- ActionController.php
 |       `-- SettingsService.php
 |-- Configuration
-|   `-- FlexForms
-|       `-- Feeds.xml
+|   |-- FlexForms
+|   |   `-- Feeds.xml
+|   `-- TypoScript
+|       `-- setup.txt (partial)
 |-- Resources
 |   |-- Private
 |   |   |-- Language
