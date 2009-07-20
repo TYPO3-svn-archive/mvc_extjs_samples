@@ -53,7 +53,7 @@ class Tx_MvcExtjsSamples_ExtJS_Utility {
 	/**
 	 * Decodes an object to be used by JSON later on.
 	 *
-	 * @param object $object
+	 * @param mixed $object
 	 * @return array
 	 */
 	public static function decodeObjectForJSON($object) {
