@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
 
 	/**
 	 * @var Tx_MvcExtjsSamples_Domain_Model_MovieRepository
@@ -54,7 +54,49 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_Extbase_MVC_Contr
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
+		$this->initializeExtJSAction();
+		
+		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'movies');
+		
+			// Create a data store with movie genres
+		$this->addJsInlineCode('
+			var movies = new Ext.data.Store({
+				reader: new Ext.data.JsonReader({
+					fields: ["title", "director", "releaseDate", "filmedIn", "isBad", "genre", "uid"],
+					root: "results",
+					totalProperty: "totalItems"
+				}),
+				proxy: new Ext.data.HttpProxy({
+					url: "' . $ajaxUrl . '"
+				}),
+				autoLoad: true
+			});
+		');
+		
+			// Create the Grid
+		$this->addJsInlineCode('
+			var grid = new Ext.grid.GridPanel({
+				title: "List of Movies",
+				height: 200,
+				width: 600,
+				store: movies,
+				stripeRows: true,
+				loadMask: true,
+				columns: [
+					{header: "Title", dataIndex: "title"},
+					{header: "Director", dataIndex: "director"},
+					{header: "Released", dataIndex: "releaseDate",
+					 renderer: Ext.util.Format.dateRenderer("d.m.Y")},
+					{header: "Genre", dataIndex: "genre"}
+				]
+			});
+			
+			grid.render("MvcExtjsSamples-Movie");
+		');
+		
 		$this->view->assign('movies', $this->movieRepository->findAll());
+		
+		$this->outputJsCode();
 	}
 
 	/**
@@ -65,7 +107,37 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_Extbase_MVC_Contr
 	 */
 	public function showAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie) {
 		$this->forward('index', 'Movie', NULL, array('movie' => $movie));
-	}	
+	}
+	
+	/**
+	 * Returns a list of movies as JSON.
+	 * 
+	 * @see typo3/classes/class.typo3ajax.php
+	 * @return void
+	 * @ajax
+	 */
+	public function moviesAction() {
+		$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_MovieRepository');
+		/* @var $movieRepository Tx_MvcExtjsSamples_Domain_Model_MovieRepository */
+		
+			// Retrieve all movies from repository
+		$movies = $movieRepository->findAll();
+		
+			// Convert Tx_MvcExtjsSamples_Domain_Model_Movie objects to an array
+		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::decodeArrayForJSON($movies);
+		
+			// Prepare the JSON response
+		header('Content-type: text/html; charset=utf-8');
+		header('X-JSON: true');
+		
+		echo json_encode(array(
+			'totalItems' => count($arr),
+			'results' => $arr,
+		));
+		
+			// Do not do further processing
+		exit;
+	}
 
 }
 ?>
