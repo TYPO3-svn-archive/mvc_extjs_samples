@@ -81,7 +81,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			});
 		');
 		
-			// Create the Grid
+			// Create the Grid   
 		$this->addJsInlineCode('
 			var grid = new Ext.grid.GridPanel({
 				title: "List of Movies",
@@ -91,11 +91,11 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 				stripeRows: true,
 				loadMask: true,
 				columns: [
-					{header: "Title", dataIndex: "title"},
-					{header: "Director", dataIndex: "director"},
+					{header: "Title", dataIndex: "title", sortable: true},
+					{header: "Director", dataIndex: "director", sortable: true},
 					{header: "Released", dataIndex: "releaseDate",
-					 renderer: Ext.util.Format.dateRenderer("d.m.Y")},
-					{header: "Genre", dataIndex: "genre"}
+					 renderer: Ext.util.Format.dateRenderer("d.m.Y"), sortable: true},
+					{header: "Genre", dataIndex: "genre", renderer: function(v,r,o){return v.name;}}
 				]
 			});
 			
