@@ -13,6 +13,8 @@ Frontend plugin PictureSlideShow needs following files:
 |       `-- setup.txt (partial)
 |-- Resources
 |   |-- Private
+|   |   |-- Language
+|   |   |   `-- flexform.PictureSlideShow.xml
 |   |   `-- Templates
 |   |       `-- PictureSlideShow
 |   |           `-- index.html
