@@ -6,6 +6,8 @@ Frontend plugin Movie needs following files:
 |   |   `-- MovieController.php
 |   |-- Domain
 |   |   `-- Model
+|   |       |-- Genre.php
+|   |       |-- GenreRepository.php
 |   |       |-- Movie.php
 |   |       `-- MovieRepository.php
 |   `-- ExtJS
@@ -26,6 +28,7 @@ Frontend plugin Movie needs following files:
 |   |           `-- index.html
 |   `-- Public
 |       `-- Icons
+|           |-- icon_tx_mvcextjssamples_domain_model_genre.gif
 |           `-- icon_tx_mvcextjssamples_domain_model_movie.gif
 |-- ext_emconf.php
 |-- ext_icon.gif
