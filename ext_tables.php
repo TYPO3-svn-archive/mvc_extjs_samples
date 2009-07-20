@@ -69,8 +69,10 @@ Tx_Extbase_Utility_Plugin::registerPlugin(
 
 	// Disable the display of layout, select_key and page fields
 $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_pictureslideshow'] = 'layout,select_key,pages';
-$TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_pictureslideshow'] = 'image,imagecaption';
 
+	// Register FlexForm
+$TCA['tt_content']['types']['list']['subtypes_addlist']['mvcextjssamples_pictureslideshow'] = 'pi_flexform';
+t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_pictureslideshow', 'FILE:EXT:mvc_extjs_samples/Configuration/FlexForms/PictureSlideShow.xml');
 
 // ========== Plugin Movie
 

@@ -40,12 +40,14 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
-		$this->initializeExtJSAction();
+		$this->initializeExtJSAction(true);
 		$this->addJsLibrary('carousel_array', 'carousel_array.js');
 		
 		$cssFile  = $this->setting['cssFile'] ? $this->setting['cssFile'] : t3lib_extMgm::extPath($this->request->getControllerExtensionKey()) . 'Resources/Public/CSS/carousel.css';
 		$GLOBALS['TSFE']->pageIncludes->addCssFile($cssFile);
 
+	   	//debug($this->settings);
+	   
 		$images = array();
 		$carousel = '
 			new Ext.ux.Carousel("MvcExtjsSamples-PictureSlideShow", {

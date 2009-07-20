@@ -10,7 +10,18 @@ plugin.tx_mvcextjssamples_feeds {
  	)
 }
 
-plugin.tx_mvcextjssamples_pictureslideshow {
+plugin.tx_mvcextjssamples.pictureslideshow {
+	pictures = COA
+	pictures {
+	 	10 = TEXT
+	 	10.field = image
+	 	
+	 	20 = TEXT
+	 	20.field = uploads/pics/
+	 	
+	 	30 = TEXT
+	 	30.field.imagecaption
+	}
  	_CSS_DEFAULT_STYLE (
  		 div.PictureSlideShow { padding: 5px; height: 280px; width: 420px; background-color: #E6E6E0; }
  	)
