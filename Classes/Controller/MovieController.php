@@ -62,7 +62,15 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$this->addJsInlineCode('
 			var movies = new Ext.data.Store({
 				reader: new Ext.data.JsonReader({
-					fields: ["title", "director", "releaseDate", "filmedIn", "isBad", "genre", "uid"],
+					fields: [
+						"title",
+						"director",
+						{name: "releaseDate", type: "date"},
+						"filmedIn",
+						"isBad",
+						"genre",
+						"uid"
+					],
 					root: "results",
 					totalProperty: "totalItems"
 				}),

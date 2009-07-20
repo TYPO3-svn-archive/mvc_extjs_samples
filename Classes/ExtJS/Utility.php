@@ -58,7 +58,7 @@ class Tx_MvcExtjsSamples_ExtJS_Utility {
 	 */
 	public static function decodeObjectForJSON($object) {
 		if ($object instanceof DateTime) {
-			return $object->format(DATE_ATOM);
+			return $object->format('r');
 		} elseif (!($object instanceof Tx_Extbase_DomainObject_AbstractEntity)) {
 			return $object;
 		}
