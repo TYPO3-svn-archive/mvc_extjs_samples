@@ -14,6 +14,10 @@
 			<label index="tx_mvcextjssamples_domain_model_movie.filmed_in.I.0">Color</label>
             <label index="tx_mvcextjssamples_domain_model_movie.filmed_in.I.1">Black and White</label>
 			<label index="tx_mvcextjssamples_domain_model_movie.is_bad">Is bad</label>
+			<label index="tx_mvcextjssamples_domain_model_movie.genre">Genre</label>
+			
+			<label index="tx_mvcextjssamples_domain_model_genre">Genre</label>
+			<label index="tx_mvcextjssamples_domain_model_genre.name">Name</label>
 		</languageKey>
 	</data>
 </T3locallang>

@@ -15,6 +15,24 @@ CREATE TABLE tx_mvcextjssamples_domain_model_movie (
     release_date int(11) DEFAULT '0' NOT NULL,
     filmed_in int(11) DEFAULT '0' NOT NULL,
     is_bad tinyint(3) DEFAULT '0' NOT NULL,
+    genre int(11) DEFAULT '0' NOT NULL,
+    
+    PRIMARY KEY (uid),
+    KEY parent (pid)
+);
+
+
+
+#
+# Table structure for table 'tx_mvcextjssamples_domain_model_genre'
+#
+CREATE TABLE tx_mvcextjssamples_domain_model_genre (
+    uid int(11) NOT NULL auto_increment,
+    pid int(11) DEFAULT '0' NOT NULL,
+    tstamp int(11) DEFAULT '0' NOT NULL,
+    crdate int(11) DEFAULT '0' NOT NULL,
+    cruser_id int(11) DEFAULT '0' NOT NULL,
+    name tinytext,
     
     PRIMARY KEY (uid),
     KEY parent (pid)

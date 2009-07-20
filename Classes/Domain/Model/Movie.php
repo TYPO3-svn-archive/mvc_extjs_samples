@@ -68,6 +68,13 @@ class Tx_MvcExtjsSamples_Domain_Model_Movie extends Tx_Extbase_DomainObject_Abst
 	protected $isBad;
 	
 	/**
+	 * The movie's genre
+	 *
+	 * @var Tx_MvcExtjsSamples_Domain_Model_Genre
+	 */
+	protected $genre;
+	
+	/**
 	 * Sets this movie's title.
 	 *
 	 * @param string $title The movie's title
@@ -164,5 +171,23 @@ class Tx_MvcExtjsSamples_Domain_Model_Movie extends Tx_Extbase_DomainObject_Abst
 		return $this->isBad;
 	}
 	
+	/**
+	 * Sets the movie's genre.
+	 *
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Genre $genre
+	 * @return void
+	 */
+	public function setGenre(Tx_MvcExtjsSamples_Domain_Model_Genre $genre) {
+		$this->genre = $genre;
+	}
+	
+	/**
+	 * Gets the movie's genre.
+	 *
+	 * @return Tx_MvcExtjsSamples_Domain_Model_Genre
+	 */
+	public function getGenre() {
+		return $this->genre;
+	}
 }
 ?>

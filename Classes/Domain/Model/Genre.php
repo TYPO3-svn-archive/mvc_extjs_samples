@@ -23,13 +23,40 @@
 ***************************************************************/
 
 /**
- * A repository for Movies.
+ * A movie genre.
  *
  * @author      Xavier Perseguers <typo3@perseguers.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
+ * @entity
  */
-class Tx_MvcExtjsSamples_Domain_Model_MovieRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_MvcExtjsSamples_Domain_Model_Genre extends Tx_Extbase_DomainObject_AbstractEntity {
+
+	/**
+	 * The genre's name
+	 *
+	 * @var string
+	 */
+	protected $name = '';
 	
+	/**
+	 * Sets this genre's name.
+	 *
+	 * @param string $name The genre's name
+	 * @return void
+	 */
+	public function setName($name) {
+		$this->name = $name;
+	}
+
+	/**
+	 * Returns the genre's name.
+	 *
+	 * @return string The genre's name
+	 */
+	public function getName() {
+		return $this->name;
+	}
+		
 }
 ?>

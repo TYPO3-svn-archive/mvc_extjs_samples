@@ -61,4 +61,9 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 	array('Movie' => 'index'),
 	array()
 );
+
+	// Add button save+new for movie records
+t3lib_extMgm::addUserTSConfig('
+	options.saveDocNew.tx_mvcextjssamples_domain_model_movie=1
+');
 ?>
