@@ -49,7 +49,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 			var genres = new Ext.data.Store({
 				reader: new Ext.data.JsonReader({
 					fields: ["name", "uid"],
-					root: "rows"
+					root: "results"
 				}),
 				proxy: new Ext.data.HttpProxy({
 					url: "' . $ajaxUrl . '"
@@ -86,7 +86,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 	}
 	
 	/**
-	 * Returns a list of movive genres as JSON.
+	 * Returns a list of movie genres as JSON.
 	 * 
 	 * @see typo3/classes/class.typo3ajax.php
 	 * @return void
@@ -105,7 +105,11 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 			// Prepare the JSON response
 		header('Content-type: text/html; charset=utf-8');
 		header('X-JSON: true');
-		echo '{rows:' . json_encode($arr) . '}';
+		
+		echo json_encode(array(
+			'totalItems' => count($arr),
+			'results' => $arr,
+		));
 		
 			// Do not do further processing
 		exit;
