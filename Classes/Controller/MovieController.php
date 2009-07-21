@@ -167,16 +167,6 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 	}
 
 	/**
-	 * Shows a single movie.
-	 *
-	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie The movie to show
-	 * @return string The rendered view of a single movie
-	 */
-	public function showAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie) {
-		$this->forward('index', 'Movie', NULL, array('movie' => $movie));
-	}
-	
-	/**
 	 * Returns a list of movies as JSON.
 	 * 
 	 * @see typo3/classes/class.typo3ajax.php
