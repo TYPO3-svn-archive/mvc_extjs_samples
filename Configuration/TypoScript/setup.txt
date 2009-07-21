@@ -1,10 +1,10 @@
-plugin.tx_mvcextjssamples_twitter {
+plugin.tx_mvcextjssamples.twitter {
  	_CSS_DEFAULT_STYLE (
  		 p.getMessage { white-space:normal;}
  	)
 }
 
-plugin.tx_mvcextjssamples_feeds {
+plugin.tx_mvcextjssamples.feeds {
  	_CSS_DEFAULT_STYLE (
  		 p.message { white-space:normal;}
  	)

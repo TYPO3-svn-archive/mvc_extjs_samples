@@ -76,18 +76,18 @@
 }
 
 .ux-carousel-nav .ux-carousel-nav-prev {
-    background-image: url('images/prev.png');
+    background-image: url('../Icons/carousel/prev.png');
     width: 31px;    
 }
 
 .ux-carousel-nav .ux-carousel-nav-next {
-    background-image: url('images/next.png');
+    background-image: url('../Icons/carousel/next.png');
     margin-right: 2px;
     width: 30px;
 }
 
 .ux-carousel-nav-play {
-    background-image: url('images/play_pause.png');
+    background-image: url('../Icons/carousel/play_pause.png');
     width: 24px;
 }
 

@@ -75,8 +75,8 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
         this.els.navPrev = dh.append(this.els.navigation, {tag: 'a', href: '#', cls: 'ux-carousel-nav-prev'}, true);
 
         // set the dimensions of the container
-        this.slideWidth = this.el.getWidth(true);
-        this.slideHeight = this.el.getHeight(true);
+        this.slideWidth = this.width || this.el.getWidth(true);
+        this.slideHeight = this.height || this.el.getHeight(true);
         this.els.container.setStyle({
             width: this.slideWidth + 'px',
             height: this.slideHeight + 'px'

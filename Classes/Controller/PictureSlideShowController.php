@@ -41,14 +41,20 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 	 */
 	public function indexAction() {
 		$this->initializeExtJSAction(true);
-		$this->addJsLibrary('carousel_array', 'carousel_array.js');
+		$this->addJsLibrary('carousel_array', 'carousel.js');
 		
-		$cssFile  = $this->setting['cssFile'] ? $this->setting['cssFile'] : t3lib_extMgm::extPath($this->request->getControllerExtensionKey()) . 'Resources/Public/CSS/carousel.css';
+		$cssFile  = $this->setting['cssFile'] ? $this->setting['cssFile'] : 'typo3conf/ext/mvc_extjs_samples/Resources/Public/CSS/carousel.css';
 		$GLOBALS['TSFE']->pageIncludes->addCssFile($cssFile);
 
-	   	//debug($this->settings);
-	   
-		$images = array();
+		#debug($this->settings);
+		$images = array();  
+		$path = 'uploads/pics/';
+        if (is_array($this->settings['pictureSlideShowContentSection.']['pictureSlideShowContent'])) {
+        	foreach ($this->settings['pictureSlideShowContentSection.']['pictureSlideShowContent'] as $pic) {
+         		$images[] = array('url' => $path . $pic['picture'], 'title' => $pic['caption']);		
+        	}
+        }
+		
 		$carousel = '
 			new Ext.ux.Carousel("MvcExtjsSamples-PictureSlideShow", {
 		        images: ' . json_encode($images) . ',
@@ -59,7 +65,9 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 		        pauseOnNavigate: true,
 		        freezeOnHover: true,
 		        transitionType: "fade",
-		        navigationOnHover: true
+		        navigationOnHover: true,
+		        width: 400,
+		        height: 300
 		    });
 		';
 			
