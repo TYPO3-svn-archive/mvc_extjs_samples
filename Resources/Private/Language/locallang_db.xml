@@ -10,6 +10,7 @@
 			<label index="tx_mvcextjssamples_domain_model_movie.title">Title of the movie</label>
 			<label index="tx_mvcextjssamples_domain_model_movie.director">Director of the movie</label>
 			<label index="tx_mvcextjssamples_domain_model_movie.release_date">Release date of the movie</label>
+			<label index="tx_mvcextjssamples_domain_model_movie.tagline">Tagline</label>
 			<label index="tx_mvcextjssamples_domain_model_movie.filmed_in">Filmed in</label>
 			<label index="tx_mvcextjssamples_domain_model_movie.filmed_in.I.0">Color</label>
             <label index="tx_mvcextjssamples_domain_model_movie.filmed_in.I.1">Black and White</label>

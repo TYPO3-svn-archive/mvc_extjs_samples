@@ -23,14 +23,17 @@ Frontend plugin Movie needs following files:
 |-- Resources
 |   |-- Private
 |   |   |-- Languages
+|   |   |   |-- extjs.Movie.xml
 |   |   |   `-- locallang_db.xml
 |   |   `-- Templates
 |   |       `-- Movie
 |   |           `-- index.html
 |   `-- Public
-|       `-- Icons
-|           |-- icon_tx_mvcextjssamples_domain_model_genre.gif
-|           `-- icon_tx_mvcextjssamples_domain_model_movie.gif
+|       |-- Icons
+|       |   |-- icon_tx_mvcextjssamples_domain_model_genre.gif
+|       |   `-- icon_tx_mvcextjssamples_domain_model_movie.gif
+|       `-- Images
+|           `-- movie-1.jpg .. movie-8.jpg
 |-- ext_emconf.php
 |-- ext_icon.gif
 |-- ext_localconf.php (partial)

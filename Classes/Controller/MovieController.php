@@ -58,6 +58,11 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		
 		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'movies');
 		
+			// Store the relative path to cover directory
+		$extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
+		$relPath = substr($extPath, strlen(PATH_site));
+		$this->settingsExtJS->assign('coverPath', $relPath . 'Resources/Public/Images/');
+		
 			// Create a data store with movie genres
 		$this->addJsInlineCode('
 			var movies = new Ext.data.Store({
@@ -69,22 +74,33 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			});
 		');
 		
+			// Create renderer functions
+		$this->addJsInlineCode('
+			function title_img(val, x, store) {
+				return "<img src=\"" + ' . $this->settingsExtJS->getExtJS('coverPath') . ' + "movie-" + store.data.uid + ".jpg\" style=\"width:50px; height:70px; float:left; margin-right:5px;\" />" +
+					"<b style=\"text-size:larger;\">" + val + "</b><br />" +
+					' . $this->getExtJSLabelKey('index.director') . ' + ": <i>" + store.data.director + "</i><br />" +
+					store.data.tagline;
+			}
+		');
+		
 			// Create the Grid   
 		$this->addJsInlineCode('
 			var grid = new Ext.grid.GridPanel({
-				title: "List of Movies",
-				height: 200,
+				title: ' . $this->getExtJSLabelKey('index.gridTitle') . ',
+				height: 400,
 				width: 600,
 				store: movies,
 				stripeRows: true,
 				loadMask: true,
-				columns: [
-					{header: "Title", dataIndex: "title", sortable: true},
-					{header: "Director", dataIndex: "director", sortable: true},
-					{header: "Released", dataIndex: "releaseDate",
-					 renderer: Ext.util.Format.dateRenderer("d.m.Y"), sortable: true},
-					{header: "Genre", dataIndex: "genre", renderer: function(v,r,o){return v.name;}}
-				]
+				columns: [ 
+					{id: "title", header: ' . $this->getExtJSLabelKey('index.title') . ', dataIndex: "title", renderer: title_img},
+					{header: ' . $this->getExtJSLabelKey('index.director') . ', dataIndex: "director", hidden: true},
+					{header: ' . $this->getExtJSLabelKey('index.released') . ', dataIndex: "releaseDate", renderer: Ext.util.Format.dateRenderer("d.m.Y"), sortable: true},
+					{header: ' . $this->getExtJSLabelKey('index.genre') . ', dataIndex: "genre", renderer: function(v,r,o){return v.name;}},
+					{header: ' . $this->getExtJSLabelKey('index.tagline') . ', dataIndex: "tagline", hidden: true}
+				],
+				autoExpandColumn: "title"
 			});
 			
 			grid.render("MvcExtjsSamples-Movie");

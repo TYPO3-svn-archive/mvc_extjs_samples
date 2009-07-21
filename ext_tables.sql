@@ -13,6 +13,7 @@ CREATE TABLE tx_mvcextjssamples_domain_model_movie (
     title tinytext,
     director tinytext,
     release_date int(11) DEFAULT '0' NOT NULL,
+    tagline tinytext,
     filmed_in int(11) DEFAULT '0' NOT NULL,
     is_bad tinyint(3) DEFAULT '0' NOT NULL,
     genre int(11) DEFAULT '0' NOT NULL,

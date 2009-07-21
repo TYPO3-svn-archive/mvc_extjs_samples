@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_mvcextjssamples_domain_model_movie'] = array(
 	'ctrl' => $TCA['tx_mvcextjssamples_domain_model_movie']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,title,director,release_date,filmed_in,is_bad,genre'
+		'showRecordFieldList' => 'hidden,title,director,release_date,tagline,filmed_in,is_bad,genre'
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -47,6 +47,16 @@ $TCA['tx_mvcextjssamples_domain_model_movie'] = array(
 				'default'  => '0'
 			)
 		),
+		'tagline' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_movie.tagline',
+			'config' => array(
+				'type' => 'input',
+				'size' => 40,
+				'eval' => 'trim',
+				'max'  => 256
+			)
+		),
 		'filmed_in' => array(
 			'exclude' => 0,		
 			'label' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_movie.filmed_in',		
@@ -82,7 +92,7 @@ $TCA['tx_mvcextjssamples_domain_model_movie'] = array(
 		),
 	),
 	'types' => array (
-		'0' => array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, director;;;;3-3-3, release_date, filmed_in, is_bad, genre')
+		'0' => array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, director;;;;3-3-3, release_date, tagline;;;;4-4-4, filmed_in, is_bad, genre')
 	),
 	'palettes' => array (
 		'1' => array('showitem' => '')

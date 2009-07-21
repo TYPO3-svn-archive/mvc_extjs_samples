@@ -52,6 +52,13 @@ class Tx_MvcExtjsSamples_Domain_Model_Movie extends Tx_Extbase_DomainObject_Abst
 	 * @var DateTime
 	 */
 	protected $releaseDate;
+	
+	/**
+	 * The movie's tagline
+	 *
+	 * @var string
+	 */
+	protected $tagline;
 
 	/**
 	 * Either 0 ('Color') or 1 ('Black and White')
@@ -129,6 +136,25 @@ class Tx_MvcExtjsSamples_Domain_Model_Movie extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getReleaseDate() {
 		return $this->releaseDate;
+	}
+	
+	/**
+	 * Sets this movie's tagline.
+	 *
+	 * @param string $tagline
+	 * @return void
+	 */
+	public function setTagline($tagline) {
+		$this->tagline = $tagline;
+	}
+	
+	/**
+	 * Gets this movie's tagline.
+	 * 
+	 * @return string
+	 */
+	public function getTagline() {
+		return $this->tagline;
 	}
 	
 	/**
