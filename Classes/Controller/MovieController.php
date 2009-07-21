@@ -135,7 +135,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 				},
 		');
 		
-			// Create the movie grid
+			// Create the list of movies as a grid
 		$this->addJsInlineCode('
 				{
 					region: "center",
@@ -155,7 +155,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 				}
 		');
 				
-			// [END] Copmlex layout: close it and... render it!
+			// [END] Complex layout: close it and... render it!
 		$this->addJsInlineCode('
 				]
 			});
