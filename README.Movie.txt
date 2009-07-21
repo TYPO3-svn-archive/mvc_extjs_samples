@@ -31,7 +31,9 @@ Frontend plugin Movie needs following files:
 |   `-- Public
 |       |-- Icons
 |       |   |-- icon_tx_mvcextjssamples_domain_model_genre.gif
-|       |   `-- icon_tx_mvcextjssamples_domain_model_movie.gif
+|       |   |-- icon_tx_mvcextjssamples_domain_model_movie.gif
+|       |   |-- movie_delete.png
+|       |   `-- movie_add.png
 |       `-- Images
 |           `-- movie-1.jpg .. movie-8.jpg
 |-- ext_emconf.php

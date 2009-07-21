@@ -58,10 +58,9 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		
 		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'movies');
 		
-			// Store the relative path to cover directory
-		$extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
-		$relPath = substr($extPath, strlen(PATH_site));
-		$this->settingsExtJS->assign('coverPath', $relPath . 'Resources/Public/Images/');
+			// Store the relative path to image directories
+		$this->settingsExtJS->assign('coverPath', $this->extRelPath . 'Resources/Public/Images/');
+		$this->settingsExtJS->assign('iconsPath', $this->extRelPath . 'Resources/Public/Icons/');
 		
 			// Create a data store with movies grouped by genre
 		$this->addJsInlineCode('
@@ -101,8 +100,27 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$this->addJsInlineCode('
 				{
 					region: "north",
-					xtype: "panel",
-					html: "Toolbar goes here..."
+					xtype: "toolbar",
+					height: 28,
+					items: [{
+						xtype: "tbspacer"
+					},{
+						xtype: "tbbutton",
+						text: ' . $this->getExtJSLabelKey('index.movie.add') . ',
+						icon: ' . $this->settingsExtJS->getExtJS('iconsPath') . ' + "movie_add.png",
+						cls: "x-btn-text-icon",
+						handler: function(btn) {
+							Ext.Msg.alert("Movie", "Will now add a movie...");
+						}
+					},{
+						xtype: "tbbutton",
+						text: ' . $this->getExtJSLabelKey('index.movie.remove') . ',
+						icon: ' . $this->settingsExtJS->getExtJS('iconsPath') . ' + "movie_delete.png",
+						cls: "x-btn-text-icon",
+						handler: function(btn) {
+							Ext.Msg.alert("Movie", "Will now remove selected movie...");
+						}
+					}]
 				},
 		');
 		

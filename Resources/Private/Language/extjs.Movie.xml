@@ -11,6 +11,8 @@
 			<label index="index.released">Released</label>
 			<label index="index.genre">Genre</label>
 			<label index="index.tagline">Tagline</label>
+			<label index="index.movie.add">Add Movie</label>
+			<label index="index.movie.remove">Remove Movie</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="index.title">Titre</label>
@@ -18,6 +20,8 @@
 			<label index="index.released">Sortie</label>
 			<label index="index.genre">Genre</label>
 			<label index="index.tagline">Citation</label>
+			<label index="index.movie.add">Ajouter un film</label>
+			<label index="index.movie.remove">Supprimer le film</label>
 		</languageKey>
 	</data>
 </T3locallang>

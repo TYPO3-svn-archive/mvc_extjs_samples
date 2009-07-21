@@ -42,6 +42,22 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	protected $extJSNamespace;
 	
 	/**
+	 * Absolute path to this extension.
+	 * Usage: Backend
+	 *
+	 * @var string
+	 */
+	protected $extPath;
+	
+	/**
+	 * Path of the root of this extension relative to the website
+	 * Usage: Frontend
+	 *
+	 * @var string
+	 */
+	protected $extRelPath;
+	
+	/**
 	 * @var array
 	 */
 	protected $jsInline = array();
@@ -74,6 +90,9 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			// TODO: add id of controller for multiple usage
 		$this->extJSNamespace = $this->extensionName . '.' . $this->request->getControllerName();
 		
+		$this->extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
+		$this->extRelPath = substr($this->extPath, strlen(PATH_site));
+		
 			// Initialize the ExtJS settings service 
 		$this->settingsExtJS = t3lib_div::makeInstance('Tx_MvcExtjsSamples_ExtJS_SettingsService', $this->extJSNamespace);
 	}
@@ -98,15 +117,13 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block	
 	*/
 	protected function addJsLibrary($name, $file, $type = 'text/javascript', $section = t3lib_pageIncludes::PART_HEADER, $compressed = TRUE, $forceOnTop = FALSE) {
-		$extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
-		$relPath = substr($extPath, strlen(PATH_site));
 		$jsFile = 'Resources/Public/JavaScript/' . $file;
 		
-		if (!@is_file($extPath . $jsFile)) {
-			die('File "' . $extPath . $jsFile . '" not found!');
+		if (!@is_file($this->extPath . $jsFile)) {
+			die('File "' . $this->extPath . $jsFile . '" not found!');
 		}
 		
-		$GLOBALS['TSFE']->pageIncludes->addJsLibrary($name, $relPath . $jsFile);
+		$GLOBALS['TSFE']->pageIncludes->addJsLibrary($name, $this->extRelPath . $jsFile);
 	}
 	
 	/**
@@ -156,7 +173,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	protected function getExtJSLabelKey($langKey) {
 		$action = $this->request->getControllerActionName();
 		
-		return $this->extJSNamespace . '.lang.' . substr($langKey, strlen($action) + 1); 
+		return $this->extJSNamespace . '.lang.' . $this->getExtJSKey(substr($langKey, strlen($action) + 1)); 
 	}
 	
 	/**
@@ -196,10 +213,24 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 				$labelText = $allLabels['default'][$action . '.' . $key];
 			}
 			
-			$labels[$key] = $labelText;
+			$labels[$this->getExtJSKey($key)] = $labelText;
 		}
 		
 		return $labels;
+	}
+	
+	/**
+	 * Returns a key to be used in ExtJS.
+	 * 
+	 * @param string $key The key as found in a TYPO3 XML file (locallang.xml, ...)
+	 */
+	private function getExtJSKey($xmlKey) {
+		$parts = explode('.', $xmlKey);
+		
+		for ($i = 1; $i < count($parts); $i++) {
+			$parts[$i] = ucfirst($parts[$i]);
+		}
+		return join ('', $parts);
 	}
 	
 }
