@@ -49,27 +49,27 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 		//debug($this->settings);
 		$images = array();  
 		$path = 'uploads/pics/';
-        	//TODO: resize the images proper to settings
-        if (is_array($this->settings['pictureSlideShowContentSection.']['pictureSlideShowContent'])) {
-        	foreach ($this->settings['pictureSlideShowContentSection.']['pictureSlideShowContent'] as $pic) {
-         		$images[] = array('url' => $path . $pic['picture'], 'title' => $pic['caption']);		
-        	}
-        }
+		//TODO: resize the images proper to settings
+		if (is_array($this->settings['pictureSlideShowContentSection']['pictureSlideShowContent'])) {
+			foreach ($this->settings['pictureSlideShowContentSection']['pictureSlideShowContent'] as $pic) {
+				$images[] = array('url' => $path . $pic['picture'], 'title' => $pic['caption']);		
+			}
+		}
 		
 		$carousel = '
 			new Ext.ux.Carousel("MvcExtjsSamples-PictureSlideShow", {
-		        images: ' . json_encode($images) . ',
-		        itemSelector: "img",
-		        interval: ' . intval($this->settings['pictureSlideShowInterval']) . ',
-		        autoPlay: ' . ($this->settings['pictureSlideShowAutoplay'] ? 'true' : 'false') . ',
-		        showPlayButton: ' . ($this->settings['pictureSlideShowShowPlayButton'] ? 'true' : 'false') . ',
-		        pauseOnNavigate: ' . ($this->settings['pictureSlideShowPauseOnNavigate'] ? 'true' : 'false') . ',
-		        freezeOnHover: ' . ($this->settings['pictureSlideShowFreezeOnHoover'] ? 'true' : 'false') . ',
-		        transitionType: "' . $this->settings['pictureSlideShowAutoplay'] . '",
-		        navigationOnHover: ' . ($this->settings['pictureSlideShowNavigationOnHoover'] ? 'true' : 'false') . ',
-		        width: ' . ($this->settings['pictureSlideShowWidth'] ? $this->settings['pictureSlideShowWidth'] : 400) . ',
-		        height: ' . ($this->settings['pictureSlideShowHeight'] ? $this->settings['pictureSlideShowHeight'] : 300) . '
-		    });
+				images: ' . json_encode($images) . ',
+				itemSelector: "img",
+				interval: ' . intval($this->settings['pictureSlideShowInterval']) . ',
+				autoPlay: ' . ($this->settings['pictureSlideShowAutoplay'] ? 'true' : 'false') . ',
+				showPlayButton: ' . ($this->settings['pictureSlideShowShowPlayButton'] ? 'true' : 'false') . ',
+				pauseOnNavigate: ' . ($this->settings['pictureSlideShowPauseOnNavigate'] ? 'true' : 'false') . ',
+				freezeOnHover: ' . ($this->settings['pictureSlideShowFreezeOnHoover'] ? 'true' : 'false') . ',
+				transitionType: "' . $this->settings['pictureSlideShowAutoplay'] . '",
+				navigationOnHover: ' . ($this->settings['pictureSlideShowNavigationOnHoover'] ? 'true' : 'false') . ',
+				width: ' . ($this->settings['pictureSlideShowWidth'] ? $this->settings['pictureSlideShowWidth'] : 400) . ',
+				height: ' . ($this->settings['pictureSlideShowHeight'] ? $this->settings['pictureSlideShowHeight'] : 300) . '
+				});
 		';
 			
 		

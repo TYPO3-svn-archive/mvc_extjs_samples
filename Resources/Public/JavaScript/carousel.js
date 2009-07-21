@@ -14,7 +14,7 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
     freezeOnHover: false,
     navigationOnHover: false,
     hideNavigation: false,
-    images: [],
+    images: [], // expected objects: {url: urlToPicture. title: titleOfPicture}
     constructor: function(elId, config) {
         config = config || {};
         Ext.apply(this, config);
@@ -57,7 +57,7 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
         
         if (this.images.length) {
             for (var i = 0; i < this.images.length; i++) {  
-               var el = dh.append(this.el, {tag: 'img', src: this.images[i].url, title: this.images[i].title}, true);
+               dh.append(this.el, {tag: 'img', src: this.images[i].url, title: this.images[i].title});
             };
         }
         
@@ -84,13 +84,13 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 
         this.els.caption.setWidth((this.slideWidth - (this.els.navNext.getWidth()*2) - (this.showPlayButton ? this.els.navPlay.getWidth() : 0) - 20) + 'px')
         
-		this.el.select(this.itemSelector).appendTo(this.els.slidesWrap).each(function(item) {
-		    item = item.wrap({cls: 'ux-carousel-slide'});
-		    this.slides.push(item);
-		    item.setWidth(this.slideWidth + 'px').setHeight(this.slideHeight + 'px');
-		}, this);
+        this.el.select(this.itemSelector).appendTo(this.els.slidesWrap).each(function(item) {
+            item = item.wrap({cls: 'ux-carousel-slide'});
+            this.slides.push(item);
+            item.setWidth(this.slideWidth + 'px').setHeight(this.slideHeight + 'px');
+        }, this);
         
-		
+        
         this.carouselSize = this.slides.length;
         if(this.navigationOnHover) {
             this.els.navigation.setStyle('top', (-1*this.els.navigation.getHeight()) + 'px');
@@ -213,7 +213,9 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 
             this.playTaskBuffer.delay(this.interval*1000);
             this.playing = true;
-            this.els.navPlay.addClass('ux-carousel-playing');
+            if(this.showPlayButton) {
+                this.els.navPlay.addClass('ux-carousel-playing');
+            }
             this.fireEvent('play');
         }        
         return this;
@@ -224,7 +226,9 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
             Ext.TaskMgr.stop(this.playTask);
             this.playTaskBuffer.cancel();
             this.playing = false;
-            this.els.navPlay.removeClass('ux-carousel-playing');
+            if(this.showPlayButton) {
+                this.els.navPlay.removeClass('ux-carousel-playing');
+            }
             this.fireEvent('pause');
         }        
         return this;
