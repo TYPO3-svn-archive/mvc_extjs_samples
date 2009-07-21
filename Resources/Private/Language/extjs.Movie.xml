@@ -6,7 +6,6 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="index.gridTitle">List of Movies</label>
 			<label index="index.title">Title</label>
 			<label index="index.director">Director</label>
 			<label index="index.released">Released</label>
@@ -14,7 +13,6 @@
 			<label index="index.tagline">Tagline</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
-			<label index="index.gridTitle">Liste de films</label>
 			<label index="index.title">Titre</label>
 			<label index="index.director">Réalisateur</label>
 			<label index="index.released">Sortie</label>

@@ -89,27 +89,60 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			}
 		');
 		
-			// Create the Grid   
+			// [START] Complex layout (split among multiple call to $this->addJsInlineCode)
 		$this->addJsInlineCode('
-			var grid = new Ext.grid.GridPanel({
-				title: ' . $this->getExtJSLabelKey('index.gridTitle') . ',
+			var complexLayout = new Ext.Panel({
 				height: 400,
-				width: 600,
-				store: movies,
-				stripeRows: true,
-				loadMask: true,
-				columns: [ 
-					{id: "title", header: ' . $this->getExtJSLabelKey('index.title') . ', dataIndex: "title", renderer: title_img},
-					{header: ' . $this->getExtJSLabelKey('index.director') . ', dataIndex: "director", hidden: true},
-					{header: ' . $this->getExtJSLabelKey('index.released') . ', dataIndex: "releaseDate", renderer: Ext.util.Format.dateRenderer("d.m.Y"), sortable: true},
-					{header: ' . $this->getExtJSLabelKey('index.genre') . ', dataIndex: "genre", hidden: true, renderer: function(v,r,o){return v.name;}},
-					{header: ' . $this->getExtJSLabelKey('index.tagline') . ', dataIndex: "tagline", hidden: true}
-				],
-				autoExpandColumn: "title",
-				view: new Ext.grid.GroupingView()
+				layout: "border",
+				items: [
+		');
+		
+			// Create the toolbar
+		$this->addJsInlineCode('
+				{
+					region: "north",
+					xtype: "panel",
+					html: "Toolbar goes here..."
+				},
+		');
+		
+			// Create the movie edit form
+		$this->addJsInlineCode('
+				{
+					region: "west",
+					xtype: "panel",
+					split: true,
+					width: 300,
+					html: "Movie edit form goes here..."
+				},
+		');
+		
+			// Create the movie grid
+		$this->addJsInlineCode('
+				{
+					region: "center",
+					xtype: "grid",
+					store: movies,
+					stripeRows: true,
+					loadMask: true,
+					columns: [ 
+						{id: "title", header: ' . $this->getExtJSLabelKey('index.title') . ', dataIndex: "title", renderer: title_img},
+						{header: ' . $this->getExtJSLabelKey('index.director') . ', dataIndex: "director", hidden: true},
+						{header: ' . $this->getExtJSLabelKey('index.released') . ', dataIndex: "releaseDate", renderer: Ext.util.Format.dateRenderer("d.m.Y"), sortable: true},
+						{header: ' . $this->getExtJSLabelKey('index.genre') . ', dataIndex: "genre", hidden: true, renderer: function(v,r,o){return v.name;}},
+						{header: ' . $this->getExtJSLabelKey('index.tagline') . ', dataIndex: "tagline", hidden: true}
+					],
+					autoExpandColumn: "title",
+					view: new Ext.grid.GroupingView()
+				}
+		');
+				
+			// [END] Copmlex layout: close it and... render it!
+		$this->addJsInlineCode('
+				]
 			});
 			
-			grid.render("MvcExtjsSamples-Movie");
+			complexLayout.render("MvcExtjsSamples-Movie");
 		');
 		
 		$this->outputJsCode();
