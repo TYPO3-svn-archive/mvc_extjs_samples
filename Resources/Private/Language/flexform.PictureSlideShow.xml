@@ -9,6 +9,14 @@
 			<label index="width">Width:</label>
 			<label index="height">Height:</label>
 			<label index="interval">Slide Interval (seconds):</label>
+			<label index="autoplay">Autoplay:</label>
+			<label index="ShowPlayButton">Show Play Button:</label>
+			<label index="PauseOnNavigate">Pause on Navigate:</label>
+			<label index="FreezeOnHoover">Freeze on Hoover:</label>
+			<label index="NavigationOnHoover">Navigation on Hoover:</label>
+			<label index="TransitionType">Transition Type:</label>
+			<label index="TransitionType.carousel">carousel</label>
+			<label index="TransitionType.fade">fade</label>
 			<label index="contents">Choose Pictures for the Slideshow</label>
 			<label index="content">Pictures for Slideshow</label>
 			<label index="picture">Picture</label>

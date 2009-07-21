@@ -46,9 +46,10 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 		$cssFile  = $this->setting['cssFile'] ? $this->setting['cssFile'] : 'typo3conf/ext/mvc_extjs_samples/Resources/Public/CSS/carousel.css';
 		$GLOBALS['TSFE']->pageIncludes->addCssFile($cssFile);
 
-		#debug($this->settings);
+		//debug($this->settings);
 		$images = array();  
 		$path = 'uploads/pics/';
+        	//TODO: resize the images proper to settings
         if (is_array($this->settings['pictureSlideShowContentSection.']['pictureSlideShowContent'])) {
         	foreach ($this->settings['pictureSlideShowContentSection.']['pictureSlideShowContent'] as $pic) {
          		$images[] = array('url' => $path . $pic['picture'], 'title' => $pic['caption']);		
@@ -59,15 +60,15 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 			new Ext.ux.Carousel("MvcExtjsSamples-PictureSlideShow", {
 		        images: ' . json_encode($images) . ',
 		        itemSelector: "img",
-		        interval: 3,
-		        autoPlay: true,
-		        showPlayButton: true,
-		        pauseOnNavigate: true,
-		        freezeOnHover: true,
-		        transitionType: "fade",
-		        navigationOnHover: true,
-		        width: 400,
-		        height: 300
+		        interval: ' . intval($this->settings['pictureSlideShowInterval']) . ',
+		        autoPlay: ' . ($this->settings['pictureSlideShowAutoplay'] ? 'true' : 'false') . ',
+		        showPlayButton: ' . ($this->settings['pictureSlideShowShowPlayButton'] ? 'true' : 'false') . ',
+		        pauseOnNavigate: ' . ($this->settings['pictureSlideShowPauseOnNavigate'] ? 'true' : 'false') . ',
+		        freezeOnHover: ' . ($this->settings['pictureSlideShowFreezeOnHoover'] ? 'true' : 'false') . ',
+		        transitionType: "' . $this->settings['pictureSlideShowAutoplay'] . '",
+		        navigationOnHover: ' . ($this->settings['pictureSlideShowNavigationOnHoover'] ? 'true' : 'false') . ',
+		        width: ' . ($this->settings['pictureSlideShowWidth'] ? $this->settings['pictureSlideShowWidth'] : 400) . ',
+		        height: ' . ($this->settings['pictureSlideShowHeight'] ? $this->settings['pictureSlideShowHeight'] : 300) . '
 		    });
 		';
 			

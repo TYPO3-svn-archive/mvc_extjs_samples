@@ -14,7 +14,7 @@
 						<size>8</size>
 						<max>5</max>
 						<eval>int</eval>
-						<default>350</default>
+						<default>400</default>
 					</config>
 				</TCEforms>
 			</pictureSlideShowWidth>
@@ -26,7 +26,7 @@
 						<size>8</size>
 						<max>5</max>
 						<eval>int</eval>
-						<default>350</default>
+						<default>300</default>
 					</config>
 				</TCEforms>
 			</pictureSlideShowHeight>
@@ -38,10 +38,74 @@
 						<size>8</size>
 						<max>10</max>
 						<eval>int</eval>
-						<default>30</default>
+						<default>3</default>
 					</config>
 				</TCEforms>
 			</pictureSlideShowInterval>
+			<pictureSlideShowShowPlayButton>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:ShowPlayButton</label>
+					<config>
+						<type>check</type>
+						<default>1</default>
+					</config>
+				</TCEforms>
+			</pictureSlideShowShowPlayButton>
+			<pictureSlideShowAutoplay>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:autoplay</label>
+					<config>
+						<type>check</type>
+						<default>1</default>
+					</config>
+				</TCEforms>
+			</pictureSlideShowAutoplay>
+			<pictureSlideShowPauseOnNavigate>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:PauseOnNavigate</label>
+					<config>
+						<type>check</type>
+						<default>1</default>
+					</config>
+				</TCEforms>
+			</pictureSlideShowPauseOnNavigate>
+			<pictureSlideShowFreezeOnHoover>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:FreezeOnHoover</label>
+					<config>
+						<type>check</type>
+						<default>1</default>
+					</config>
+				</TCEforms>
+			</pictureSlideShowFreezeOnHoover>
+			<pictureSlideShowNavigationOnHoover>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:NavigationOnHoover</label>
+					<config>
+						<type>check</type>
+						<default>1</default>
+					</config>
+				</TCEforms>
+			</pictureSlideShowNavigationOnHoover>
+			<pictureSlideShowTransitionType>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:TransitionType</label>
+					<config>
+						<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:TransitionType.carousel</numIndex>
+								<numIndex index="1">carousel</numIndex>
+							</numIndex> 
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:TransitionType.fade</numIndex>
+								<numIndex index="1">fade</numIndex>
+							</numIndex> 
+						</items>
+					</config>
+				</TCEforms>
+			</pictureSlideShowTransitionType>
+			
 			<pictureSlideShowContentSection>
 				<tx_templavoila>
 					<title>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:contents</title>
