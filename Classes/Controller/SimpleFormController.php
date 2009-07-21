@@ -47,10 +47,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 			// Create a data store with movie genres
 		$this->addJsInlineCode('
 			var genres = new Ext.data.Store({
-				reader: new Ext.data.JsonReader({
-					fields: ["name", "uid"],
-					root: "results"
-				}),
+				reader: ' . Tx_MvcExtjsSamples_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Genre') . ',
 				proxy: new Ext.data.HttpProxy({
 					url: "' . $ajaxUrl . '"
 				}),
@@ -106,10 +103,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 		header('Content-type: text/html; charset=utf-8');
 		header('X-JSON: true');
 		
-		echo json_encode(array(
-			'totalItems' => count($arr),
-			'results' => $arr,
-		));
+		echo Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
 		
 			// Do not do further processing
 		exit;

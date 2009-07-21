@@ -61,19 +61,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			// Create a data store with movie genres
 		$this->addJsInlineCode('
 			var movies = new Ext.data.Store({
-				reader: new Ext.data.JsonReader({
-					fields: [
-						"title",
-						"director",
-						{name: "releaseDate", type: "date"},
-						"filmedIn",
-						"isBad",
-						"genre",
-						"uid"
-					],
-					root: "results",
-					totalProperty: "totalItems"
-				}),
+				reader: ' . Tx_MvcExtjsSamples_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Movie') . ',
 				proxy: new Ext.data.HttpProxy({
 					url: "' . $ajaxUrl . '"
 				}),
@@ -101,8 +89,6 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			
 			grid.render("MvcExtjsSamples-Movie");
 		');
-		
-		$this->view->assign('movies', $this->movieRepository->findAll());
 		
 		$this->outputJsCode();
 	}
@@ -138,10 +124,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		header('Content-type: text/html; charset=utf-8');
 		header('X-JSON: true');
 		
-		echo json_encode(array(
-			'totalItems' => count($arr),
-			'results' => $arr,
-		));
+		echo Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
 		
 			// Do not do further processing
 		exit;

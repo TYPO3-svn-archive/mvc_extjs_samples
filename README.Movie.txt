@@ -13,7 +13,8 @@ Frontend plugin Movie needs following files:
 |   `-- ExtJS
 |       |-- Controller
 |       |   `-- ActionController.php
-|       `-- SettingsService.php
+|       |-- SettingsService.php
+|       `-- Utility.php
 |-- Configuration
 |   |-- FlexForms
 |   |   `-- Twitter.xml

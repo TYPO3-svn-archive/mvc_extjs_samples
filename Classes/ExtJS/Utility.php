@@ -85,5 +85,49 @@ class Tx_MvcExtjsSamples_ExtJS_Utility {
 		return $arr;
 	}
 	
+	/**
+	 * Returns an Ext.data.JsonReader for objects of
+	 * class $class.
+	 *
+	 * @param string $class
+	 */
+	public static function getJSONReader($class) {
+		$jsonReader = 'new Ext.data.JsonReader({
+			fields: [ %s ],
+			root: "results",
+			totalProperty: "totalItems",
+			id: "uid"
+		})';
+		
+		$fields = array();
+		
+		$rc = new ReflectionClass($class);
+		$object = t3lib_div::makeInstance($class);
+		$properties = $rc->getProperties();
+		
+		foreach ($properties as $property) {
+			$propertyGetterName = 'get' . ucfirst($property->name);
+			
+			if (method_exists($object, $propertyGetterName)) {
+				$fields[] = '"' . $property->name . '"';
+			}
+		}
+		
+		return sprintf($jsonReader, join(',', $fields));
+	}
+	
+	/**
+	 * Returns a JSON-encoded array to be consumed by ExtJS.
+	 *
+	 * @param array $a
+	 * @return string
+	 */
+	public static function getJSON(array $a) {
+		return json_encode(array(
+			'totalItems' => count($a),
+			'results' => $a,
+		));
+	}
+	
 }
 ?>
