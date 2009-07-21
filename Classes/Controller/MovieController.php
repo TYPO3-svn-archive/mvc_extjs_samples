@@ -63,13 +63,18 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$relPath = substr($extPath, strlen(PATH_site));
 		$this->settingsExtJS->assign('coverPath', $relPath . 'Resources/Public/Images/');
 		
-			// Create a data store with movie genres
+			// Create a data store with movies grouped by genre
 		$this->addJsInlineCode('
-			var movies = new Ext.data.Store({
-				reader: ' . Tx_MvcExtjsSamples_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Movie') . ',
+			var movies = new Ext.data.GroupingStore({
 				proxy: new Ext.data.HttpProxy({
 					url: "' . $ajaxUrl . '"
 				}),
+				sortInfo: {
+					field: "genre",
+					direction: "ASC"
+				},
+				groupField: "genre",
+				reader: ' . Tx_MvcExtjsSamples_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Movie') . ',
 				autoLoad: true
 			});
 		');
@@ -97,10 +102,11 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 					{id: "title", header: ' . $this->getExtJSLabelKey('index.title') . ', dataIndex: "title", renderer: title_img},
 					{header: ' . $this->getExtJSLabelKey('index.director') . ', dataIndex: "director", hidden: true},
 					{header: ' . $this->getExtJSLabelKey('index.released') . ', dataIndex: "releaseDate", renderer: Ext.util.Format.dateRenderer("d.m.Y"), sortable: true},
-					{header: ' . $this->getExtJSLabelKey('index.genre') . ', dataIndex: "genre", renderer: function(v,r,o){return v.name;}},
+					{header: ' . $this->getExtJSLabelKey('index.genre') . ', dataIndex: "genre", hidden: true, renderer: function(v,r,o){return v.name;}},
 					{header: ' . $this->getExtJSLabelKey('index.tagline') . ', dataIndex: "tagline", hidden: true}
 				],
-				autoExpandColumn: "title"
+				autoExpandColumn: "title",
+				view: new Ext.grid.GroupingView()
 			});
 			
 			grid.render("MvcExtjsSamples-Movie");
