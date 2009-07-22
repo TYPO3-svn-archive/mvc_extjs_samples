@@ -109,11 +109,54 @@ class Tx_MvcExtjsSamples_ExtJS_Utility {
 			$propertyGetterName = 'get' . ucfirst($property->name);
 			
 			if (method_exists($object, $propertyGetterName)) {
-				$fields[] = '"' . $property->name . '"';
+				$type = self::getMethodReturnType($object, $propertyGetterName);
+				if ($type) {
+					$fields[] = sprintf('{name: "%s", type: "%s"}', $property->name, $type);
+				} else {
+					$fields[] = sprintf('"%s"', $property->name);
+				}
 			}
 		}
 		
 		return sprintf($jsonReader, join(',', $fields));
+	}
+	
+	/**
+	 * Returns the return type of an object method.
+	 * EXPERIMENTAL
+	 * 
+	 * @param object $object
+	 * @param string $methodName
+	 * @return string Empty string if type could not be determined
+	 */
+	private static function getMethodReturnType($object, $methodName) {
+		$method = new ReflectionMethod($object, $methodName);
+		$phpDoc = $method->getDocComment();
+		
+		$type = '';
+		if (preg_match('/@return\\s+(\\w+)/', $phpDoc, $matches)) {
+			switch ($matches[1]) {
+				case 'string':
+					$type = 'string';
+					break;
+				case 'int':
+				case 'integer':
+					$type = 'int';
+					break;
+				case 'float':
+					$type = 'float';
+					break;
+				case 'bool':
+				case 'boolean':
+					$type = 'boolean';
+					break;
+				case 'DateTime':
+					$type = 'date';
+					break;
+			}
+		}
+		
+		return $type;
 	}
 	
 	/**
