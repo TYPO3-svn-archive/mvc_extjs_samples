@@ -197,6 +197,12 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 						fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
 						name: "genre",
 						width: 130
+					},{
+						xtype: "textarea",
+						fieldLabel: ' . $this->getExtJSLabelKey('index.tagline') . ',
+						name: "tagline",
+						height: 80,
+						anchor: "100%"
 					}],
 					buttons: [{
 						text: ' . $this->getExtJSLabelKey('index.form.save') . '
