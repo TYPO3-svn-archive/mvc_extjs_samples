@@ -11,8 +11,13 @@
 			<label index="index.released">Released</label>
 			<label index="index.genre">Genre</label>
 			<label index="index.tagline">Tagline</label>
+			<label index="index.filmedIn">Filmed In</label>
+			<label index="index.filmedIn.color">Color</label>
+			<label index="index.filmedIn.bw">Black and White</label>
 			<label index="index.movie.add">Add Movie</label>
 			<label index="index.movie.remove">Remove Movie</label>
+			<label index="index.form.save">Save</label>
+			<label index="index.form.reset">Reset</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="index.title">Titre</label>
@@ -20,8 +25,13 @@
 			<label index="index.released">Sortie</label>
 			<label index="index.genre">Genre</label>
 			<label index="index.tagline">Citation</label>
+			<label index="index.filmedIn">Filmé en</label>
+			<label index="index.filmedIn.color">Couleur</label>
+			<label index="index.filmedIn.bw">Noir et blanc</label>
 			<label index="index.movie.add">Ajouter un film</label>
 			<label index="index.movie.remove">Supprimer le film</label>
+			<label index="index.form.save">Enregistrer</label>
+			<label index="index.form.reset">Réinitialiser</label>
 		</languageKey>
 	</data>
 </T3locallang>

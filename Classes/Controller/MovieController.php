@@ -62,6 +62,27 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$this->settingsExtJS->assign('coverPath', $this->extRelPath . 'Resources/Public/Images/');
 		$this->settingsExtJS->assign('iconsPath', $this->extRelPath . 'Resources/Public/Icons/');
 		
+			// Enable quick tips
+		$this->enableExtJSQuickTips = TRUE;
+		$this->addJsInlineCode('
+			Ext.apply(Ext.QuickTips.getQuickTip(), {
+				maxWidth: 200,
+				minWidth: 100,
+				showDelay: 50,
+				trackMouse: true
+			});
+		');
+		
+			// Create a validation type for the movie form
+		$this->addJsInlineCode('
+			Ext.form.VTypes.nameVal  = /^([A-Z]{1})[A-Za-z\-]+ ([A-Z]{1})[A-Za-z\-]+/;
+			Ext.form.VTypes.nameMask = /[A-Za-z\- ]/;
+			Ext.form.VTypes.nameText = "Invalid Director Name.";
+			Ext.form.VTypes.name = function(v) {
+				return Ext.form.VTypes.nameVal.test(v);
+			};
+		');
+		
 			// Create a data store with movies grouped by genre
 		$this->addJsInlineCode('
 			var movies = new Ext.data.GroupingStore({
@@ -128,10 +149,60 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$this->addJsInlineCode('
 				{
 					region: "west",
-					xtype: "panel",
+					xtype: "form",
 					split: true,
-					width: 300,
-					html: "Movie edit form goes here..."
+					collapsible: true,
+					collapsMode: "mini",
+					title: "Movie Information Form",
+					bodyStyle: "padding:5px;",
+					width: 250,
+					minSize: 250,
+					items: [{
+						xtype: "textfield",
+						fieldLabel: ' . $this->getExtJSLabelKey('index.title') . ',
+						name: "title",
+						anchor: "100%",
+						allowBlank: false,
+						listeners: {
+							specialKey: function(f,e) {
+								if (e.getKey() == e.ENTER) {
+									// Send form
+								}
+							}
+						}
+					},{
+						xtype: "textfield",
+						fieldLabel: ' . $this->getExtJSLabelKey('index.director') . ',
+						name: "director",
+						anchor: "100%",
+						vtype: "name"
+					},{
+						xtype: "datefield",
+						fieldLabel: ' . $this->getExtJSLabelKey('index.released') . ',
+						name: "releaseDate",
+						disabledDays: [6]
+					},{
+						xtype: "radio",
+						fieldLabel: ' . $this->getExtJSLabelKey('index.filmedIn') . ',
+						name: "filmedIn",
+						boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.color') . '
+					},{
+						xtype: "radio",
+						hideLabel: false,
+						labelSeparator: "",
+						name: "filmedIn",
+						boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.bw') . '
+					},{
+						xtype: "combo",
+						fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
+						name: "genre",
+						width: 130
+					}],
+					buttons: [{
+						text: ' . $this->getExtJSLabelKey('index.form.save') . '
+					},{
+						text: ' . $this->getExtJSLabelKey('index.form.reset') . '
+					}]
 				},
 		');
 		
@@ -164,6 +235,11 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		');
 		
 		$this->outputJsCode();
+		
+		$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_MovieRepository');
+		/* @var $movieRepository Tx_MvcExtjsSamples_Domain_Model_MovieRepository */
+		$movies = $movieRepository->findAll();
+		$this->view->assign('movie', $movies[0]);
 	}
 
 	/**
