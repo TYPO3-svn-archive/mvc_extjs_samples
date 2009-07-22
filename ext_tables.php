@@ -121,6 +121,16 @@ $TCA['tx_mvcextjssamples_domain_model_genre'] = array(
 	),
 );
 
+// ========== Plugin FeUserAdmin
+
+Tx_Extbase_Utility_Plugin::registerPlugin(
+	'MvcExtjsSamples',
+	'FeUserAdmin',
+	'MVC ExtJS Samples - FeUser Admin'
+);
+
+	// Disable the display of layout and select_key fields
+$TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feuseradmin'] = 'layout,select_key';
 
 // ========== Common
 
