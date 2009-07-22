@@ -58,9 +58,19 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	protected $extRelPath;
 	
 	/**
+	 * @var boolean
+	 */
+	protected $enableExtJSQuickTips = FALSE;
+	
+	/**
 	 * @var array
 	 */
 	protected $jsInline = array();
+	
+	/**
+	 * @var array
+	 */
+	protected $cssInline = array();
 	
 	/**
 	 * @var Tx_MvcExtjsSamples_ExtJS_SettingsService
@@ -73,18 +83,26 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	protected $useExtCore = false;
 	
 	/**
+	 * @var t3lib_pageIncludes
+	 */
+	protected $pageIncludes;
+	
+	
+	/**
 	 * Should be called in an action method, before doing anything else.
 	 */
 	protected function initializeExtJSAction($useExtCore = false) {
+		$this->pageIncludes = $GLOBALS['TSFE']->pageIncludes;
+		
 		if ($useExtCore) {
 			$this->useExtCore = TRUE;
 				// Load ExtCore library
-			$GLOBALS['TSFE']->pageIncludes->loadExtCore();		
+			$this->pageIncludes->loadExtCore();		
 		} else {
 				// temporary fix for t3style		
 			$GLOBALS['TBE_STYLES']['extJS']['theme'] =  t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';
 				// Load ExtJS libraries and stylesheets
-			$GLOBALS['TSFE']->pageIncludes->loadExtJS();
+			$this->pageIncludes->loadExtJS();
 		}
 			// Namespace will be registered in ExtJS when calling method outputJsCode
 			// TODO: add id of controller for multiple usage
@@ -95,6 +113,35 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 		
 			// Initialize the ExtJS settings service 
 		$this->settingsExtJS = t3lib_div::makeInstance('Tx_MvcExtjsSamples_ExtJS_SettingsService', $this->extJSNamespace);
+	}
+	
+	/**
+	 * Adds JS inline code.
+	 * 
+	 * @var string $block
+	 */
+	protected function addCssInlineBlock($block) {
+		$this->cssInline[] = $block;
+	}
+	
+	/**
+	* Adds a JavaScript library.
+	* 
+	* @param string $name
+	* @param string $file file to be included, relative to this extension's Javascript directory
+	* @param string $type
+	* @param int $section 	t3lib_pageIncludes::PART_HEADER (0) or t3lib_pageIncludes::PART_FOOTER (1)
+	* @param boolean $compressed	flag if library is compressed
+	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block	
+	*/
+	protected function addCssFile($cssFile, $rel = 'stylesheet', $media = 'screen', $title = '', $compressed = FALSE, $forceOnTop = FALSE) {
+		$cssFile = 'Resources/Public/CSS/' . $cssFile;
+		
+		if (!@is_file($this->extPath . $cssFile)) {
+			die('File "' . $this->extPath . $cssFile . '" not found!');
+		}
+		
+		$this->pageIncludes->addCssFile( $this->extRelPath . $cssFile, $rel, $media, $title, $compressed, $forceOnTop);
 	}
 	
 	/**
@@ -123,7 +170,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			die('File "' . $this->extPath . $jsFile . '" not found!');
 		}
 		
-		$GLOBALS['TSFE']->pageIncludes->addJsLibrary($name, $this->extRelPath . $jsFile);
+		$this->pageIncludes->addJsLibrary($name, $this->extRelPath . $jsFile);
 	}
 	
 	/**
@@ -158,10 +205,16 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			}();
 		';
 		
-			// Start code when ExtJS is ready 
-		$block .= 'Ext.onReady(' . $this->extJSNamespace . '.plugin.init, ' . $this->extJSNamespace . '.plugin);';
+		$block .= $this->extJSNamespace . '.plugin.init();';   
 		
-		$GLOBALS['TSFE']->pageIncludes->addJsInlineCode($this->extJSNamespace, $block, $compressed, $forceOnTop);
+			// Start code when ExtJS is ready 
+		$this->pageIncludes->enableExtJSQuickTips = $this->enableExtJSQuickTips; 
+		$this->pageIncludes->addJsHandlerCode($block, t3lib_pageIncludes::JSHANDLER_EXTONREADY);
+		
+		if (count($this->cssInline)) {
+			    $this->pageIncludes->addCssInlineBlock($this->extJSNamespace, implode('', $this->cssInline));
+		}
+		
 	}
 	
 	/**
