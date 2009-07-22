@@ -153,7 +153,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 					split: true,
 					collapsible: true,
 					collapsMode: "mini",
-					title: "Movie Information Form",
+					title: ' . $this->getExtJSLabelKey('index.form.title') . ',
 					bodyStyle: "padding:5px;",
 					width: 250,
 					minSize: 250,

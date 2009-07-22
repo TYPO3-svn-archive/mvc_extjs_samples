@@ -16,6 +16,7 @@
 			<label index="index.filmedIn.bw">Black and White</label>
 			<label index="index.movie.add">Add Movie</label>
 			<label index="index.movie.remove">Remove Movie</label>
+			<label index="index.form.title">Movie Information Form</label>
 			<label index="index.form.save">Save</label>
 			<label index="index.form.reset">Reset</label>
 		</languageKey>
@@ -30,6 +31,7 @@
 			<label index="index.filmedIn.bw">Noir et blanc</label>
 			<label index="index.movie.add">Ajouter un film</label>
 			<label index="index.movie.remove">Supprimer le film</label>
+			<label index="index.form.title">Formulaire d'information sur le film</label>
 			<label index="index.form.save">Enregistrer</label>
 			<label index="index.form.reset">Réinitialiser</label>
 		</languageKey>
