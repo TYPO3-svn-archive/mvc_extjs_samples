@@ -90,6 +90,8 @@ class Tx_MvcExtjsSamples_ExtJS_Utility {
 	 * class $class.
 	 *
 	 * @param string $class
+	 * @param object $obj
+	 * @return string
 	 */
 	public static function getJSONReader($class, $obj = NULL) {
 		$jsonReader = 'new Ext.data.JsonReader({
@@ -102,7 +104,14 @@ class Tx_MvcExtjsSamples_ExtJS_Utility {
 		$fields = array();
 		
 		$rc = new ReflectionClass($class);
-		$object = $obj ? $obj : t3lib_div::makeInstance($class);
+		if ($obj) {
+			if (!is_a($obj, $class)) {
+				die('Object is not a ' . $class);
+			}
+			$object = $obj;
+		} else {
+			$object = t3lib_div::makeInstance($class);
+		}
 		$properties = $rc->getProperties();
 		
 		foreach ($properties as $property) {
