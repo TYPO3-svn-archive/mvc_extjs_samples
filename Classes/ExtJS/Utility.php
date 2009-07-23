@@ -91,7 +91,7 @@ class Tx_MvcExtjsSamples_ExtJS_Utility {
 	 *
 	 * @param string $class
 	 */
-	public static function getJSONReader($class) {
+	public static function getJSONReader($class, $obj = NULL) {
 		$jsonReader = 'new Ext.data.JsonReader({
 			fields: [ %s ],
 			root: "results",
@@ -102,7 +102,7 @@ class Tx_MvcExtjsSamples_ExtJS_Utility {
 		$fields = array();
 		
 		$rc = new ReflectionClass($class);
-		$object = t3lib_div::makeInstance($class);
+		$object = $obj ? $obj : t3lib_div::makeInstance($class);
 		$properties = $rc->getProperties();
 		
 		foreach ($properties as $property) {
