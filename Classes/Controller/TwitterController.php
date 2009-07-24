@@ -40,8 +40,21 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjsSamples
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
-		$this->initializeExtJSAction();
-		$this->addJsLibrary('Ext.ux.TYPO3.Twitter', 'ux.TYPO3.Twitter.js');
+		$this->initializeExtJSAction(FALSE, TRUE);
+		$this->addJsFile('ux.TYPO3.Twitter.js');
+		
+		//make appLoader
+		$appLoaderLabels = array(
+			$this->extensionName . ' Twitter Application', 
+			'Loading Core API...', 
+			'Loading UI Components...', 
+			'Initializing Application...'
+		);
+		$markUp = $this->pageIncludes->enableApplicationLoader($appLoaderLabels, $this->extRelPath . 'Resources/Public/Icons/typo3anim32.gif');
+		$this->addCssInlineBlock($markUp['CSS']);
+		$this->view->assign('loadingIcon', $this->extRelPath . 'Resources/Public/Icons/typo3anim32.gif');
+		$this->view->assign('label1', $appLoaderLabels[0]);
+		$this->view->assign('label2', $appLoaderLabels[1]);
 		
 		$GLOBALS['TSFE']->pageIncludes->addInlineComment('These examples show the possibility to work with ExtJS based on extbase plugin');
 		
@@ -62,6 +75,7 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjsSamples
 		$this->addJsInlineCode('
 			new Ext.ux.TYPO3.Twitter("MvcExtjsSamples-Twitter", {' . $twitter . '});'
 		);
+		$this->addJsInlineCode($markUp['JAVASCRIPT']);
 		
 		$this->outputJsCode();
 	}

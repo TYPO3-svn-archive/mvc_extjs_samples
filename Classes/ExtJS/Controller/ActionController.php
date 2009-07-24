@@ -87,12 +87,12 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	 */
 	protected $pageIncludes;
 	
-	
 	/**
 	 * Should be called in an action method, before doing anything else.
 	 */
-	protected function initializeExtJSAction($useExtCore = false) {
+	protected function initializeExtJSAction($useExtCore = FALSE, $moveJsFromHeaderToFooter = FALSE) {
 		$this->pageIncludes = $GLOBALS['TSFE']->pageIncludes;
+		$this->pageIncludes->moveJsFromHeaderToFooter = $moveJsFromHeaderToFooter;
 		
 		if ($useExtCore) {
 			$this->useExtCore = TRUE;
@@ -170,7 +170,27 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			die('File "' . $this->extPath . $jsFile . '" not found!');
 		}
 		
-		$this->pageIncludes->addJsLibrary($name, $this->extRelPath . $jsFile);
+		$this->pageIncludes->addJsLibrary($name, $this->extRelPath . $jsFile, $type, $section, $compressed, $forceOnTop);
+	}
+	
+	/**
+	* Adds a JavaScript file.
+	* 
+	* @param string $name
+	* @param string $file file to be included, relative to this extension's Javascript directory
+	* @param string $type
+	* @param int $section 	t3lib_pageIncludes::PART_HEADER (0) or t3lib_pageIncludes::PART_FOOTER (1)
+	* @param boolean $compressed	flag if library is compressed
+	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block	
+	*/
+	protected function addJsFile($file, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
+		$jsFile = 'Resources/Public/JavaScript/' . $file;
+		
+		if (!@is_file($this->extPath . $jsFile)) {
+			die('File "' . $this->extPath . $jsFile . '" not found!');
+		}
+		
+		$this->pageIncludes->addJsFile($this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
 	}
 	
 	/**
