@@ -60,6 +60,12 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$this->settingsExtJS->assign('coverPath', $this->extRelPath . 'Resources/Public/Images/');
 		$this->settingsExtJS->assign('iconsPath', $this->extRelPath . 'Resources/Public/Icons/');
 		
+			// TODO: Actually do this a bit prettier :-)
+		$updateUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'update');
+		$parts = explode('?', $updateUrl);
+		$updateUrl = $parts[0] . '?' . urlencode('tx_mvcextjssamples_movie[movie][uid]') . '=UID&' . $parts[1];
+		$this->settingsExtJS->assign('updateUrl', $updateUrl);
+		
 			// Enable quick tips
 		$this->enableExtJSQuickTips = TRUE;
 		$this->addJsInlineCode('
@@ -91,6 +97,9 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 						
 						var values = grid.getSelectionModel().getSelected().data;
 						
+						// Update form action URL
+						movie_form.getForm().url = ' . $this->settingsExtJS->getExtJS('updateUrl') . '.replace(/UID/, values.uid);
+						
 						// TODO: Add this to a new setExtbaseValues() method on Ext.form.BasicForm
 						var field, id;
 						for(id in values){
@@ -102,11 +111,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 									}
 								} catch (e) {}
 							}
-						}
-						
-						// TODO: Update form URL to urlencode what comes after the ?
-						//       and to add this:
-						//       tx_mvcextjssamples_movie%5Bmovie%5D%5Buid%5D=1&<urlencoded-parameters> 
+						} 
 					}
 				};
 			}();
@@ -193,7 +198,6 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 					region: "west",
 					xtype: "form",
 					id: "movie_form",
-					url: "' . $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'update') . '",
 					method: "post",
 					split: true,
 					collapsible: true,
@@ -332,7 +336,20 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$movies = $movieRepository->findAll();
 		$this->view->assign('movie', $movies[0]);
 	}
-
+	
+	/**
+	 * Updates an existing movie.
+	 *
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie The existing, unmodified movie
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $updatedMovie A clone of the original movie with the updated values already applied
+	 * @return void
+	 */
+	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie, Tx_MvcExtjsSamples_Domain_Model_Movie $updatedMovie) {
+		t3lib_div::debug($updatedMovie);
+		//$this->movieRepository->replace($movie, $updatedMovie);
+		//$this->redirect('index');
+	}
+	
 	/**
 	 * Returns a list of movies as JSON.
 	 * 
