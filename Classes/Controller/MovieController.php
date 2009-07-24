@@ -56,8 +56,6 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 	public function indexAction() {
 		$this->initializeExtJSAction();
 		
-		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'movies');
-		
 			// Store the relative path to image directories
 		$this->settingsExtJS->assign('coverPath', $this->extRelPath . 'Resources/Public/Images/');
 		$this->settingsExtJS->assign('iconsPath', $this->extRelPath . 'Resources/Public/Icons/');
@@ -83,11 +81,26 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			};
 		');
 		
-			// Create a data store with movies grouped by genre
+			// Create a few functions to manage movies
 		$this->addJsInlineCode('
-			var movies = new Ext.data.GroupingStore({
+			var Movies = function() {
+				return {
+					editDetails : function(grid, index) {
+						var movie_form = Ext.getCmp("movie_view").findById("movie_form");
+						if (!movie_form.isVisible()) { movie_form.expand(); }
+						
+						var record = grid.getSelectionModel().getSelected().data;
+						movie_form.getForm().setValues(record);
+					}
+				};
+			}();
+		');
+		
+			// Create a data stores
+		$this->addJsInlineCode('
+			var moviesStore = new Ext.data.GroupingStore({
 				proxy: new Ext.data.HttpProxy({
-					url: "' . $ajaxUrl . '"
+					url: "' . $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'movies') . '"
 				}),
 				sortInfo: {
 					field: "genre",
@@ -95,6 +108,18 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 				},
 				groupField: "genre",
 				reader: ' . Tx_MvcExtjsSamples_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Movie') . ',
+				autoLoad: true
+			});
+			
+			var genresStore = new Ext.data.Store({
+				proxy: new Ext.data.HttpProxy({
+					url: "' . $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'genres') . '"
+				}),
+				sortInfo: {
+					field: "name",
+					direction: "ASC"
+				},
+				reader: ' . Tx_MvcExtjsSamples_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Genre') . ',
 				autoLoad: true
 			});
 		');
@@ -112,6 +137,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			// [START] Complex layout (split among multiple call to $this->addJsInlineCode)
 		$this->addJsInlineCode('
 			var complexLayout = new Ext.Panel({
+				id: "movie_view",
 				height: 400,
 				layout: "border",
 				items: [
@@ -150,6 +176,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 				{
 					region: "west",
 					xtype: "form",
+					id: "movie_form",
 					split: true,
 					collapsible: true,
 					collapsMode: "mini",
@@ -196,6 +223,9 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 						xtype: "combo",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
 						name: "genre",
+						mode: "local",
+						store: genresStore,
+						displayField: "name",
 						width: 130
 					},{
 						xtype: "textarea",
@@ -217,7 +247,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 				{
 					region: "center",
 					xtype: "grid",
-					store: movies,
+					store: moviesStore,
 					stripeRows: true,
 					loadMask: true,
 					columns: [ 
@@ -228,7 +258,15 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 						{header: ' . $this->getExtJSLabelKey('index.tagline') . ', dataIndex: "tagline", hidden: true}
 					],
 					autoExpandColumn: "title",
-					view: new Ext.grid.GroupingView()
+					listeners: {
+						rowdblclick: {
+							fn: Movies.editDetails
+						}
+					},
+					view: new Ext.grid.GroupingView(),
+					sm: new Ext.grid.RowSelectionModel({
+						singleSelect: true
+					})
 				}
 		');
 				
@@ -264,6 +302,33 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		
 			// Convert Tx_MvcExtjsSamples_Domain_Model_Movie objects to an array
 		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::decodeArrayForJSON($movies);
+		
+			// Prepare the JSON response
+		header('Content-type: text/html; charset=utf-8');
+		header('X-JSON: true');
+		
+		echo Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
+		
+			// Do not do further processing
+		exit;
+	}
+	
+	/**
+	 * Returns a list of movie genres as JSON.
+	 * 
+	 * @see typo3/classes/class.typo3ajax.php
+	 * @return void
+	 * @ajax
+	 */
+	public function genresAction() {
+		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_GenreRepository');
+		/* @var $genreRepository Tx_MvcExtjsSamples_Domain_Model_GenreRepository */
+		
+			// Retrieve all genres from repository
+		$genres = $genreRepository->findAll();
+		
+			// Convert Tx_MvcExtjsSamples_Domain_Model_Genre objects to an array
+		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::decodeArrayForJSON($genres);
 		
 			// Prepare the JSON response
 		header('Content-type: text/html; charset=utf-8');

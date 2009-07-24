@@ -58,8 +58,8 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 Tx_Extbase_Utility_Plugin::configureDispatcher(
 	'MvcExtjsSamples',
 	'Movie',
-	array('Movie' => 'index,movies'),
-	array('Movie' => 'movies')
+	array('Movie' => 'index,movies,genres'),
+	array('Movie' => 'movies,genres')
 );
 
 	// Add button save+new for movie records
