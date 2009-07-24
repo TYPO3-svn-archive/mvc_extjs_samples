@@ -89,8 +89,24 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 						var movie_form = Ext.getCmp("movie_view").findById("movie_form");
 						if (!movie_form.isVisible()) { movie_form.expand(); }
 						
-						var record = grid.getSelectionModel().getSelected().data;
-						movie_form.getForm().setValues(record);
+						var values = grid.getSelectionModel().getSelected().data;
+						
+						// TODO: Add this to a new setExtbaseValues() method on Ext.form.BasicForm
+						var field, id;
+						for(id in values){
+							if(!Ext.isFunction(values[id]) && (field = movie_form.getForm().findField("updatedMovie[" + id + "]"))){
+								try { // TODO: handle multiple fields (radio button filmedIn) 
+									field.setValue(values[id]);
+									if(movie_form.getForm().trackResetOnLoad){
+										field.originalValue = field.getValue();
+									}
+								} catch (e) {}
+							}
+						}
+						
+						// TODO: Update form URL to urlencode what comes after the ?
+						//       and to add this:
+						//       tx_mvcextjssamples_movie%5Bmovie%5D%5Buid%5D=1&<urlencoded-parameters> 
 					}
 				};
 			}();
@@ -177,6 +193,8 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 					region: "west",
 					xtype: "form",
 					id: "movie_form",
+					url: "' . $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'update') . '",
+					method: "post",
 					split: true,
 					collapsible: true,
 					collapsMode: "mini",
@@ -185,9 +203,24 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 					width: 250,
 					minSize: 250,
 					items: [{
+						xtype: "hidden",
+						name: "updatedMovie[uid]"
+					},{
+						xtype: "hidden",
+						name: "__referrer[extensionName]",
+						value: "' . $this->request->getControllerExtensionName() . '"
+					},{
+						xtype: "hidden",
+						name: "__referrer[controllerName]",
+						value: "' . $this->request->getControllerName() . '"
+					},{
+						xtype: "hidden",
+						name: "__referrer[actionName]",
+						value: "update"
+					},{
 						xtype: "textfield",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.title') . ',
-						name: "title",
+						name: "updatedMovie[title]",
 						anchor: "100%",
 						allowBlank: false,
 						listeners: {
@@ -200,29 +233,29 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 					},{
 						xtype: "textfield",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.director') . ',
-						name: "director",
+						name: "updatedMovie[director]",
 						anchor: "100%",
 						vtype: "name"
 					},{
 						xtype: "datefield",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.released') . ',
-						name: "releaseDate",
+						name: "updatedMovie[releaseDate]",
 						disabledDays: [6]
 					},{
 						xtype: "radio",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.filmedIn') . ',
-						name: "filmedIn",
+						name: "updatedMovie[filmedIn]",
 						boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.color') . '
 					},{
 						xtype: "radio",
 						hideLabel: false,
 						labelSeparator: "",
-						name: "filmedIn",
+						name: "updatedMovie[filmedIn]",
 						boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.bw') . '
 					},{
 						xtype: "combo",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
-						name: "genre",
+						name: "updatedMovie[genre]",
 						mode: "local",
 						store: genresStore,
 						displayField: "name",
@@ -230,14 +263,28 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 					},{
 						xtype: "textarea",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.tagline') . ',
-						name: "tagline",
+						name: "updatedMovie[tagline]",
 						height: 80,
 						anchor: "100%"
 					}],
 					buttons: [{
-						text: ' . $this->getExtJSLabelKey('index.form.save') . '
+						text: ' . $this->getExtJSLabelKey('index.form.save') . ',
+						handler: function() {
+							Ext.getCmp("movie_view").findById("movie_form").getForm().submit({
+								success: function(f,a) {
+									Ext.Msg.alert("Success", "It worked");
+								},
+								failure: function(f,a) {
+									console.log(a);
+									Ext.Msg.alert("Warning", a.result.errormsg);
+								}
+							});
+						}
 					},{
-						text: ' . $this->getExtJSLabelKey('index.form.reset') . '
+						text: ' . $this->getExtJSLabelKey('index.form.reset') . ',
+						handler: function() {
+							Ext.getCmp("movie_view").findById("movie_form").getForm().reset();
+						}
 					}]
 				},
 		');
