@@ -70,7 +70,6 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 		// BACK_PATH is the path from the typo3/ directory from within the directory containing
 		// the controller file
 		$pathExt = substr(t3lib_extMgm::extPath($config['extensionKey']), strlen(PATH_site)) . 'Classes/Controller/';
-		echo $pathExt . '<br>';
 		$subdirs = count(explode('/', $pathExt)) - 1;
 		if (substr($pathExt, 0, strlen(TYPO3_mainDir)) === TYPO3_mainDir) {
 				// Extension is within directory typo3/ (either global or system)
