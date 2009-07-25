@@ -1,8 +1,15 @@
 <?php
 
-	// DO NOT REMOVE OR CHANGE THESE 3 LINES:
-define('TYPO3_MOD_PATH', '../../typo3conf/ext/mvc_extjs_samples/Classes/');
-$BACK_PATH = '../../../../typo3/';
+// TYPO3_MOD_PATH is the path to the directory containing this file
+// relative to within typo3/ directory
+$pathExt = substr(dirname(__FILE__), strlen(PATH_site));
+if (substr($pathExt, 0, strlen(TYPO3_mainDir) === TYPO3_mainDir)) {
+		// Extension is within directory typo3/ (either global or system)
+	$pathExt = substr($pathExt, strlen(TYPO3_mainDir) + 1) . '/';
+} else {
+	$pathExt = '../' . $pathExt;
+}
+define('TYPO3_MOD_PATH', $pathExt);
 
 // remark: $name comes from class.t3lib_loadmodules.php
 $MCONF['name'] = $name;
