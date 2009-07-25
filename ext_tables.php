@@ -147,6 +147,21 @@ Tx_MvcExtjsSamples_Utility_Module::registerModule(
 	'blank'
 );
 
+// ========== Module List
+
+Tx_MvcExtjsSamples_Utility_Module::registerModule(
+	'MvcExtjsSamples',
+	'ListModule',
+	'index',
+	array(
+		'access' => 'user,group',
+		'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
+		'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/ListModule.xml',
+	),
+	'web',	// Make Blank module a submodule of 'web'
+	'list'
+);
+
 // ========== Common
 
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'MVC ExtJS Samples');   
