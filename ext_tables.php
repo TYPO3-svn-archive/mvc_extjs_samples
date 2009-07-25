@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) {
 // ========== Plugin HelloWorld
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
-	'MvcExtjsSamples',
+	$_EXTKEY,
 	'HelloWorld',
 	'MVC ExtJS Samples - Hello World'
 );
@@ -18,7 +18,7 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_hel
 // ========== Plugin SimpleForm
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
-	'MvcExtjsSamples',
+	$_EXTKEY,
 	'SimpleForm',
 	'MVC ExtJS Samples - Simple Form'
 );
@@ -30,7 +30,7 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_sim
 // ========== Plugin Twitter
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
-	'MvcExtjsSamples',
+	$_EXTKEY,
 	'Twitter',
 	'MVC ExtJS Samples - Twitter'
 );
@@ -46,7 +46,7 @@ t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_twitter', 'FILE:EXT:mvc_extjs_
 // ========== Plugin Feeds
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
-	'MvcExtjsSamples',
+	$_EXTKEY,
 	'Feeds',
 	'MVC ExtJS Samples - Feeds'
 );
@@ -62,7 +62,7 @@ t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_feeds', 'FILE:EXT:mvc_extjs_sa
 // ========== Plugin PictureSlideShow
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
-	'MvcExtjsSamples',
+	$_EXTKEY,
 	'PictureSlideShow',
 	'MVC ExtJS Samples - Picture Slide Show'
 );
@@ -77,7 +77,7 @@ t3lib_extMgm::addPiFlexFormValue('mvcextjssamples_pictureslideshow', 'FILE:EXT:m
 // ========== Plugin Movie
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
-	'MvcExtjsSamples',
+	$_EXTKEY,
 	'Movie',
 	'MVC ExtJS Samples - Movie'
 );
@@ -124,7 +124,7 @@ $TCA['tx_mvcextjssamples_domain_model_genre'] = array(
 // ========== Plugin FeUserAdmin
 
 Tx_Extbase_Utility_Plugin::registerPlugin(
-	'MvcExtjsSamples',
+	$_EXTKEY,
 	'FeUserAdmin',
 	'MVC ExtJS Samples - FeUser Admin'
 );
@@ -135,7 +135,7 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feu
 // ========== Module Blank
 
 Tx_MvcExtjsSamples_Utility_Module::registerModule(
-	'MvcExtjsSamples',
+	$_EXTKEY,
 	'BlankModule',
 	'index',
 	array(
@@ -150,7 +150,7 @@ Tx_MvcExtjsSamples_Utility_Module::registerModule(
 // ========== Module List
 
 Tx_MvcExtjsSamples_Utility_Module::registerModule(
-	'MvcExtjsSamples',
+	$_EXTKEY,
 	'ListModule',
 	'index',
 	array(
