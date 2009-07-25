@@ -8,9 +8,9 @@ Index: t3lib/class.t3lib_loadmodules.php
  				if ($MCONF['script']==='_DISPATCH')	{
 -					$modconf['script'] = 'mod.php?M='.rawurlencode($name);
 +					if ($MCONF['extbase']) {
-+						$modconf['script'] = 'mod.php?M=TX_'.rawurlencode($name);
++						$modconf['script'] = 'mod.php?M=TX_' . rawurlencode($name);
 +					} else {
-+						$modconf['script'] = 'mod.php?M='.rawurlencode($name);	
++						$modconf['script'] = 'mod.php?M=' . rawurlencode($name);	
 +					}
  				} elseif ($MCONF['script'] && file_exists($path.'/'.$MCONF['script']))	{
  					$modconf['script'] = $this->getRelativePath(PATH_typo3,$fullpath.'/'.$MCONF['script']);
@@ -28,18 +28,18 @@ Index: typo3/mod.php
 -	require($temp_path.'conf.php');
 -	$BACK_PATH='';
 -	require($temp_path.'index.php');
-+if (substr($temp_M, 0, 3) == 'TX_') {
++if (substr($temp_M, 0, 3) === 'TX_') {
 +	$dispatcher = t3lib_div::makeInstance('Tx_MvcExtjsSamples_BackendDispatcher');
 +	$dispatcher->callModule(substr($temp_M, 3));
  } else {
 -	die('Value "'.htmlspecialchars($temp_M).'" for "M" was not found as a module');
-+	if ($temp_path = $TBE_MODULES['_PATHS'][$temp_M])	{
-+		$MCONF['_'] = 'mod.php?M='.rawurlencode($temp_M);
-+		require($temp_path.'conf.php');
-+		$BACK_PATH='';
-+		require($temp_path.'index.php');
++	if ($temp_path = $TBE_MODULES['_PATHS'][$temp_M]) {
++		$MCONF['_'] = 'mod.php?M=' . rawurlencode($temp_M);
++		require($temp_path . 'conf.php');
++		$BACK_PATH = '';
++		require($temp_path . 'index.php');
 +	} else {
-+		die('Value "'.htmlspecialchars($temp_M).'" for "M" was not found as a module');
++		die('Value "' . htmlspecialchars($temp_M) . '" for "M" was not found as a module');
 +	}
  }
  
