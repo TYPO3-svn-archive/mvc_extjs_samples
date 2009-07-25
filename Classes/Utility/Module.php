@@ -70,7 +70,7 @@ class Tx_MvcExtjsSamples_Utility_Module {
 		}
 		
 		$moduleConfig = array(
-			'extension' => $GLOBALS['_EXTKEY'],
+			'extension' => $extensionName,
 			'controller' => $controller,
 			'action' => $action,
 			'config' => $config,

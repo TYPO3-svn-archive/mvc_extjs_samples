@@ -19,7 +19,7 @@ Index: typo3/mod.php
 ===================================================================
 --- typo3/mod.php	(revision 5734)
 +++ typo3/mod.php	(working copy)
-@@ -42,13 +42,17 @@
+@@ -42,13 +42,18 @@
  
  	// Find module path:
  $temp_M = (string)t3lib_div::_GET('M');
@@ -29,7 +29,8 @@ Index: typo3/mod.php
 -	$BACK_PATH='';
 -	require($temp_path.'index.php');
 +if (substr($temp_M, 0, 3) == 'TX_') {
-+	Tx_MvcExtjsSamples_BackendDispatcher::callModule($temp_M);
++	$dispatcher = t3lib_div::makeInstance('Tx_MvcExtjsSamples_BackendDispatcher');
++	$dispatcher->callModule(substr($temp_M, 3));
  } else {
 -	die('Value "'.htmlspecialchars($temp_M).'" for "M" was not found as a module');
 +	if ($temp_path = $TBE_MODULES['_PATHS'][$temp_M])	{

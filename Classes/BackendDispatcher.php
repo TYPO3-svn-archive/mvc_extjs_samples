@@ -35,5 +35,40 @@
  */
 class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 	
+	/**
+	 * Calls an Extbase Backend module.
+	 *
+	 * @param string $module 
+	 * @return void
+	 */
+	public function callModule($module) {
+		if (!isset($GLOBALS['TBE_EXTBASE_MODULES'][$module])) {
+			die('No configuration found for module ' . $module);
+		}
+		
+		$config = $GLOBALS['TBE_EXTBASE_MODULES'][$module];
+		
+		// TODO: prepare Extbase request stuff and extract the action to use, if any
+		$action = $config['action'];
+		
+		// TODO: should this $extbaseConfiguration actually be stored in $config instead?
+		$extbaseConfiguration = array(
+			'userFunc' => 'tx_extbase_dispatcher->dispatch',
+			'pluginName' => $module,
+			'extensionName' => $config['extension'],
+			'enableAutomaticCacheClearing' => 1,
+			'controller' => $config['controller'],
+			'action' => $action,
+			'switchableControllerActions.' => array(
+				'1.' => array(
+					'controller' => $config['controller'],
+					'actions' => $action,
+				),
+			),
+		);
+		
+		echo $this->dispatch('Problem with Extbase', $extbaseConfiguration);
+	}
+	
 }
 ?>

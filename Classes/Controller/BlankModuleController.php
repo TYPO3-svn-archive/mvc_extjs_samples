@@ -32,7 +32,16 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjsSamples_Controller_Backend_BlankController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
+	
+	/**
+	 * Index action for this controller.
+	 *
+	 * @return string The rendered view
+	 */
+	public function indexAction() {
+		$this->view->assign('title', 'Hello World!');
+	}
 	
 }
 ?>

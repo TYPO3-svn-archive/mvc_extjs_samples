@@ -136,7 +136,7 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feu
 
 Tx_MvcExtjsSamples_Utility_Module::registerModule(
 	'MvcExtjsSamples',
-	'Tx_MvcExtjsSamples_Controller_Backend_BlankController',
+	'BlankModule',
 	'index',
 	array(
 		'access' => 'user,group',
