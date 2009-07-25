@@ -41,17 +41,46 @@ class Tx_MvcExtjsSamples_Utility_Module {
 	 * @param string $extensionName The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
 	 * @param string $controller This is the main controller of the module
 	 * @param string $action This is the default action of the module's controller
+	 * @param array $config The configuration options of the module (icon, locallang.xml file)
 	 * @param string $main The main module key, $sub is the submodule key. So $main would be an index in the $TBE_MODULES array and $sub could be an element in the lists there. If $main is not set a blank $extensionName module is created
 	 * @param string $sub The submodule key. If $sub is not set a blank $main module is created
 	 * @param string $position This can be used to set the position of the $sub module within the list of existing submodules for the main module. $position has this syntax: [cmd]:[submodule-key]. cmd can be "after", "before" or "top" (or blank which is default). If "after"/"before" then submodule will be inserted after/before the existing submodule with [submodule-key] if found. If not found, the bottom of list. If "top" the module is inserted in the top of the submodule list.
 	 * @return void
 	 */
-	public static function registerModule($extensionName, $controller, $action, $main = '', $sub = '', $position = '') {
-		// TODO: some Extbase magic stuff with dispatcher registration here
+	public static function registerModule($extensionName, $controller, $action, $config = array(), $main = '', $sub = '', $position = '') {
+		if (empty($extensionName)) {
+			throw new InvalidArgumentException('The extension name was invalid (must not be empty and must match /[A-Za-z][_A-Za-z0-9]/)', 1239891989);
+		}
+		$extensionName = str_replace(' ', '', ucwords(str_replace('_', ' ', $extensionName)));
+		
+		if (!isset($GLOBALS['TBE_EXTBASE_MODULES'])) {
+			$GLOBALS['TBE_EXTBASE_MODULES'] = array();
+		}
+		
+		if ($main && !isset($GLOBALS['TBE_MODULES'][$main])) {
+			$main = $extensionName . ucfirst($main);	
+		} else {
+			$main = $main ? $main : $extensionName;
+		}
+		
+		if (!is_array($config) || count($config) == 0) {
+			$config['access'] = 'admin';
+			$config['icon'] = '';
+			$config['labels'] = '';
+		}
+		
+		$moduleConfig = array(
+			'extension' => $GLOBALS['_EXTKEY'],
+			'controller' => $controller,
+			'action' => $action,
+			'config' => $config,
+		);
+		
+		$key = $main . ($sub ? '_' . $sub : '');
+		$GLOBALS['TBE_EXTBASE_MODULES'][$key] = $moduleConfig;
 		
 			// Add the module to the backend
-		$main = $main ? $main : $extensionName;
-		$path = '';
+		$path = t3lib_extMgm::extPath('mvc_extjs_samples') . 'Classes/';
 		t3lib_extMgm::addModule($main, $sub, $position, $path);
 	}
 	

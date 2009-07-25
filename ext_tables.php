@@ -132,6 +132,21 @@ Tx_Extbase_Utility_Plugin::registerPlugin(
 	// Disable the display of layout and select_key fields
 $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feuseradmin'] = 'layout,select_key';
 
+// ========== Module Blank
+
+Tx_MvcExtjsSamples_Utility_Module::registerModule(
+	'MvcExtjsSamples',
+	'Tx_MvcExtjsSamples_Controller_Backend_BlankController',
+	'index',
+	array(
+		'access' => 'user,group',
+		'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
+		'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_mod_blank.xml',
+	),
+	'user',	// Make Blank module a submodule of 'user'
+	'blank'
+);
+
 // ========== Common
 
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'MVC ExtJS Samples');   
