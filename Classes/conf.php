@@ -11,6 +11,16 @@ if (substr($pathExt, 0, strlen(TYPO3_mainDir) === TYPO3_mainDir)) {
 }
 define('TYPO3_MOD_PATH', $pathExt);
 
+// BACK_PATH is the path from the typo3/ directory from within the directory containing
+// the controller file. Needed in order for the backend module icon to be shown.
+$subdirs = count(explode('/', $pathExt)) - 1;
+if (substr($pathExt, 0, strlen(TYPO3_mainDir)) === TYPO3_mainDir) {
+		// Extension is within directory typo3/ (either global or system)
+	$BACK_PATH = str_repeat('../', $subdirs - 1);
+} else {
+	$BACK_PATH = str_repeat('../', $subdirs) . TYPO3_mainDir;
+}
+
 // remark: $name comes from class.t3lib_loadmodules.php
 $MCONF['name'] = $name;
 
