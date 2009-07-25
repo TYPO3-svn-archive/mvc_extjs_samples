@@ -10,7 +10,8 @@ $MCONF['name'] = $name;
 $config = $GLOBALS['TBE_EXTBASE_MODULES'][$name]['config'];
 
 $MCONF['access'] = $config['access'];
-$MCONF['script'] = 'BackendDispatcher.php';
+$MCONF['extbase'] = TRUE;
+$MCONF['script'] = '_DISPATCH';
 
 if (substr($config['icon'], 0, 4) === 'EXT:') {
 	list($extKey, $local) = explode('/', substr($config['icon'], 4), 2);
