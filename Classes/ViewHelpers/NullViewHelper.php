@@ -1,5 +1,4 @@
 <?php
-
 /*                                                                        *
  * This script belongs to the FLOW3 package "Fluid".                      *
  *                                                                        *
@@ -54,10 +53,8 @@ class Tx_MvcExtjsSamples_ViewHelpers_NullViewHelper extends Tx_Fluid_Core_ViewHe
 	 * @author Steffen Kamper <info@sk-typo3.de>
 	 */
 	public function render() {
-
 		$content = $this->renderChildren(); 
 		return $content;
 	}
 }
-
 ?>
