@@ -1,20 +1,3 @@
-Index: t3lib/class.t3lib_loadmodules.php
-===================================================================
---- t3lib/class.t3lib_loadmodules.php	(revision 5734)
-+++ t3lib/class.t3lib_loadmodules.php	(working copy)
-@@ -433,7 +431,11 @@
- 
- 					// Default script setup
- 				if ($MCONF['script']==='_DISPATCH')	{
--					$modconf['script'] = 'mod.php?M='.rawurlencode($name);
-+					if ($MCONF['extbase']) {
-+						$modconf['script'] = 'mod.php?M=TX_'.rawurlencode($name);
-+					} else {
-+						$modconf['script'] = 'mod.php?M='.rawurlencode($name);	
-+					}
- 				} elseif ($MCONF['script'] && file_exists($path.'/'.$MCONF['script']))	{
- 					$modconf['script'] = $this->getRelativePath(PATH_typo3,$fullpath.'/'.$MCONF['script']);
- 				} else {
 Index: typo3/mod.php
 ===================================================================
 --- typo3/mod.php	(revision 5734)
@@ -34,7 +17,7 @@ Index: typo3/mod.php
  } else {
 -	die('Value "'.htmlspecialchars($temp_M).'" for "M" was not found as a module');
 +	if ($temp_path = $TBE_MODULES['_PATHS'][$temp_M])	{
-+		$MCONF['_'] = 'mod.php?M='.rawurlencode($temp_M);
++		$MCONF['_'] = 'mod.php?M=' . rawurlencode($temp_M);
 +		require($temp_path.'conf.php');
 +		$BACK_PATH='';
 +		require($temp_path.'index.php');
@@ -45,3 +28,20 @@ Index: typo3/mod.php
  
  ?>
 \ No newline at end of file
+Index: t3lib/class.t3lib_loadmodules.php
+===================================================================
+--- t3lib/class.t3lib_loadmodules.php	(revision 5734)
++++ t3lib/class.t3lib_loadmodules.php	(working copy)
+@@ -433,7 +433,11 @@
+ 
+ 					// Default script setup
+ 				if ($MCONF['script']==='_DISPATCH')	{
+-					$modconf['script'] = 'mod.php?M='.rawurlencode($name);
++					if ($MCONF['extbase']) {
++						$modconf['script'] = 'mod.php?M=TX_' . rawurlencode($name);
++					} else {
++						$modconf['script'] = 'mod.php?M=' . rawurlencode($name);	
++					}
+ 				} elseif ($MCONF['script'] && file_exists($path.'/'.$MCONF['script']))	{
+ 					$modconf['script'] = $this->getRelativePath(PATH_typo3,$fullpath.'/'.$MCONF['script']);
+ 				} else {
