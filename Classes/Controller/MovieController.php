@@ -240,7 +240,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 						name: "updatedMovie[director]",
 						anchor: "100%",
 						vtype: "name"
-					},{
+					},/*{
 						xtype: "datefield",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.released') . ',
 						name: "updatedMovie[releaseDate]",
@@ -264,7 +264,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 						store: genresStore,
 						displayField: "name",
 						width: 130
-					},{
+					},*/{
 						xtype: "textarea",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.tagline') . ',
 						name: "updatedMovie[tagline]",
@@ -276,7 +276,8 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 						handler: function() {
 							Ext.getCmp("movie_view").findById("movie_form").getForm().submit({
 								success: function(f,a) {
-									Ext.Msg.alert("Success", "It worked");
+									// Refresh the grid as save worked
+									moviesStore.reload();
 								},
 								failure: function(f,a) {
 									console.log(a);
@@ -343,11 +344,25 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie The existing, unmodified movie
 	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $updatedMovie A clone of the original movie with the updated values already applied
 	 * @return void
+	 * @ajax
 	 */
 	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie, Tx_MvcExtjsSamples_Domain_Model_Movie $updatedMovie) {
-		t3lib_div::debug($updatedMovie);
-		//$this->movieRepository->replace($movie, $updatedMovie);
-		//$this->redirect('index');
+		try {
+			$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_MovieRepository');
+			$movieRepository->replace($movie, $updatedMovie);
+			
+			$persistenceManager = t3lib_div::makeInstance('Tx_Extbase_Persistence_Manager');
+			/* @var $persistenceManager Tx_Extbase_Persistence_Manager */
+			
+			$persistenceManager->persistAll();
+						
+			echo '{success:true}';
+		} catch (Exception $e) {
+			echo '{success:false}';
+		}
+		
+			// Do not do further processing
+		exit;
 	}
 	
 	/**
