@@ -12,7 +12,7 @@ if (substr($pathExt, 0, strlen(TYPO3_mainDir) === TYPO3_mainDir)) {
 define('TYPO3_MOD_PATH', $pathExt);
 
 // BACK_PATH is the path from the typo3/ directory from within the directory containing
-// the controller file. Needed in order for the backend module icon to be shown.
+// this file. Needed in order for the backend module icon to be shown.
 $subdirs = count(explode('/', $pathExt)) - 1;
 if (substr($pathExt, 0, strlen(TYPO3_mainDir)) === TYPO3_mainDir) {
 		// Extension is within directory typo3/ (either global or system)
