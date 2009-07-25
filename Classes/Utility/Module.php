@@ -51,6 +51,7 @@ class Tx_MvcExtjsSamples_Utility_Module {
 		if (empty($extensionName)) {
 			throw new InvalidArgumentException('The extension name was invalid (must not be empty and must match /[A-Za-z][_A-Za-z0-9]/)', 1239891989);
 		}
+		$extensionKey = $extensionName;
 		$extensionName = str_replace(' ', '', ucwords(str_replace('_', ' ', $extensionName)));
 		
 		if (!isset($GLOBALS['TBE_EXTBASE_MODULES'])) {
@@ -70,6 +71,7 @@ class Tx_MvcExtjsSamples_Utility_Module {
 		}
 		
 		$moduleConfig = array(
+			'extensionKey' => $extensionKey,	
 			'extension' => $extensionName,
 			'controller' => $controller,
 			'action' => $action,
