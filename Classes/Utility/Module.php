@@ -33,6 +33,27 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjsSamples_Utility_Module {
+
+	/**
+	 * Registers an Extbase module (main or sub) to the backend interface.
+	 * FOR USE IN ext_tables.php FILES
+	 *
+	 * @param string $extensionName The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
+	 * @param string $controller This is the main controller of the module
+	 * @param string $action This is the default action of the module's controller
+	 * @param string $main The main module key, $sub is the submodule key. So $main would be an index in the $TBE_MODULES array and $sub could be an element in the lists there. If $main is not set a blank $extensionName module is created
+	 * @param string $sub The submodule key. If $sub is not set a blank $main module is created
+	 * @param string $position This can be used to set the position of the $sub module within the list of existing submodules for the main module. $position has this syntax: [cmd]:[submodule-key]. cmd can be "after", "before" or "top" (or blank which is default). If "after"/"before" then submodule will be inserted after/before the existing submodule with [submodule-key] if found. If not found, the bottom of list. If "top" the module is inserted in the top of the submodule list.
+	 * @return void
+	 */
+	public static function registerModule($extensionName, $controller, $action, $main = '', $sub = '', $position = '') {
+		// TODO: some Extbase magic stuff with dispatcher registration here
+		
+			// Add the module to the backend
+		$main = $main ? $main : $extensionName;
+		$path = '';
+		t3lib_extMgm::addModule($main, $sub, $position, $path);
+	}
 	
 }
 ?>
