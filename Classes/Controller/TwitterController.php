@@ -73,7 +73,7 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjsSamples
 		$this->addJsInlineCode('
 			new Ext.ux.TYPO3.Twitter("MvcExtjsSamples-Twitter", {' . $twitter . '});'
 		);
-		//$this->addJsInlineCode($markUp['JAVASCRIPT']);
+		$this->addJsInlineCode($markUp['JAVASCRIPT']);
 		
 		$this->outputJsCode();
 	}
