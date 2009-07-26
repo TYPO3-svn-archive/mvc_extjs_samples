@@ -147,19 +147,19 @@ Tx_MvcExtjsSamples_Utility_Module::registerModule(
 	'blank'
 );
 
-// ========== Module List
+// ========== Module OldStyle
 
 Tx_MvcExtjsSamples_Utility_Module::registerModule(
 	$_EXTKEY,
-	'ListModule',
+	'OldStyleModule',
 	'index',
 	array(
 		'access' => 'user,group',
 		'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
-		'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/ListModule.xml',
+		'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/OldStyleModule.xml',
 	),
 	'web',	// Make Blank module a submodule of 'web'
-	'list'
+	'oldstyle'
 );
 
 // ========== Common
