@@ -158,7 +158,7 @@ Tx_MvcExtjsSamples_Utility_Module::registerModule(
 		'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
 		'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/OldStyleModule.xml',
 	),
-	'web',	// Make Blank module a submodule of 'web'
+	'web',	// Make OldStyle module a submodule of 'web'
 	'oldstyle'
 );
 
