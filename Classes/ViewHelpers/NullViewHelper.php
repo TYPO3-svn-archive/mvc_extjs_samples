@@ -20,12 +20,6 @@
  *                                                                        */
 
 /**
- * @package Fluid
- * @subpackage ViewHelpers
- * @version $Id: BaseViewHelper.php 725 2009-05-28 21:45:46Z sebastian $
- */
-
-/**
  * View helper which return input as it is
  *
  * = Examples =
@@ -33,28 +27,25 @@
  * <f:null>{anyString}</f:null>
  *
  *
- * @package Fluid
- * @subpackage ViewHelpers
- * @version $Id: BaseViewHelper.php 725 2009-05-28 21:45:46Z sebastian $
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- * @scope prototype
+ * @package     TYPO3
+ * @subpackage  tx_mvcextjssamples
+ * @author Steffen Kamper <info@sk-typo3.de>
+ * @license     http://www.gnu.org/copyleft/gpl.html
+ * @version     SVN: $Id: 
+ * 
  */
 class Tx_MvcExtjsSamples_ViewHelpers_NullViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	protected $objectAccessorPostProcessorEnabled = FALSE;
 	
 	/**
-	 * Render 
+	 * Render without processing
 	 *
-	 * Note: renders as <base></base>, because IE6 will else refuse to display
-	 * the page...
 	 *
 	 * @return string 
-	 * @author Steffen Kamper <info@sk-typo3.de>
 	 */
 	public function render() {
-		$content = $this->renderChildren(); 
-		return $content;
+		return $this->renderChildren(); 
 	}
 }
 ?>
