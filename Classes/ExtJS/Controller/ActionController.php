@@ -293,27 +293,6 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	}
 	
 	/**
-	 * Renders a module by incorporating the rendered controller's view
-	 * into a master view encapsulating standard TYPO3's module elements. 
-	 * 
-	 * @return void
-	 */
-	protected function renderModule() {
-		if (TYPO3_MODE !== 'BE') {
-			die('renderModule may only be called for backend modules');
-		}
-		
-		if ($this->doc) {
-			$title = $this->settings['pluginName'];
-			$this->masterView->assign('startPage', $this->doc->startPage($title));
-			$this->masterView->assign('endPage', $this->doc->endPage());
-		}
-		
-		$this->masterView->assign('moduleContent', $this->view->render());
-		$this->view = $this->masterView;
-	}
-	
-	/**
 	 * Returns an ExtJS variable to get a localized label.
 	 *
 	 * @param string $langKey language key as defined in a locallang.xml-formatted file
@@ -380,6 +359,76 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			$parts[$i] = ucfirst($parts[$i]);
 		}
 		return join ('', $parts);
+	}
+	
+	// ----------------------------------------------------------------
+	// BACKEND-ONLY METHODS
+	// ----------------------------------------------------------------
+	
+	/**
+	 * Sets the menu of the backend module.
+	 *
+	 * @param array $menu
+	 * @return void
+	 */
+	protected function setMenu(array $menu) {
+		$this->scBase->MOD_MENU = array(
+			'function' => $menu
+		);
+		$this->scBase->menuConfig();
+	}
+	
+	/**
+	 * Renders a module by incorporating the rendered controller's view
+	 * into a master view encapsulating standard TYPO3's module elements. 
+	 * 
+	 * @return void
+	 */
+	protected function renderModule() {
+		if (TYPO3_MODE !== 'BE') {
+			die('renderModule may only be called for backend modules');
+		}
+		
+		if ($this->doc) {
+			$title = $this->settings['pluginName'];
+			$shortcut = '';
+			$menu = '';
+			
+			$this->doc->form = '';
+			$this->doc->JScode = '
+				<script language="javascript" type="text/javascript">
+					script_ended = 0;
+					function jumpToUrl(URL)	{
+						document.location = URL;
+					}
+				</script>
+			';
+			$this->doc->postCode = '
+				<script language="javascript" type="text/javascript">
+					script_ended = 1;
+					if (top.fsMod) top.fsMod.recentIds["web"] = 0;
+				</script>
+			';
+			
+				// Show shortcut icon
+			if ($GLOBALS['BE_USER']->mayMakeShortcut()) {
+				$shortcut = $this->doc->makeShortcutIcon('id', implode(',', array_keys($this->scBase->MOD_MENU)), $this->scBase->MCONF['name']);
+			}
+			
+				// TODO: Create a pretty ExtJS combobox instead
+			$menu = $this->doc->funcMenu(
+				'',
+				t3lib_BEfunc::getFuncMenu($this->id, 'SET[function]', $this->scBase->MOD_SETTINGS['function'], $this->scBase->MOD_MENU['function'])
+			);
+			
+			$this->masterView->assign('startPage', $this->doc->startPage($title));
+			$this->masterView->assign('shortcut', $shortcut);
+			$this->masterView->assign('menu', $menu);
+			$this->masterView->assign('endPage', $this->doc->endPage());
+		}
+		
+		$this->masterView->assign('moduleContent', $this->view->render());
+		$this->view = $this->masterView;
 	}
 	
 }

@@ -42,6 +42,12 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 	public function indexAction() {
 		$this->initializeExtJSAction();
 		
+		$this->setMenu(array(
+			'1' => 'My first entry',
+			'2' => 'My second entry',
+			'3' => 'My third entry',
+		));
+		
 		$this->view->assign('title', 'Hello World!');
 		
 		$this->addJsInlineCode('
