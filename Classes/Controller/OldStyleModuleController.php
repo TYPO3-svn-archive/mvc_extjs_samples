@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * The Blank backend module controller for the MVC_ExtJS_Samples package.
+ * The OldStyle backend module controller for the MVC_ExtJS_Samples package.
  *
  * @category    Controller
  * @package     TYPO3
