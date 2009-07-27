@@ -87,6 +87,31 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	 */
 	protected $pageIncludes;
 	
+	// -- BE-only properties
+	
+	/**
+	 * @var Tx_Fluid_View_TemplateView
+	 */
+	private $masterView;
+	
+	/**
+	 * Initializes the action.
+	 * 
+	 * Beware: make sure to call parent::initializeAction if you need to do something in your child class 
+	 */
+	protected function initializeAction() {
+		if (TYPO3_MODE === 'BE') {
+			$this->injectSettings(Tx_Extbase_Dispatcher::getSettings());
+			
+				// Prepare the view
+			$this->masterView = t3lib_div::makeInstance('Tx_Fluid_View_TemplateView');
+			$controllerContext = $this->buildControllerContext();
+			$this->masterView->setControllerContext($controllerContext);
+			$this->masterView->setTemplatePathAndFilename(t3lib_extMgm::extPath('mvc_extjs_samples') . 'Resources/Private/Templates/module.html');
+			$this->masterView->injectSettings($this->settings);
+		}
+	}
+	
 	/**
 	 * Should be called in an action method, before doing anything else.
 	 */
@@ -104,6 +129,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 				// Load ExtJS libraries and stylesheets
 			$this->pageIncludes->loadExtJS();
 		}
+		
 			// Namespace will be registered in ExtJS when calling method outputJsCode
 			// TODO: add id of controller for multiple usage
 		$this->extJSNamespace = $this->extensionName . '.' . $this->request->getControllerName();
@@ -235,6 +261,20 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			    $this->pageIncludes->addCssInlineBlock($this->extJSNamespace, implode('', $this->cssInline));
 		}
 		
+	}
+	
+	/**
+	 * Renders a module by incorporating the rendered controller's view
+	 * into a master view encapsulating standard TYPO3's module elements. 
+	 * 
+	 * @return void
+	 */
+	protected function renderModule() {
+		if (TYPO3_MODE !== 'BE') {
+			die('renderModule may only be called for backend modules');
+		}
+		$this->masterView->assign('moduleContent', $this->view->render());
+		$this->view = $this->masterView;
 	}
 	
 	/**

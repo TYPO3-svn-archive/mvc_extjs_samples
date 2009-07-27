@@ -41,6 +41,8 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 	 */
 	public function indexAction() {
 		$this->view->assign('title', 'Hello World!');
+		
+		$this->renderModule();
 	}
 	
 }
