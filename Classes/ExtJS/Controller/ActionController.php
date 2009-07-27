@@ -82,6 +82,8 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	 */
 	protected $useExtCore = false;
 	
+	// -- FE-only properties
+	
 	/**
 	 * @var t3lib_pageIncludes
 	 */
@@ -93,6 +95,16 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	 * @var Tx_Fluid_View_TemplateView
 	 */
 	private $masterView;
+	
+	/**
+	 * @var template
+	 */
+	private $doc;
+	
+	/**
+	 * @var t3lib_SCbase
+	 */
+	private $scBase;
 	
 	/**
 	 * Initializes the action.
@@ -116,16 +128,33 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	 * Should be called in an action method, before doing anything else.
 	 */
 	protected function initializeExtJSAction($useExtCore = FALSE, $moveJsFromHeaderToFooter = FALSE) {
-		$this->pageIncludes = $GLOBALS['TSFE']->pageIncludes;
+		$this->useExtCore = $useExtCore;
+		
+		if (TYPO3_MODE === 'FE') {
+			$this->pageIncludes = $GLOBALS['TSFE']->pageIncludes;
+			
+			if (!$useExtCore) {
+					// temporary fix for t3style		
+				$GLOBALS['TBE_STYLES']['extJS']['theme'] = t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';	
+			}
+		} else {
+			$this->scBase = t3lib_div::makeInstance('t3lib_SCbase'); 
+			$this->scBase->MCONF['name'] = $this->settings['pluginName'];
+			$this->scBase->init();
+			
+				// Prepare template class
+			$this->doc = t3lib_div::makeInstance('template'); 
+			$this->doc->backPath = $GLOBALS['BACK_PATH'];
+			
+			$this->pageIncludes = $this->doc->pageIncludes;
+		}
+		
 		$this->pageIncludes->moveJsFromHeaderToFooter = $moveJsFromHeaderToFooter;
 		
 		if ($useExtCore) {
-			$this->useExtCore = TRUE;
 				// Load ExtCore library
 			$this->pageIncludes->loadExtCore();		
 		} else {
-				// temporary fix for t3style		
-			$GLOBALS['TBE_STYLES']['extJS']['theme'] =  t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';
 				// Load ExtJS libraries and stylesheets
 			$this->pageIncludes->loadExtJS();
 		}
@@ -258,7 +287,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 		$this->pageIncludes->addJsHandlerCode($block, t3lib_pageIncludes::JSHANDLER_EXTONREADY);
 		
 		if (count($this->cssInline)) {
-			    $this->pageIncludes->addCssInlineBlock($this->extJSNamespace, implode('', $this->cssInline));
+			$this->pageIncludes->addCssInlineBlock($this->extJSNamespace, implode('', $this->cssInline));
 		}
 		
 	}
@@ -273,6 +302,13 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 		if (TYPO3_MODE !== 'BE') {
 			die('renderModule may only be called for backend modules');
 		}
+		
+		if ($this->doc) {
+			$title = $this->settings['pluginName'];
+			$this->masterView->assign('startPage', $this->doc->startPage($title));
+			$this->masterView->assign('endPage', $this->doc->endPage());
+		}
+		
 		$this->masterView->assign('moduleContent', $this->view->render());
 		$this->view = $this->masterView;
 	}

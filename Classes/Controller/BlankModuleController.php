@@ -40,8 +40,15 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
+		$this->initializeExtJSAction();
+		
 		$this->view->assign('title', 'Hello World!');
 		
+		$this->addJsInlineCode('
+			Ext.Msg.alert("My Title", "Hello World!");
+		');
+		
+		$this->outputJsCode();
 		$this->renderModule();
 	}
 	
