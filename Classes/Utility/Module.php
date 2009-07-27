@@ -59,7 +59,7 @@ class Tx_MvcExtjsSamples_Utility_Module {
 		}
 		
 		if ($main && !isset($GLOBALS['TBE_MODULES'][$main])) {
-			$main = $extensionName . ucfirst($main);	
+			$main = $extensionName . ucfirst($main);
 		} else {
 			$main = $main ? $main : $extensionName;
 		}
@@ -70,15 +70,16 @@ class Tx_MvcExtjsSamples_Utility_Module {
 			$config['labels'] = '';
 		}
 		
+		$key = $main . ($sub ? '_' . $sub : '');
+		
 		$moduleConfig = array(
+			'name' => $key,
 			'extensionKey' => $extensionKey,	
 			'extension' => $extensionName,
 			'controller' => $controller,
 			'action' => $action,
 			'config' => $config,
 		);
-		
-		$key = $main . ($sub ? '_' . $sub : '');
 		$GLOBALS['TBE_EXTBASE_MODULES'][$key] = $moduleConfig;
 		
 			// Add the module to the backend

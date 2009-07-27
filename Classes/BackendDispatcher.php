@@ -48,6 +48,9 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 		
 		$config = $GLOBALS['TBE_EXTBASE_MODULES'][$module];
 		
+			// Check permissions and exit if the user has no permission for entry
+		$GLOBALS['BE_USER']->modAccess($config, 1);
+		
 		// TODO: prepare Extbase request stuff and extract the action to use, if any
 		$action = $config['action'];
 		
@@ -67,8 +70,8 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			),
 		);
 		
-		// BACK_PATH is the path from the typo3/ directory from within the directory containing
-		// the controller file
+			// BACK_PATH is the path from the typo3/ directory from within the
+			// directory containing the controller file
 		$pathExt = substr(t3lib_extMgm::extPath($config['extensionKey']), strlen(PATH_site)) . 'Classes/Controller/';
 		$subdirs = count(explode('/', $pathExt)) - 1;
 		if (substr($pathExt, 0, strlen(TYPO3_mainDir)) === TYPO3_mainDir) {
