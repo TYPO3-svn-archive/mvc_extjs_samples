@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id: BlankModuleController.php 22770 2009-07-25 15:32:38Z xperseguers $
  */
-class Tx_MvcExtjsSamples_Controller_OldStyleModuleController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_OldStyleModuleController extends Tx_Extbase_MVC_Controller_ActionController {
 	
 	/**
 	 * Holds reference to the template class
