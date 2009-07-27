@@ -55,10 +55,11 @@ class Tx_MvcExtjsSamples_Controller_OldStyleModuleController extends Tx_Extbase_
 	 */
 	public function indexAction() {
 		$settings = Tx_Extbase_Dispatcher::getSettings();
+		$this->injectSettings($settings);
 		
 			// Prepare scBase
 		$this->scBase = t3lib_div::makeInstance('t3lib_SCbase'); 
-		$this->scBase->MCONF['name'] = $settings['pluginName'];
+		$this->scBase->MCONF['name'] = $this->settings['pluginName'];
 		$this->scBase->init();
 		
 			// Prepare template class
