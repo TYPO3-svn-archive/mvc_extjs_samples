@@ -136,8 +136,9 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feu
 
 Tx_MvcExtjsSamples_Utility_Module::registerModule(
 	$_EXTKEY,
-	'BlankModule',
-	'index',
+	array(
+		'BlankModule' => 'index'
+	),
 	array(
 		'access' => 'user,group',
 		'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
@@ -151,8 +152,9 @@ Tx_MvcExtjsSamples_Utility_Module::registerModule(
 
 Tx_MvcExtjsSamples_Utility_Module::registerModule(
 	$_EXTKEY,
-	'OldStyleModule',
-	'index',
+	array(
+		'OldStyleModule' => 'index'
+	),
 	array(
 		'access' => 'user,group',
 		'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',

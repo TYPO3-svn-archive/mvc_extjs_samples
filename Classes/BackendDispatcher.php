@@ -51,8 +51,12 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			// Check permissions and exit if the user has no permission for entry
 		$GLOBALS['BE_USER']->modAccess($config, 1);
 		
-		// TODO: prepare Extbase request stuff and extract the action to use, if any
-		$action = $config['action'];
+		// TODO: Extract the controller/action to use, if any
+		$controllers = array_keys($config['controllerActions']);
+		$defaultController = array_shift($controllers);
+		$actions = t3lib_div::trimExplode(',', $config['controllerActions'][$defaultController], true);
+		
+		$defaultAction = $actions[0];
 		
 		// TODO: should this $extbaseConfiguration actually be stored in $config instead?
 		$extbaseConfiguration = array(
@@ -60,16 +64,19 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			'pluginName' => $module,
 			'extensionName' => $config['extension'],
 			'enableAutomaticCacheClearing' => 1,
-			'controller' => $config['controller'],
-			'action' => $action,
-			'switchableControllerActions.' => array(
-				'1.' => array(
-					'controller' => $config['controller'],
-					'actions' => $action,
-				),
-			),
+			'controller' => $defaultController,
+			'action' => $defaultAction,
+			'switchableControllerActions.' => array()
 		);
 		
+		$i = 1;
+		foreach ($config['controllerActions'] as $controller => $actions) {
+			$extbaseConfiguration['switchableControllerActions.'][$i++ . '.'] = array(
+				'controller' => $controller,
+				'actions' => $actions,
+			);
+		}
+				
 			// BACK_PATH is the path from the typo3/ directory from within the
 			// directory containing the controller file
 		$pathExt = substr(t3lib_extMgm::extPath($config['extensionKey']), strlen(PATH_site)) . 'Classes/Controller/';

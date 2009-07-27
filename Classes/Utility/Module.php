@@ -39,15 +39,14 @@ class Tx_MvcExtjsSamples_Utility_Module {
 	 * FOR USE IN ext_tables.php FILES
 	 *
 	 * @param string $extensionName The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
-	 * @param string $controller This is the main controller of the module
-	 * @param string $action This is the default action of the module's controller
+	 * @param array $controllerActions is an array of allowed combinations of controller and action stored in an array (controller name as key and a comma separated list of action names as value, the first controller and its first action is chosen as default)
 	 * @param array $config The configuration options of the module (icon, locallang.xml file)
 	 * @param string $main The main module key, $sub is the submodule key. So $main would be an index in the $TBE_MODULES array and $sub could be an element in the lists there. If $main is not set a blank $extensionName module is created
 	 * @param string $sub The submodule key. If $sub is not set a blank $main module is created
 	 * @param string $position This can be used to set the position of the $sub module within the list of existing submodules for the main module. $position has this syntax: [cmd]:[submodule-key]. cmd can be "after", "before" or "top" (or blank which is default). If "after"/"before" then submodule will be inserted after/before the existing submodule with [submodule-key] if found. If not found, the bottom of list. If "top" the module is inserted in the top of the submodule list.
 	 * @return void
 	 */
-	public static function registerModule($extensionName, $controller, $action, $config = array(), $main = '', $sub = '', $position = '') {
+	public static function registerModule($extensionName, array $controllerActions, $config = array(), $main = '', $sub = '', $position = '') {
 		if (empty($extensionName)) {
 			throw new InvalidArgumentException('The extension name was invalid (must not be empty and must match /[A-Za-z][_A-Za-z0-9]/)', 1239891989);
 		}
@@ -76,8 +75,7 @@ class Tx_MvcExtjsSamples_Utility_Module {
 			'name' => $key,
 			'extensionKey' => $extensionKey,	
 			'extension' => $extensionName,
-			'controller' => $controller,
-			'action' => $action,
+			'controllerActions' => $controllerActions,
 			'config' => $config,
 		);
 		$GLOBALS['TBE_EXTBASE_MODULES'][$key] = $moduleConfig;
