@@ -79,7 +79,7 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 				
 			// BACK_PATH is the path from the typo3/ directory from within the
 			// directory containing the controller file. We are using mod.php dispatcher
-			// and thus we are already within typo3/
+			// and thus we are already within typo3/ because we call typo3/mod.php
 		$GLOBALS['BACK_PATH'] = '';
 		
 		echo $this->dispatch('Here comes Extbase BE Module', $extbaseConfiguration);
