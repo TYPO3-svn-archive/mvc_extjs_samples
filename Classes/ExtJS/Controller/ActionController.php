@@ -254,6 +254,24 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	}
 	
 	/**
+	 * Same function as $this->URIBuilder but with split between Backend and Frontend.
+	 *
+	 * @return string
+	 */
+	protected function UriFor($pageUid = NULL, $actionName = NULL, $arguments = array(), $controllerName = NULL, $extensionName = NULL, $pluginName = NULL, $pageType = 0, $noCache = FALSE, $useCacheHash = TRUE, $section = '', $linkAccessRestrictedPages = FALSE, array $additionalParams = array()) {
+		if (TYPO3_MODE === 'FE') {
+			return $this->URIBuilder->UriFor($pageUid, $actionName, $arguments, $controllerName, $extensionName, $pluginName, $pageType, $noCache, $useCacheHash, $section, $linkAccessRestrictedPages, $additionalParams);
+		} else {	// TYPO3_MODE === 'BE'
+			if ($pluginName === NULL) {
+				$pluginName = $this->settings['pluginName'];
+			}
+			$additionalParams['M'] = 'TX_' . $pluginName;
+			
+			return $this->URIBuilder->UriFor($pageUid, $actionName, $arguments, $controllerName, $extensionName, $pluginName, $pageType, $noCache, $useCacheHash, $section, $linkAccessRestrictedPages, $additionalParams);
+		}
+	}
+	
+	/**
 	 * Outputs JS code to the page
 	 * 
 	 * @param boolean $compressed
