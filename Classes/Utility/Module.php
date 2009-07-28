@@ -70,7 +70,7 @@ class Tx_MvcExtjsSamples_Utility_Module {
 			$config['access'] = 'admin';
 			$config['icon'] = '';
 			$config['labels'] = '';
-			$onfig['extRelPath'] = $relPath;
+			$config['extRelPath'] = $relPath;
 		}
 		
 		$key = $main . ($sub ? '_' . $sub : '');
@@ -86,7 +86,6 @@ class Tx_MvcExtjsSamples_Utility_Module {
 		$GLOBALS['TBE_EXTBASE_MODULES'][$key]['configureModuleFunction'] = array('Tx_MvcExtjsSamples_Utility_Module', 'setModuleConfiguration');
 		
 			// Add the module to the backend
-		
 		t3lib_extMgm::addModule($main, $sub, $position, $path);
 	}
 	
@@ -111,7 +110,6 @@ class Tx_MvcExtjsSamples_Utility_Module {
 
 		if (substr($config['icon'], 0, 4) === 'EXT:') {
 			list($extKey, $local) = explode('/', substr($config['icon'], 4), 2);
-				// TODO: be a bit more clever here
 			$config['icon'] = t3lib_extMgm::extRelPath($extKey) . $local;
 		}
          
@@ -173,8 +171,6 @@ class Tx_MvcExtjsSamples_Utility_Module {
 				
 		return $modconf;
 	}
-	
-	
 	
 }
 ?>
