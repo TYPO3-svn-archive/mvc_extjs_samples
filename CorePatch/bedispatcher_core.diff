@@ -11,7 +11,7 @@ Index: t3lib/class.t3lib_loadmodules.php
 +			$obj = $GLOBALS['TBE_EXTBASE_MODULES'][$name]['configureModuleFunction'];
 +			if (is_callable($obj)) {
 +				$MCONF = $MLANG = array();
-+				return call_user_func($obj, $name, &$MCONF, &$MLANG);
++				return call_user_func($obj, $name, $MCONF, $MLANG);
 +			}
 +		}
  		$modconf=Array();
@@ -30,18 +30,18 @@ Index: typo3/mod.php
 -	require($temp_path.'conf.php');
 -	$BACK_PATH='';
 -	require($temp_path.'index.php');
-+if (substr($temp_M, 0, 3) == 'TX_') {
++if (substr($temp_M, 0, 3) === 'TX_') {
 +	$dispatcher = t3lib_div::makeInstance('Tx_MvcExtjsSamples_BackendDispatcher');
 +	$dispatcher->callModule(substr($temp_M, 3));
  } else {
 -	die('Value "'.htmlspecialchars($temp_M).'" for "M" was not found as a module');
 +	if ($temp_path = $TBE_MODULES['_PATHS'][$temp_M])	{
-+		$MCONF['_'] = 'mod.php?M='.rawurlencode($temp_M);
-+		require($temp_path.'conf.php');
-+		$BACK_PATH='';
-+		require($temp_path.'index.php');
++		$MCONF['_'] = 'mod.php?M=' . rawurlencode($temp_M);
++		require($temp_path . 'conf.php');
++		$BACK_PATH = '';
++		require($temp_path . 'index.php');
 +	} else {
-+		die('Value "'.htmlspecialchars($temp_M).'" for "M" was not found as a module');
++		die('Value "' . htmlspecialchars($temp_M) . '" for "M" was not found as a module');
 +	}
  }
  

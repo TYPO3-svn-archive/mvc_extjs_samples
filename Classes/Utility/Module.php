@@ -104,7 +104,7 @@ class Tx_MvcExtjsSamples_Utility_Module {
 
 		$GLOBALS['BACK_PATH'] = '';  
 		
-		// fill $MCONF
+		// Fill $MCONF
 		$MCONF['name'] = $key;
 		$MCONF['access'] = $config['access'];
 		$MCONF['script'] = '_DISPATCH';
@@ -115,57 +115,58 @@ class Tx_MvcExtjsSamples_Utility_Module {
 			$config['icon'] = t3lib_extMgm::extRelPath($extKey) . $local;
 		}
          
-			// Initializing search for alternative icon:
+			// Initialize search for alternative icon:
 		$altIconKey = 'MOD:' . $key . '/' . $config['icon'];		// Alternative icon key (might have an alternative set in $TBE_STYLES['skinImg']
 		$altIconAbsPath = is_array($GLOBALS['TBE_STYLES']['skinImg'][$altIconKey]) ? t3lib_div::resolveBackPath(PATH_typo3.$GLOBALS['TBE_STYLES']['skinImg'][$altIconKey][0]) : '';
 
-			// Setting icon, either default or alternative:
-		if ($altIconAbsPath && @is_file($altIconAbsPath))	{
+			// Set icon, either default or alternative:
+		if ($altIconAbsPath && @is_file($altIconAbsPath)) {
 			$tabImage = $altIconAbsPath;
 		} else {
 				// Setting default icon:
 			$tabImage = $config['icon'];
 		}
 
-			// // fill $MLANG
+			// Fill $MLANG
 		$MLANG['default']['ll_ref'] = $config['labels'];   
 		
-			// Finally, setting the icon with correct path:
-		if (substr($tabImage, 0 ,3) == '../') {
+			// Finally, set the icon with correct path:
+		if (substr($tabImage, 0 ,3) === '../') {
 			$MLANG['default']['tabs_images']['tab'] = PATH_site . substr($tabImage, 3);
 		} else {
 			$MLANG['default']['tabs_images']['tab'] = PATH_typo3 . $tabImage;
 		}
 		
 			// If LOCAL_LANG references are used for labels of the module:
-		if ($MLANG['default']['ll_ref'])	{
+		if ($MLANG['default']['ll_ref']) {
 				// Now the 'default' key is loaded with the CURRENT language - not the english translation...
-			$MLANG['default']['labels']['tablabel'] = $GLOBALS['LANG']->sL($MLANG['default']['ll_ref'].':mlang_labels_tablabel');
-			$MLANG['default']['labels']['tabdescr'] = $GLOBALS['LANG']->sL($MLANG['default']['ll_ref'].':mlang_labels_tabdescr');
-			$MLANG['default']['tabs']['tab'] = $GLOBALS['LANG']->sL($MLANG['default']['ll_ref'].':mlang_tabs_tab');
-			$GLOBALS['LANG']->addModuleLabels($MLANG['default'],$key.'_');
+			$MLANG['default']['labels']['tablabel'] = $GLOBALS['LANG']->sL($MLANG['default']['ll_ref'] . ':mlang_labels_tablabel');
+			$MLANG['default']['labels']['tabdescr'] = $GLOBALS['LANG']->sL($MLANG['default']['ll_ref'] . ':mlang_labels_tabdescr');
+			$MLANG['default']['tabs']['tab'] = $GLOBALS['LANG']->sL($MLANG['default']['ll_ref'] . ':mlang_tabs_tab');
+			$GLOBALS['LANG']->addModuleLabels($MLANG['default'], $key . '_');
 		} else {	// ... otherwise use the old way:
-			$GLOBALS['LANG']->addModuleLabels($MLANG['default'],$key.'_');
-			$GLOBALS['LANG']->addModuleLabels($MLANG[$GLOBALS['LANG']->lang],$key.'_');
+			$GLOBALS['LANG']->addModuleLabels($MLANG['default'], $key . '_');
+			$GLOBALS['LANG']->addModuleLabels($MLANG[$GLOBALS['LANG']->lang], $key . '_');
 		}
 		
-			// // fill $modconf
+			// Fill $modconf
 		$modconf['script'] = 'mod.php?M=TX_' . rawurlencode($key);
 		$modconf['name'] = $key;
 					
 				// Default tab setting
-		if ($MCONF['defaultMod'])	{
+		if ($MCONF['defaultMod']) {
 			$modconf['defaultMod'] = $MCONF['defaultMod'];
 		}
 			// Navigation Frame Script (GET params could be added)
 		if ($MCONF['navFrameScript']) {
 			$navFrameScript = explode('?', $MCONF['navFrameScript']);
 			$navFrameScript = $navFrameScript[0];
-			if (file_exists($path.'/'.$navFrameScript))	{
-				$modconf['navFrameScript'] = $this->getRelativePath(PATH_typo3,$fullpath.'/'.$MCONF['navFrameScript']);
+			if (file_exists($path . '/' . $navFrameScript)) {
+				$modconf['navFrameScript'] = $this->getRelativePath(PATH_typo3, $fullpath . '/' . $MCONF['navFrameScript']);
 			}
 		}
-			// additional params for Navigation Frame Script: "&anyParam=value&moreParam=1"
+		
+			// Additional params for Navigation Frame Script: "&anyParam=value&moreParam=1"
 		if ($MCONF['navFrameScriptParam']) {
 			$modconf['navFrameScriptParam'] = $MCONF['navFrameScriptParam'];
 		}
