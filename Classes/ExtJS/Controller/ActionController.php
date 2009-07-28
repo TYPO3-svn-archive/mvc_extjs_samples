@@ -97,6 +97,11 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	private $masterView;
 	
 	/**
+	 * @var array
+	 */
+	private $menu = array();
+	
+	/**
 	 * @var template
 	 */
 	private $doc;
@@ -372,27 +377,23 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	 * @return void
 	 */
 	protected function setMenu(array $menu) {
-		$this->scBase->MOD_MENU = array(
-			'function' => $menu
-		);
-		$this->scBase->menuConfig();
+		$this->menu = $menu;
 	}
 	
 	/**
-	 * Renders a module by incorporating the rendered controller's view
+	 * Renders a ExtJS module by incorporating the controller's view
 	 * into a master view encapsulating standard TYPO3's module elements. 
 	 * 
+	 * @param string $contentPanel The ExtJS panel holding the module itself
 	 * @return void
 	 */
-	protected function renderModule() {
+	public function renderExtJSModule($contentPanel = NULL) {
 		if (TYPO3_MODE !== 'BE') {
-			die('renderModule may only be called for backend modules');
+			die('renderExtJSModule() may only be called by backend modules');
 		}
 		
 		if ($this->doc) {
 			$title = $this->settings['pluginName'];
-			$shortcut = '';
-			$menu = '';
 			
 			$this->doc->form = '';
 			$this->doc->JScode = '
@@ -410,24 +411,82 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 				</script>
 			';
 			
-				// Show shortcut icon
 			if ($GLOBALS['BE_USER']->mayMakeShortcut()) {
 				$shortcut = $this->doc->makeShortcutIcon('id', implode(',', array_keys($this->scBase->MOD_MENU)), $this->scBase->MCONF['name']);
+			} else {
+				$shortcut = '';
+			}
+						
+			$this->addJsInlineCode('
+				var viewport = new Ext.Viewport({
+					layout: "border",
+					renderTo: Ext.getBody(),
+					items: [{
+						region: "north",
+						xtype: "toolbar",
+						height: 28,
+						items: [{
+							xtype: "tbspacer"
+						}
+			');
+			
+			if (count($this->menu)) {
+				$menuEntries = array();
+				foreach ($this->menu as $id => $title) {
+					$menuEntry = json_encode(array($id => $title));
+					$menuEntry = preg_replace('/^{(.*)":"(.*)}/', '[\1","\2]', $menuEntry);
+					$menuEntries[] = $menuEntry;
+				}
+				
+				$this->addJsInlineCode('
+						,{
+							xtype: "combo",
+							triggerAction: "all",
+							mode: "local",
+							store: [' . join(',', $menuEntries) . '],
+							displayField: "title",
+							readOnly: true,
+							listeners:{
+								select:function(combo, record, index) {
+									Ext.Msg.alert("Selected index", index);
+								}
+							}
+						}
+				');
 			}
 			
-				// TODO: Create a pretty ExtJS combobox instead
-			$menu = $this->doc->funcMenu(
-				'',
-				t3lib_BEfunc::getFuncMenu($this->id, 'SET[function]', $this->scBase->MOD_SETTINGS['function'], $this->scBase->MOD_MENU['function'])
-			);
+			if ($shortcut) {
+				preg_match('/(top.ShortcutManager.createShortcut.*;)return false;/', $shortcut, $matches);
+				$this->addJsInlineCode('
+						,{
+							xtype: "tbfill"
+						},{
+							xtype: "tbbutton",
+							cls: "x-btn-icon",
+							icon: "' . $GLOBALS['BACK_PATH'] . '/sysext/t3skin/icons/gfx/shortcut.gif",
+							handler: function() { ' . $matches[1] . ' }
+						}
+				');
+			}
 			
-			$this->masterView->assign('startPage', $this->doc->startPage($title));
-			$this->masterView->assign('shortcut', $shortcut);
-			$this->masterView->assign('menu', $menu);
-			$this->masterView->assign('endPage', $this->doc->endPage());
+			$this->addJsInlineCode('
+						]
+					},{
+						region: "center",
+						xtype: "panel",
+						' . ($contentPanel ? 'items: ' . $contentPanel : 'html: "MODULE GOES HERE"') . '
+					}]
+				});
+			');
+			
+			$this->outputJsCode();
+			
+			$this->masterView->assign(
+				'layout',
+				$this->doc->startPage($title) . $this->doc->endPage()
+			);
 		}
 		
-		$this->masterView->assign('moduleContent', $this->view->render());
 		$this->view = $this->masterView;
 	}
 	

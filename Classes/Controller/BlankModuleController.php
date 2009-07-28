@@ -48,14 +48,15 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 			'3' => 'My third entry',
 		));
 		
-		$this->view->assign('title', 'Hello World!');
-		
 		$this->addJsInlineCode('
-			Ext.Msg.alert("My Title", "Hello World!");
+			var mod1 = new Ext.Panel({
+				title: "Blank Module",
+				html: "Here is the really great Blank Module content...",
+				border: false
+			});
 		');
 		
-		$this->outputJsCode();
-		$this->renderModule();
+		$this->renderExtJSModule('mod1');
 	}
 	
 }
