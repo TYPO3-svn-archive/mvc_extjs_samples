@@ -463,7 +463,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 						},{
 							xtype: "tbbutton",
 							cls: "x-btn-icon",
-							icon: "' . $GLOBALS['BACK_PATH'] . '/sysext/t3skin/icons/gfx/shortcut.gif",
+							icon: "sysext/t3skin/icons/gfx/shortcut.gif",
 							handler: function() { ' . $matches[1] . ' }
 						}
 				');
