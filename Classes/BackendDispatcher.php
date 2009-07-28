@@ -51,22 +51,40 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			// Check permissions and exit if the user has no permission for entry
 		$GLOBALS['BE_USER']->modAccess($config, 1);
 		
-		$prefix = 'tx_' . str_replace('_', '', $config['extensionKey']) . '_' . $config['name'];
-		$dispatcherParams = t3lib_div::_GP($prefix);
+			// Extract dispatcher settings from request
+		$argumentPrefix = strtolower('tx_' . $config['extensionName'] . '_' . $config['name']);
+		$dispatcherParams = t3lib_div::_GP($argumentPrefix);
 		
+			// Extract module settings from its registration in ext_tables.php
 		$controllers = array_keys($config['controllerActions']);
 		$defaultController = array_shift($controllers);
 		$actions = t3lib_div::trimExplode(',', $config['controllerActions'][$defaultController], true);
-		
 		$defaultAction = $actions[0];
+		
+			// Determine the controller and action to use
+		$controller = $defaultController;
+		if (isset($dispatcherParams['controller'])) {
+			$requestedController = $dispatcherParams['controller'];
+			if (in_array($requestedController, $controllers)) {
+				$controller = $requestedController;
+			}
+		}
+		$action = $defaultAction;
+		if (isset($dispatcherParams['action'])) {
+			$requestedAction = $dispatcherParams['action'];
+			$controllerActions = t3lib_div::trimExplode(',', $config['controllerActions'][$controller], true);
+			if (in_array($requestedAction, $controllerActions)) {
+				$action = $requestedAction;
+			}
+		}
 		
 		$extbaseConfiguration = array(
 			'userFunc' => 'tx_extbase_dispatcher->dispatch',
 			'pluginName' => $module,
 			'extensionName' => $config['extension'],
 			'enableAutomaticCacheClearing' => 1,
-			'controller' => isset($dispatcherParams['controller']) ? $dispatcherParams['controller'] : $defaultController,
-			'action' => isset($dispatcherParams['action']) ? $dispatcherParams['action'] : $defaultAction,
+			'controller' => $controller,
+			'action' => $action,
 			'switchableControllerActions.' => array()
 		);
 		
