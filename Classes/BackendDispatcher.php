@@ -51,21 +51,22 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			// Check permissions and exit if the user has no permission for entry
 		$GLOBALS['BE_USER']->modAccess($config, 1);
 		
-		// TODO: Extract the controller/action to use, if any
+		$prefix = 'tx_' . str_replace('_', '', $config['extensionKey']) . '_' . $config['name'];
+		$dispatcherParams = t3lib_div::_GP($prefix);
+		
 		$controllers = array_keys($config['controllerActions']);
 		$defaultController = array_shift($controllers);
 		$actions = t3lib_div::trimExplode(',', $config['controllerActions'][$defaultController], true);
 		
 		$defaultAction = $actions[0];
 		
-		// TODO: should this $extbaseConfiguration actually be stored in $config instead?
 		$extbaseConfiguration = array(
 			'userFunc' => 'tx_extbase_dispatcher->dispatch',
 			'pluginName' => $module,
 			'extensionName' => $config['extension'],
 			'enableAutomaticCacheClearing' => 1,
-			'controller' => $defaultController,
-			'action' => $defaultAction,
+			'controller' => isset($dispatcherParams['controller']) ? $dispatcherParams['controller'] : $defaultController,
+			'action' => isset($dispatcherParams['action']) ? $dispatcherParams['action'] : $defaultAction,
 			'switchableControllerActions.' => array()
 		);
 		
