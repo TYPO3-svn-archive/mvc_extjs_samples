@@ -46,6 +46,10 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 		$cssFile  = $this->setting['cssFile'] ? $this->setting['cssFile'] : 'typo3conf/ext/mvc_extjs_samples/Resources/Public/CSS/carousel.css';
 		$GLOBALS['TSFE']->pageIncludes->addCssFile($cssFile);
 
+		$settings = Tx_Extbase_Dispatcher::getSettings();
+		$id = $settings['contentObjectData']['uid'];
+		$this->view->assign('ID', $id);
+		
 		$images = array();  
 		$path = 'uploads/pics/';
 		//TODO: resize the images proper to settings
@@ -56,7 +60,7 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 		}
 		
 		$carousel = '
-			new Ext.ux.Carousel("MvcExtjsSamples-PictureSlideShow", {
+			new Ext.ux.Carousel("MvcExtjsSamples-PictureSlideShow-' . $id . '", {
 				images: ' . json_encode($images) . ',
 				itemSelector: "img",
 				interval: ' . intval($this->settings['pictureSlideShowInterval']) . ',
