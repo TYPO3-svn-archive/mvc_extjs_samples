@@ -43,20 +43,48 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 		$this->initializeExtJSAction();
 		
 		$this->setMenu(array(
-			'1' => 'My first entry',
-			'2' => 'My second entry',
-			'3' => 'My third entry',
+			'BlankModule->first' => 'My first action',
+			'BlankModule->second' => 'My second action',
+			'BlankModule->third' => 'My third action',
 		));
 		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
 				title: "Blank Module",
-				html: "Here is the really great Blank Module content...",
+				html: "Here is the really great Blank Module content with ' .
+					'<a href=\"' . $this->URIFor('mod.php', 'first') . '\">a link to another action</a>.",
 				border: false
 			});
 		');
 		
 		$this->renderExtJSModule('mod1');
+	}
+	
+	/**
+	 * First action for this controller
+	 *
+	 * @return string The rendered view
+	 */
+	public function firstAction() {
+		$this->initializeExtJSAction();
+		
+		$this->addJsInlineCode('
+			var mod1 = new Ext.Panel({
+				title: "First Action",
+				html: "Great! You just used the Extbase dispatcher in backend to redirect to another action",
+				border: false
+			});
+		');
+		
+		$this->renderExtJSModule('mod1');
+	}
+	
+	public function secondAction() {
+		
+	}
+	
+	public function thirdAction() {
+		
 	}
 	
 }
