@@ -35,28 +35,28 @@
 class Tx_MvcExtjsSamples_ExtJS_Utility {
 
 	/**
-	 * Decodes an array of objects to be used by JSON later on.
+	 * Encodes an array of objects to be used by JSON later on.
 	 * 
 	 * @param array $objects
 	 * @return array
 	 */
-	public static function decodeArrayForJSON(array $objects) {
+	public static function encodeArrayForJSON(array $objects) {
 		$arr = array();
 		
 		foreach ($objects as $object) {
-			$arr[] = self::decodeObjectForJSON($object);
+			$arr[] = self::encodeObjectForJSON($object);
 		}
 		
 		return $arr;
 	}
 	
 	/**
-	 * Decodes an object to be used by JSON later on.
+	 * Encodes an object to be used by JSON later on.
 	 *
 	 * @param mixed $object
 	 * @return array
 	 */
-	public static function decodeObjectForJSON($object) {
+	public static function encodeObjectForJSON($object) {
 		if ($object instanceof DateTime) {
 			return $object->format('r');
 		} elseif (!($object instanceof Tx_Extbase_DomainObject_AbstractEntity)) {
@@ -74,9 +74,9 @@ class Tx_MvcExtjsSamples_ExtJS_Utility {
 			if (method_exists($object, $propertyGetterName)) {
 				$value = call_user_method($propertyGetterName, $object);
 				if (is_array($value)) {
-					$value = self::decodeArrayForJSON($value);
+					$value = self::encodeArrayForJSON($value);
 				} elseif (is_object($value)) {
-					$value = self::decodeObjectForJSON($value);
+					$value = self::encodeObjectForJSON($value);
 				}
 				$arr[$property->name] = $value;
 			}

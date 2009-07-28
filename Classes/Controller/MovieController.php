@@ -380,7 +380,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$movies = $movieRepository->findAll();
 		
 			// Convert Tx_MvcExtjsSamples_Domain_Model_Movie objects to an array
-		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::decodeArrayForJSON($movies);
+		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::encodeArrayForJSON($movies);
 		
 			// Prepare the JSON response
 		header('Content-type: text/html; charset=utf-8');
@@ -407,7 +407,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$genres = $genreRepository->findAll();
 		
 			// Convert Tx_MvcExtjsSamples_Domain_Model_Genre objects to an array
-		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::decodeArrayForJSON($genres);
+		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::encodeArrayForJSON($genres);
 		
 			// Prepare the JSON response
 		header('Content-type: text/html; charset=utf-8');
