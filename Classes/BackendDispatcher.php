@@ -81,7 +81,7 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 		$extbaseConfiguration = array(
 			'userFunc' => 'tx_extbase_dispatcher->dispatch',
 			'pluginName' => $module,
-			'extensionName' => $config['extension'],
+			'extensionName' => $config['extensionName'],
 			'enableAutomaticCacheClearing' => 1,
 			'controller' => $controller,
 			'action' => $action,

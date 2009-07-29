@@ -143,7 +143,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 				$GLOBALS['TBE_STYLES']['extJS']['theme'] = t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';	
 			}
 		} else {
-			$this->scBase = t3lib_div::makeInstance('t3lib_SCbase'); 
+			$this->scBase = t3lib_div::makeInstance('t3lib_SCbase');
 			$this->scBase->MCONF['name'] = $this->settings['pluginName'];
 			$this->scBase->init();
 			
@@ -334,8 +334,7 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 	 */
 	private function getExtJSLabels() {
 		$fileRef = 'EXT:' . $this->request->getControllerExtensionKey() . '/Resources/Private/Language/extjs.' . $this->request->getControllerName() . '.xml';
-			// TODO: switch over TYPO3_MODE once backend code is available
-		$lang = $GLOBALS['TSFE']->lang;
+		
 		$action = $this->request->getControllerActionName();
 		
 			// Test whether localization exists for current controller
@@ -344,7 +343,14 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			return array();
 		}
 		
-		$allLabels = $GLOBALS['TSFE']->readLLfile($fileRef);
+		if (TYPO3_MODE === 'FE') {
+			$lang = $GLOBALS['TSFE']->lang;
+			$allLabels = $GLOBALS['TSFE']->readLLfile($fileRef);
+		} else {	// TYPO3_MODE === 'BE'
+			$lang = $GLOBALS['BE_USER']->user['lang'];
+			$lang = $lang ? $lang : 'default';
+			$allLabels = t3lib_div::readLLfile($fileRef, $lang);
+		}
 		
 			// Extract label keys available for current action
 		$keys = array();
