@@ -35,18 +35,27 @@
 class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
 	
 	/**
-	 * Index action for this controller.
+	 * Initializes the action.
 	 *
-	 * @return string The rendered view
 	 */
-	public function indexAction() {
-		$this->initializeExtJSAction();
+	public function initializeAction() {
+			// Make sure to call parent's initializeAction first...
+		parent::initializeAction();
 		
 		$this->setMenu(array(
 			'BlankModule->first' => 'My first action',
 			'BlankModule->second' => 'My second action',
 			'BlankModule->third' => 'My third action',
 		));
+	}
+	
+	/**
+	 * Index action for this controller.
+	 *
+	 * @return string The rendered view
+	 */
+	public function indexAction() {
+		$this->initializeExtJSAction();
 		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
@@ -61,7 +70,7 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 	}
 	
 	/**
-	 * First action for this controller
+	 * First action for this controller.
 	 *
 	 * @return string The rendered view
 	 */
@@ -71,7 +80,7 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
 				title: "First Action",
-				html: "Great! You just used the Extbase dispatcher in backend to redirect to another action",
+				html: "Great! You just used the Extbase dispatcher in backend to redirect to another action.",
 				border: false
 			});
 		');
@@ -79,12 +88,42 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 		$this->renderExtJSModule('mod1');
 	}
 	
+	/**
+	 * Second action for this controller.
+	 *
+	 * @return string The rendered view
+	 */
 	public function secondAction() {
+		$this->initializeExtJSAction();
 		
+		$this->addJsInlineCode('
+			var mod1 = new Ext.Panel({
+				title: "Second Action",
+				html: "Really Great! You just called yet another action.",
+				border: false
+			});
+		');
+		
+		$this->renderExtJSModule('mod1');
 	}
 	
+	/**
+	 * Third action for this controller.
+	 *
+	 * @return string The rendered view
+	 */
 	public function thirdAction() {
+		$this->initializeExtJSAction();
 		
+		$this->addJsInlineCode('
+			var mod1 = new Ext.Panel({
+				title: "Third Action",
+				html: "Very well, this is the third and last action available.",
+				border: false
+			});
+		');
+		
+		$this->renderExtJSModule('mod1');
 	}
 	
 }

@@ -78,7 +78,32 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			}
 		}
 		
-		$extbaseConfiguration = array(
+			// Allow function dispatcher to override controller/action
+		if ($set = t3lib_div::_GET('SET')) {
+			// TODO: Add support for external plain-old module rendering
+			
+			if (preg_match('/^(.*)->(.*)$/', $set['function'], $matches)) {
+				$controller = $matches[1];
+				$action = $matches[2];
+			}
+		}
+		
+		echo $this->transfer($module, $controller, $action);
+	}
+	
+	/**
+	 * Transfers the request to an Extbase backend module, calling
+	 * a given controller/action.
+	 *
+	 * @param string $module
+	 * @param string $controller
+	 * @param string $action
+	 * @return string The module rendered view
+	 */
+	public function transfer($module, $controller, $action) {
+		 $config = $GLOBALS['TBE_EXTBASE_MODULES'][$module];
+		 
+		 $extbaseConfiguration = array(
 			'userFunc' => 'tx_extbase_dispatcher->dispatch',
 			'pluginName' => $module,
 			'extensionName' => $config['extensionName'],
@@ -101,7 +126,7 @@ class Tx_MvcExtjsSamples_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			// and thus we are already within typo3/ because we call typo3/mod.php
 		$GLOBALS['BACK_PATH'] = '';
 		
-		echo $this->dispatch('Here comes Extbase BE Module', $extbaseConfiguration);
+		return $this->dispatch('Here comes Extbase BE Module', $extbaseConfiguration);
 	}
 	
 }
