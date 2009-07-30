@@ -42,7 +42,12 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 	public function indexAction() {
 		$this->initializeExtJSAction();
 		
-		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'genres');
+		if (TYPO3_MODE === 'FE') {
+			$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'genres');	
+		} else {	// TYPO3_MODE === 'BE'
+			$ajaxUrl = $this->UriFor(NULL, 'genres');
+		}
+		
 		
 			// Create a data store with movie genres
 		$this->addJsInlineCode('
@@ -67,6 +72,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 					allowBlank: false
 				},{
 					xtype: "combo",
+					triggerAction: "all",
 					name: "genre",
 					fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
 					mode: "local",
@@ -75,11 +81,16 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 					width: 120
 				}]
 			});
-
-			movie_form.render("MvcExtjsSamples-SimpleForm");
 		');
 		
-		$this->outputJsCode();
+		if (TYPO3_MODE === 'FE') {
+			$this->addJsInlineCode('
+				movie_form.render("MvcExtjsSamples-SimpleForm");
+			');
+			$this->outputJsCode();
+		} else {	// TYPO3_MODE === 'BE'
+			$this->renderExtJSModule('movie_form');	
+		}	
 	}
 	
 	/**
