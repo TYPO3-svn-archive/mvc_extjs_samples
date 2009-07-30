@@ -419,6 +419,9 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 		if ($this->doc) {
 			$title = $this->settings['pluginName'];
 			
+				// Store current controller/action url
+			$this->settingsExtJS->assign('selfUrl', $this->UriFor());
+			
 			$this->doc->form = '';
 			$this->doc->JScode = '
 				<script language="javascript" type="text/javascript">
@@ -428,17 +431,52 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 					}
 				</script>
 			';
-			$this->doc->postCode = '
-				<script language="javascript" type="text/javascript">
-					script_ended = 1;
-					if (top.fsMod) top.fsMod.recentIds["web"] = 0;
-				</script>
-			';
-			
+						
 			if ($GLOBALS['BE_USER']->mayMakeShortcut()) {
 				$shortcut = $this->doc->makeShortcutIcon('id', implode(',', array_keys($this->scBase->MOD_MENU)), $this->scBase->MCONF['name']);
 			} else {
 				$shortcut = '';
+			}
+			
+			if (count($this->menu)) {
+			$menuEntries = array();
+				foreach ($this->menu as $id => $title) {
+					$menuEntry = json_encode(array($id => $title));
+					$menuEntry = preg_replace('/^{(.*)":"(.*)}/', '[\1","\2]', $menuEntry);
+					$menuEntries[] = $menuEntry;
+				}
+				
+				$this->addJsInlineCode('
+					var funcMenu = new Ext.form.ComboBox({
+						triggerAction: "all",
+						mode: "local",
+						store: new Ext.data.ArrayStore({
+							autoDestroy: true,
+							fields: ["key", "title"],
+							data: [' . join(',', $menuEntries) . ']
+						}),
+						displayField: "title",
+						readOnly: true,
+						listeners:{
+							select:function(combo, record, index) {
+								jumpToUrl(' . $this->settingsExtJS->getExtJS('selfUrl') . ' + "&SET[function]=" + record.data.key);
+							}
+						}
+					});
+				');
+				
+					// Select current function
+				if ($set = t3lib_div::_GET('SET')) {
+					$currentFunction = $this->menu[$set['function']];
+				}
+				if (!$currentFunction) {
+					$keys = array_keys($this->menu);
+					$currentFunction = $this->menu[$keys[0]];
+				}
+				
+				$this->addJsInlineCode('
+					funcMenu.setValue("' . str_replace('"', '\\"', $currentFunction) . '");
+				');
 			}
 						
 			$this->addJsInlineCode('
@@ -455,27 +493,8 @@ class Tx_MvcExtjsSamples_ExtJS_Controller_ActionController extends Tx_Extbase_MV
 			');
 			
 			if (count($this->menu)) {
-				$menuEntries = array();
-				foreach ($this->menu as $id => $title) {
-					$menuEntry = json_encode(array($id => $title));
-					$menuEntry = preg_replace('/^{(.*)":"(.*)}/', '[\1","\2]', $menuEntry);
-					$menuEntries[] = $menuEntry;
-				}
-				
 				$this->addJsInlineCode('
-						,{
-							xtype: "combo",
-							triggerAction: "all",
-							mode: "local",
-							store: [' . join(',', $menuEntries) . '],
-							displayField: "title",
-							readOnly: true,
-							listeners:{
-								select:function(combo, record, index) {
-									Ext.Msg.alert("Selected index", index);
-								}
-							}
-						}
+						, funcMenu
 				');
 			}
 			
