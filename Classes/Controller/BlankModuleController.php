@@ -50,26 +50,6 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 	}
 	
 	/**
-	 * Index action for this controller.
-	 *
-	 * @return string The rendered view
-	 */
-	public function indexAction() {
-		$this->initializeExtJSAction();
-		
-		$this->addJsInlineCode('
-			var mod1 = new Ext.Panel({
-				title: "Blank Module",
-				html: "Here is the really great Blank Module content with ' .
-					'<a href=\"' . $this->URIFor('mod.php', 'index', array(), 'SimpleForm') . '\">a link to another action</a>.",
-				border: false
-			});
-		');
-		
-		$this->renderExtJSModule('mod1');
-	}
-	
-	/**
 	 * First action for this controller.
 	 *
 	 * @return string The rendered view
@@ -79,8 +59,9 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSam
 		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
-				title: "First Action",
-				html: "Great! You just used the Extbase dispatcher in backend to redirect to another action.",
+				title: "Blank Module / First Action",
+				html: "Here is the really great Blank Module content with ' .
+					'<a href=\"' . $this->URIFor('mod.php', 'index', array(), 'SimpleForm') . '\">a link to the SimpleForm controller</a>.",
 				border: false
 			});
 		');

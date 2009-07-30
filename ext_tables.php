@@ -137,7 +137,7 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feu
 Tx_MvcExtjsSamples_Utility_Module::registerModule(
 	$_EXTKEY,
 	array(
-		'BlankModule' => 'index,first,second,third',
+		'BlankModule' => 'first,second,third',
 		'SimpleForm' => 'index,genres'
 	),
 	array(
