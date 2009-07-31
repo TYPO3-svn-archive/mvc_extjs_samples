@@ -115,9 +115,6 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 		header('X-JSON: true');
 		
 		echo Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
-		
-			// Do not do further processing
-		exit;
 	}
 	
 }
