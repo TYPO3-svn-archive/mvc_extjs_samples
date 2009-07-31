@@ -110,10 +110,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 			// Convert Tx_MvcExtjsSamples_Domain_Model_Genre objects to an array
 		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::encodeArrayForJSON($genres);
 		
-			// Prepare the JSON response
-		header('Content-type: text/html; charset=utf-8');
-		header('X-JSON: true');
-		
+			// Send the JSON response
 		return Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
 	}
 	
