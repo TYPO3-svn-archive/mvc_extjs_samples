@@ -132,38 +132,40 @@ Tx_Extbase_Utility_Plugin::registerPlugin(
 	// Disable the display of layout and select_key fields
 $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feuseradmin'] = 'layout,select_key';
 
-// ========== Module Blank
+if (TYPO3_MODE == 'BE') {
+	// ========== Module Blank
 
-Tx_MvcExtjsSamples_Utility_Module::registerModule(
-	$_EXTKEY,
-	array(
-		'BlankModule' => 'first,second,third',
-		'SimpleForm' => 'index,genres'
-	),
-	array(
-		'access' => 'user,group',
-		'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
-		'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_mod_blank.xml',
-	),
-	'user',	// Make Blank module a submodule of 'user'
-	'blank'
-);
+	Tx_MvcExtjsSamples_Utility_Module::registerModule(
+		$_EXTKEY,
+		array(
+			'BlankModule' => 'first,second,third',
+			'SimpleForm' => 'index,genres'
+		),
+		array(
+			'access' => 'user,group',
+			'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
+			'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_mod_blank.xml',
+		),
+		'user',	// Make Blank module a submodule of 'user'
+		'blank'
+	);
 
-// ========== Module OldStyle
+	// ========== Module OldStyle
 
-Tx_MvcExtjsSamples_Utility_Module::registerModule(
-	$_EXTKEY,
-	array(
-		'OldStyleModule' => 'index'
-	),
-	array(
-		'access' => 'user,group',
-		'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
-		'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/OldStyleModule.xml',
-	),
-	'web',	// Make OldStyle module a submodule of 'web'
-	'oldstyle'
-);
+	Tx_MvcExtjsSamples_Utility_Module::registerModule(
+		$_EXTKEY,
+		array(
+			'OldStyleModule' => 'index'
+		),
+		array(
+			'access' => 'user,group',
+			'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
+			'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/OldStyleModule.xml',
+		),
+		'web',	// Make OldStyle module a submodule of 'web'
+		'oldstyle'
+	);
+}
 
 // ========== Common
 
