@@ -43,11 +43,11 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 		$this->initializeExtJSAction();
 		
 		if (TYPO3_MODE === 'FE') {
-			$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'genres');	
+				// value 1249058971 is the same as in /Configuration/TypoScript/ajax.txt
+			$ajaxUrl = $this->URIBuilder->URIFor(NULL, 'genres', array(), NULL, NULL, NULL, 1249058971);	
 		} else {	// TYPO3_MODE === 'BE'
 			$ajaxUrl = $this->UriFor(NULL, 'genres');
 		}
-		
 		
 			// Create a data store with movie genres
 		$this->addJsInlineCode('
