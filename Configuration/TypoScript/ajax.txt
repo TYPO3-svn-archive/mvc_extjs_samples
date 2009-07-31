@@ -3,6 +3,7 @@
 
 ajax = PAGE
 ajax {
+	typeNum = 1249058971
 	config {
 		disableAllHeaderCode = 1
 		additionalHeaders = Content-type:application/json
