@@ -733,7 +733,7 @@ Index: t3lib/class.t3lib_pageincludes.php
 +			'HEADERDATA'        => $this->headerData, 
 +			'JS_INCLUDE_FOOTER' => $jsFiles, 
 +			'JS_INLINE_FOOTER'  => $jsInline, 
-+		);debug($markerArray);
++		);
 +        
 +        return t3lib_parsehtml::substituteMarkerArray($subpart, $markerArray, '###|###');
 +    }
