@@ -114,7 +114,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 		header('Content-type: text/html; charset=utf-8');
 		header('X-JSON: true');
 		
-		echo Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
+		return Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
 	}
 	
 }
