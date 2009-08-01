@@ -5,10 +5,11 @@ Frontend plugin Movie needs following files:
 |   |-- Controller
 |   |   `-- MovieController.php
 |   |-- Domain
-|   |   `-- Model
-|   |       |-- Genre.php
+|   |   |-- Model
+|   |   |   |-- Genre.php
+|   |   |   `-- Movie.php
+|   |   `-- Repository
 |   |       |-- GenreRepository.php
-|   |       |-- Movie.php
 |   |       `-- MovieRepository.php
 |   `-- ExtJS
 |       |-- Controller

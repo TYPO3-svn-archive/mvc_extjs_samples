@@ -23,13 +23,13 @@
 ***************************************************************/
 
 /**
- * A repository for Genres.
+ * A repository for Movies.
  *
  * @author      Xavier Perseguers <typo3@perseguers.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjsSamples_Domain_Model_GenreRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_MvcExtjsSamples_Domain_Repository_MovieRepository extends Tx_Extbase_Persistence_Repository {
 	
 }
 ?>

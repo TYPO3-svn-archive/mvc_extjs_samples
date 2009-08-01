@@ -35,7 +35,7 @@
 class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
 
 	/**
-	 * @var Tx_MvcExtjsSamples_Domain_Model_MovieRepository
+	 * @var Tx_MvcExtjsSamples_Domain_Repository_MovieRepository
 	 */
 	protected $movieRepository;
 
@@ -45,7 +45,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 	 * @return void
 	 */
 	public function initializeAction() {		
-		$this->movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_MovieRepository');
+		$this->movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
 	}
 
 	/**
@@ -332,8 +332,8 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		
 		$this->outputJsCode();
 		
-		$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_MovieRepository');
-		/* @var $movieRepository Tx_MvcExtjsSamples_Domain_Model_MovieRepository */
+		$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Repository_Model_MovieRepository');
+		/* @var $movieRepository Tx_MvcExtjsSamples_Domain_Repository_MovieRepository */
 		$movies = $movieRepository->findAll();
 		$this->view->assign('movie', $movies[0]);
 	}
@@ -348,7 +348,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 	 */
 	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie, Tx_MvcExtjsSamples_Domain_Model_Movie $updatedMovie) {
 		try {
-			$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_MovieRepository');
+			$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
 			$movieRepository->replace($movie, $updatedMovie);
 			
 			$persistenceManager = t3lib_div::makeInstance('Tx_Extbase_Persistence_Manager');
@@ -371,8 +371,8 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 	 * @return string The rendered view
 	 */
 	public function moviesAction() {
-		$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_MovieRepository');
-		/* @var $movieRepository Tx_MvcExtjsSamples_Domain_Model_MovieRepository */
+		$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
+		/* @var $movieRepository Tx_MvcExtjsSamples_Domain_Repository_MovieRepository */
 		
 			// Retrieve all movies from repository
 		$movies = $movieRepository->findAll();
@@ -386,8 +386,8 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 	 * @return string The rendered view
 	 */
 	public function genresAction() {
-		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_GenreRepository');
-		/* @var $genreRepository Tx_MvcExtjsSamples_Domain_Model_GenreRepository */
+		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_GenreRepository');
+		/* @var $genreRepository Tx_MvcExtjsSamples_Domain_Repository_GenreRepository */
 		
 			// Retrieve all genres from repository
 		$genres = $genreRepository->findAll();

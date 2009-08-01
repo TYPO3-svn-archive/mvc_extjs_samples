@@ -99,8 +99,8 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 	 * @return string The rendered view
 	 */
 	public function genresAction() {
-		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_GenreRepository');
-		/* @var $genreRepository Tx_MvcExtjsSamples_Domain_Model_GenreRepository */
+		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_GenreRepository');
+		/* @var $genreRepository Tx_MvcExtjsSamples_Domain_Repository_GenreRepository */
 		
 			// Retrieve all genres from repository
 		$genres = $genreRepository->findAll();

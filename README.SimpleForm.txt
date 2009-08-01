@@ -5,8 +5,9 @@ Frontend plugin SimpleForm needs following files:
 |   |-- Controller
 |   |   `-- SimpleFormController.php
 |   |-- Domain
-|   |   `-- Model
-|   |       |-- Genre.php
+|   |   |-- Model
+|   |   |   `-- Genre.php
+|   |   `-- Repository
 |   |       `-- GenreRepository.php
 |   `-- ExtJS
 |       |-- Controller
