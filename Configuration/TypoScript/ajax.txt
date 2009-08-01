@@ -3,7 +3,8 @@
 
 ajax = PAGE
 ajax {
-	typeNum = 1249058971
+		# You don't need to change this typeNum
+	typeNum = 1249058000
 	config {
 		disableAllHeaderCode = 1
 		additionalHeaders = Content-type:application/json
