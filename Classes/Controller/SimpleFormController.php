@@ -96,7 +96,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 	/**
 	 * Returns a list of movie genres as JSON.
 	 * 
-	 * @return void
+	 * @return string The rendered view
 	 */
 	public function genresAction() {
 		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_GenreRepository');
