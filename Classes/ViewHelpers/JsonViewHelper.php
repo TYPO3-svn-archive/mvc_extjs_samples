@@ -35,7 +35,7 @@
  * @subpackage  tx_mvcextjssamples
  * @author      Xavier Perseguers <typo3@perseguers.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id: ActionController.php 22934 2009-07-30 17:27:21Z xperseguers $
+ * @version     SVN: $Id$
  */
 class Tx_MvcExtjsSamples_ViewHelpers_JsonViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
