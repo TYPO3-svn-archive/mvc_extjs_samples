@@ -13,12 +13,16 @@ Frontend plugin SimpleForm needs following files:
 |       |   `-- ActionController.php
 |       |-- SettingsService.php
 |       `-- Utility.php
+|-- Configuration
+|   `-- TypoScript
+|       `-- ajax.txt (partial)
 |-- Resources
 |   |-- Private
 |   |   |-- Language
 |   |   |   `-- extjs.SimpleForm.xml
 |   |   `-- Templates
 |   |       `-- SimpleForm
+|   |           |-- genres.html
 |   |           `-- index.html
 |   `-- Public
 |       `-- Icons

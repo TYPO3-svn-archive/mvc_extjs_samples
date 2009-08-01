@@ -96,9 +96,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 	/**
 	 * Returns a list of movie genres as JSON.
 	 * 
-	 * @see typo3/classes/class.typo3ajax.php
 	 * @return void
-	 * @ajax
 	 */
 	public function genresAction() {
 		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_GenreRepository');
@@ -107,11 +105,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 			// Retrieve all genres from repository
 		$genres = $genreRepository->findAll();
 		
-			// Convert Tx_MvcExtjsSamples_Domain_Model_Genre objects to an array
-		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::encodeArrayForJSON($genres);
-		
-			// Send the JSON response
-		return Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
+		$this->view->assign('genres', $genres);
 	}
 	
 }
