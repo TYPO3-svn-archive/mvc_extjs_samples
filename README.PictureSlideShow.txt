@@ -2,12 +2,8 @@ Frontend plugin PictureSlideShow needs following files:
 
 .
 |-- Classes
-|   |-- Controller
-|   |   `-- PictureSlideShowController.php
-|   `-- ExtJS
-|       |-- Controller
-|       |   `-- ActionController.php
-|       `-- SettingsService.php
+|   `-- Controller
+|       `-- PictureSlideShowController.php
 |-- Configuration
 |   `-- FlexForms
 |       `-- PictureSlideShow.xml

@@ -4,7 +4,6 @@
 
 $extensionClassesPath = t3lib_extMgm::extPath('mvc_extjs_samples') . 'Classes/';
 return array(
-	'tx_mvcextjssamples_backenddispatcher' => $extensionClassesPath . 'BackendDispatcher.php',
 	'tx_mvcextjssamples_controller_blankmodulecontroller' => $extensionClassesPath . 'Controller/BlankModuleController.php',
 	'tx_mvcextjssamples_controller_feuseradmincontroller' => $extensionClassesPath . 'Controller/FeUserAdminController.php',
 	'tx_mvcextjssamples_controller_feedscontroller' => $extensionClassesPath . 'Controller/FeedsController.php',
@@ -18,10 +17,5 @@ return array(
 	'tx_mvcextjssamples_domain_model_genrerepository' => $extensionClassesPath . 'Domain/Model/GenreRepository.php',
 	'tx_mvcextjssamples_domain_model_movie' => $extensionClassesPath . 'Domain/Model/Movie.php',
 	'tx_mvcextjssamples_domain_model_movierepository' => $extensionClassesPath . 'Domain/Model/MovieRepository.php',
-	'tx_mvcextjssamples_extjs_settingsservice' => $extensionClassesPath . 'ExtJS/SettingsService.php',
-	'tx_mvcextjssamples_extjs_utility' => $extensionClassesPath . 'ExtJS/Utility.php',
-	'tx_mvcextjssamples_extjs_controller_actioncontroller' => $extensionClassesPath . 'ExtJS/Controller/ActionController.php',
-	'tx_mvcextjssamples_utility_module' => $extensionClassesPath . 'Utility/Module.php',
-	'tx_mvcextjssamples_viewhelpers_nullviewhelper' => $extensionClassesPath . 'ViewHelpers/NullViewHelper.php',
 );
 ?>

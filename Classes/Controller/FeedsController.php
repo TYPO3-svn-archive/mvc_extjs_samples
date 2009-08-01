@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id: SimpleFormController.php 22464 2009-07-18 17:53:32Z xperseguers $
  */
-class Tx_MvcExtjsSamples_Controller_FeedsController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_FeedsController extends Tx_MvcExtjs_ExtJS_Controller_ActionController {
 	
 	/**
 	 * Index action for this controller.

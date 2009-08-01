@@ -2,12 +2,8 @@ Frontend plugin Twitter needs following files:
 
 .
 |-- Classes
-|   |-- Controller
-|   |   `-- TwitterController.php
-|   `-- ExtJS
-|       |-- Controller
-|       |   `-- ActionController.php
-|       `-- SettingsService.php
+|   `-- Controller
+|       `-- TwitterController.php
 |-- Configuration
 |   |-- FlexForms
 |   |   `-- Twitter.xml

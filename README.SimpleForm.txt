@@ -4,16 +4,11 @@ Frontend plugin SimpleForm needs following files:
 |-- Classes
 |   |-- Controller
 |   |   `-- SimpleFormController.php
-|   |-- Domain
-|   |   |-- Model
-|   |   |   `-- Genre.php
-|   |   `-- Repository
-|   |       `-- GenreRepository.php
-|   `-- ExtJS
-|       |-- Controller
-|       |   `-- ActionController.php
-|       |-- SettingsService.php
-|       `-- Utility.php
+|   `-- Domain
+|       |-- Model
+|       |   `-- Genre.php
+|       `-- Repository
+|           `-- GenreRepository.php
 |-- Configuration
 |   `-- TypoScript
 |       `-- ajax.txt (partial)

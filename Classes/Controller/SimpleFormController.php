@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjs_ExtJS_Controller_ActionController {
 	
 	/**
 	 * Index action for this controller.
@@ -52,7 +52,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjsSamp
 			// Create a data store with movie genres
 		$this->addJsInlineCode('
 			var genres = new Ext.data.Store({
-				reader: ' . Tx_MvcExtjsSamples_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Genre') . ',
+				reader: ' . Tx_MvcExtjs_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Genre') . ',
 				proxy: new Ext.data.HttpProxy({
 					url: "' . $ajaxUrl . '"
 				}),

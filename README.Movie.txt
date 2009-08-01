@@ -4,18 +4,13 @@ Frontend plugin Movie needs following files:
 |-- Classes
 |   |-- Controller
 |   |   `-- MovieController.php
-|   |-- Domain
-|   |   |-- Model
-|   |   |   |-- Genre.php
-|   |   |   `-- Movie.php
-|   |   `-- Repository
-|   |       |-- GenreRepository.php
-|   |       `-- MovieRepository.php
-|   `-- ExtJS
-|       |-- Controller
-|       |   `-- ActionController.php
-|       |-- SettingsService.php
-|       `-- Utility.php
+|   `-- Domain
+|       |-- Model
+|       |   |-- Genre.php
+|       |   `-- Movie.php
+|       `-- Repository
+|           |-- GenreRepository.php
+|           `-- MovieRepository.php
 |-- Configuration
 |   |-- FlexForms
 |   |   `-- Twitter.xml

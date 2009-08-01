@@ -2,12 +2,8 @@ Frontend plugin Feeds needs following files:
 
 .
 |-- Classes
-|   |-- Controller
-|   |   `-- FeUserAdminController.php
-|   `-- ExtJS
-|       |-- Controller
-|       |   `-- ActionController.php
-|       `-- SettingsService.php
+|   `-- Controller
+|       `-- FeUserAdminController.php
 |-- Configuration
 |   `-- TypoScript
 |       `-- setup.txt (partial)

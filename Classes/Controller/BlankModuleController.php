@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjsSamples_ExtJS_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_ExtJS_Controller_ActionController {
 	
 	/**
 	 * Initializes the action.

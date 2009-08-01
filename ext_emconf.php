@@ -17,7 +17,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'author' => 'Xavier Perseguers',
 	'author_email' => 'typo3@perseguers.ch',
 	'shy' => '',
-	'dependencies' => 'extbase,fluid',
+	'dependencies' => 'extbase,fluid,mvc_extjs',
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
@@ -36,6 +36,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'typo3' => '4.3.0-0.0.0',
 			'extbase' => '0.0.0-0.0.0',
 			'fluid' => '0.0.0-0.0.0',
+			'mvc_extjs' => '0.0.0-0.0.0',
 		),
 		'conflicts' => array(
 		),

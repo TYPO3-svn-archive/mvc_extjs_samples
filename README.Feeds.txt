@@ -2,12 +2,8 @@ Frontend plugin Feeds needs following files:
 
 .
 |-- Classes
-|   |-- Controller
-|   |   `-- FeedsController.php
-|   `-- ExtJS
-|       |-- Controller
-|       |   `-- ActionController.php
-|       `-- SettingsService.php
+|   `-- Controller
+|       `-- FeedsController.php
 |-- Configuration
 |   |-- FlexForms
 |   |   `-- Feeds.xml
