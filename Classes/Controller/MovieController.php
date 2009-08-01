@@ -121,7 +121,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 		$this->addJsInlineCode('
 			var moviesStore = new Ext.data.GroupingStore({
 				proxy: new Ext.data.HttpProxy({
-					url: "' . $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'movies') . '"
+					url: "' . $this->URIBuilder->URIFor(NULL, 'movies', array(), NULL, NULL, NULL, 1249117053) . '"
 				}),
 				sortInfo: {
 					field: "genre",
@@ -134,7 +134,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			
 			var genresStore = new Ext.data.Store({
 				proxy: new Ext.data.HttpProxy({
-					url: "' . $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'genres') . '"
+					url: "' . $this->URIBuilder->URIFor(NULL, 'movies', array(), NULL, NULL, NULL, 1249117332) . '"
 				}),
 				sortInfo: {
 					field: "name",
@@ -368,9 +368,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 	/**
 	 * Returns a list of movies as JSON.
 	 * 
-	 * @see typo3/classes/class.typo3ajax.php
-	 * @return void
-	 * @ajax
+	 * @return string The rendered view
 	 */
 	public function moviesAction() {
 		$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_MovieRepository');
@@ -379,25 +377,13 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			// Retrieve all movies from repository
 		$movies = $movieRepository->findAll();
 		
-			// Convert Tx_MvcExtjsSamples_Domain_Model_Movie objects to an array
-		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::encodeArrayForJSON($movies);
-		
-			// Prepare the JSON response
-		header('Content-type: text/html; charset=utf-8');
-		header('X-JSON: true');
-		
-		echo Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
-		
-			// Do not do further processing
-		exit;
+		$this->view->assign('movies', $movies);
 	}
 	
 	/**
 	 * Returns a list of movie genres as JSON.
 	 * 
-	 * @see typo3/classes/class.typo3ajax.php
-	 * @return void
-	 * @ajax
+	 * @return string The rendered view
 	 */
 	public function genresAction() {
 		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_GenreRepository');
@@ -406,17 +392,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjsSamples_E
 			// Retrieve all genres from repository
 		$genres = $genreRepository->findAll();
 		
-			// Convert Tx_MvcExtjsSamples_Domain_Model_Genre objects to an array
-		$arr = Tx_MvcExtjsSamples_ExtJS_Utility::encodeArrayForJSON($genres);
-		
-			// Prepare the JSON response
-		header('Content-type: text/html; charset=utf-8');
-		header('X-JSON: true');
-		
-		echo Tx_MvcExtjsSamples_ExtJS_Utility::getJSON($arr);
-		
-			// Do not do further processing
-		exit;
+		$this->view->assign('genres', $genres);
 	}
 
 }

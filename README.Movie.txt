@@ -20,6 +20,9 @@ Frontend plugin Movie needs following files:
 |   |   `-- Twitter.xml
 |   `-- TCA
 |       `-- tca.php
+|-- Configuration
+|   `-- TypoScript
+|       `-- ajax.txt (partial)
 |-- Resources
 |   |-- Private
 |   |   |-- Languages
@@ -27,7 +30,9 @@ Frontend plugin Movie needs following files:
 |   |   |   `-- locallang_db.xml
 |   |   `-- Templates
 |   |       `-- Movie
-|   |           `-- index.html
+|   |           |-- genres.html
+|   |           |-- index.html
+|   |           `-- movies.html
 |   `-- Public
 |       |-- Icons
 |       |   |-- icon_tx_mvcextjssamples_domain_model_genre.gif
