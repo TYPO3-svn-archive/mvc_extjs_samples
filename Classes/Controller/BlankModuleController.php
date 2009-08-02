@@ -35,13 +35,9 @@
 class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_ExtJS_Controller_ActionController {
 	
 	/**
-	 * Initializes the action.
-	 *
+	 * Initializes the menu entries.
 	 */
-	public function initializeAction() {
-			// Make sure to call parent's initializeAction first...
-		parent::initializeAction();
-		
+	public function menuConfig() {
 		$this->setMenu(array(
 			'BlankModule->first' => 'My first action',
 			'BlankModule->second' => 'My second action',
