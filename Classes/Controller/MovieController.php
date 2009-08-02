@@ -44,7 +44,10 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 	 *
 	 * @return void
 	 */
-	public function initializeAction() {		
+	public function initializeAction() {
+			// Do not forget to call parent's initializeAction method
+		parent::initializeAction();
+		
 		$this->movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
 	}
 
@@ -331,11 +334,6 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 		');
 		
 		$this->outputJsCode();
-		
-		$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Repository_Model_MovieRepository');
-		/* @var $movieRepository Tx_MvcExtjsSamples_Domain_Repository_MovieRepository */
-		$movies = $movieRepository->findAll();
-		$this->view->assign('movie', $movies[0]);
 	}
 	
 	/**
