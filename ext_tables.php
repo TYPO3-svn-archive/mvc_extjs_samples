@@ -149,6 +149,15 @@ if (TYPO3_MODE == 'BE') {
 		'user',	// Make Blank module a submodule of 'user'
 		'blank'
 	);
+	
+	// ========== Legacy (SCbase) function
+	
+	t3lib_extMgm::insertModuleFunction(
+		'user_blank',	// Insert legacy function into function menu of Module Blank
+		'tx_mvcextjssamples_modfunc1',
+		t3lib_extMgm::extPath($_EXTKEY) . 'modfunc1/class.tx_mvcextjssamples_modfunc1.php',
+		'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:moduleFunction.tx_mvcextjssamples_modfunc1'
+	);
 
 	// ========== Module OldStyle
 
