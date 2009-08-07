@@ -46,8 +46,7 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 		$cssFile  = $this->setting['cssFile'] ? $this->setting['cssFile'] : 'typo3conf/ext/mvc_extjs_samples/Resources/Public/CSS/carousel.css';
 		$GLOBALS['TSFE']->pageIncludes->addCssFile($cssFile);
 
-		$settings = Tx_Extbase_Dispatcher::getSettings();
-		$id = $settings['contentObjectData']['uid'];
+		$id = $this->settings['contentObjectData']['uid'];
 		$this->view->assign('ID', $id);
 		
 		$images = array();  
@@ -74,8 +73,6 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 				height: ' . ($this->settings['pictureSlideShowHeight'] ? $this->settings['pictureSlideShowHeight'] : 300) . '
 				});
 		';
-			
-		
 		
 			// Create twitter plugin
 		$this->addJsInlineCode($carousel);

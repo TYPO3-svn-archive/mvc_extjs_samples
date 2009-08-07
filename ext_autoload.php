@@ -7,6 +7,7 @@ return array(
 	'tx_mvcextjssamples_controller_blankmodulecontroller' => $extensionClassesPath . 'Controller/BlankModuleController.php',
 	'tx_mvcextjssamples_controller_feuseradmincontroller' => $extensionClassesPath . 'Controller/FeUserAdminController.php',
 	'tx_mvcextjssamples_controller_feedscontroller' => $extensionClassesPath . 'Controller/FeedsController.php',
+	'tx_mvcextjssamples_controller_genrecontroller' => $extensionClassesPath . 'Controller/GenreController.php',
 	'tx_mvcextjssamples_controller_helloworldcontroller' => $extensionClassesPath . 'Controller/HelloWorldController.php',
 	'tx_mvcextjssamples_controller_moviecontroller' => $extensionClassesPath . 'Controller/MovieController.php',
 	'tx_mvcextjssamples_controller_oldstylemodulecontroller' => $extensionClassesPath . 'Controller/OldStyleModuleController.php',

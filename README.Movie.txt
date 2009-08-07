@@ -3,6 +3,7 @@ Frontend plugin Movie needs following files:
 .
 |-- Classes
 |   |-- Controller
+|   |   |-- GenreController.php
 |   |   `-- MovieController.php
 |   `-- Domain
 |       |-- Model

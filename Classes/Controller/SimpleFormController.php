@@ -44,9 +44,9 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjs_Ext
 		
 		if (TYPO3_MODE === 'FE') {
 				// value 1249058971 is the same as in /Configuration/TypoScript/ajax.txt
-			$ajaxUrl = $this->URIBuilder->URIFor(NULL, 'genres', array(), NULL, NULL, NULL, 1249058971);	
-		} else {	// TYPO3_MODE === 'BE'
-			$ajaxUrl = $this->UriFor(NULL, 'genres');
+			$ajaxUrl = $this->URIBuilder->URIFor(NULL, 'index', array(), 'Genre', NULL, NULL, 1249058971);	
+		} else { // TYPO3_MODE === 'BE'
+			$ajaxUrl = $this->UriFor(NULL, 'index', array(), 'Genre');
 		}
 		
 			// Create a data store with movie genres
@@ -91,21 +91,6 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjs_Ext
 		} else {	// TYPO3_MODE === 'BE'
 			$this->renderExtJSModule('movie_form');	
 		}	
-	}
-	
-	/**
-	 * Returns a list of movie genres as JSON.
-	 * 
-	 * @return string The rendered view
-	 */
-	public function genresAction() {
-		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_GenreRepository');
-		/* @var $genreRepository Tx_MvcExtjsSamples_Domain_Repository_GenreRepository */
-		
-			// Retrieve all genres from repository
-		$genres = $genreRepository->findAll();
-		
-		$this->view->assign('genres', $genres);
 	}
 	
 }

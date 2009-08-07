@@ -26,3 +26,10 @@ plugin.tx_mvcextjssamples.pictureslideshow {
  		 div.PictureSlideShow { padding: 5px; height: 280px; width: 420px; background-color: #E6E6E0; }
  	)
 }
+
+plugin.tx_mvcextjssamples {
+	persistence {
+			// Our records (from ext_tables_static+adt.sql) are stored at root
+		storagePid = 0
+	}
+} 

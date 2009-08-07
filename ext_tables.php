@@ -139,7 +139,8 @@ if (TYPO3_MODE == 'BE') {
 		$_EXTKEY,
 		array(
 			'BlankModule' => 'first,second,third',
-			'SimpleForm' => 'index,genres'
+			'SimpleForm' => 'index',
+			'Genre' => 'index',
 		),
 		array(
 			'access' => 'user,group',

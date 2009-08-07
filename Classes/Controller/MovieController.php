@@ -137,7 +137,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 			
 			var genresStore = new Ext.data.Store({
 				proxy: new Ext.data.HttpProxy({
-					url: "' . $this->URIBuilder->URIFor(NULL, 'movies', array(), NULL, NULL, NULL, 1249117332) . '"
+					url: "' . $this->URIBuilder->URIFor(NULL, 'index', array(), 'Genre', NULL, NULL, 1249117332) . '"
 				}),
 				sortInfo: {
 					field: "name",
@@ -378,20 +378,5 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 		$this->view->assign('movies', $movies);
 	}
 	
-	/**
-	 * Returns a list of movie genres as JSON.
-	 * 
-	 * @return string The rendered view
-	 */
-	public function genresAction() {
-		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_GenreRepository');
-		/* @var $genreRepository Tx_MvcExtjsSamples_Domain_Repository_GenreRepository */
-		
-			// Retrieve all genres from repository
-		$genres = $genreRepository->findAll();
-		
-		$this->view->assign('genres', $genres);
-	}
-
 }
 ?>

@@ -43,14 +43,11 @@ class Tx_MvcExtjsSamples_Controller_FeedsController extends Tx_MvcExtjs_ExtJS_Co
 		$this->initializeExtJSAction();
 		$this->addJsLibrary('Ext.ux.TYPO3.feeds', 'ux.TYPO3.Feeds.js');
 
-		$settings = Tx_Extbase_Dispatcher::getSettings();
-		$id = $settings['contentObjectData']['uid'];
+		$id = $this->settings['contentObjectData']['uid'];
 		$this->view->assign('ID', $id);
 		
 		$feedUrl = $this->settings['feedsUrl'];
 		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'feeds', array('feed' => $feedUrl, 'fid' => $id));
-		
-		
 		
 			// Create a data store with movie genres
 		$this->addJsInlineCode('

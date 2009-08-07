@@ -18,8 +18,11 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 Tx_Extbase_Utility_Plugin::configureDispatcher(
 	'MvcExtjsSamples',
 	'SimpleForm',
-	array('SimpleForm' => 'index,genres'),
-	array('SimpleForm' => 'genres')			// Action 'genres' is used for AJAX and thus should not be cached
+	array(
+		'SimpleForm' => 'index',
+		'Genre' => 'index',
+	),
+	array('Genre' => 'index')			// Action 'index' from controller 'Genre' is used for AJAX and thus should not be cached
 );
 
 
@@ -58,8 +61,14 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 Tx_Extbase_Utility_Plugin::configureDispatcher(
 	'MvcExtjsSamples',
 	'Movie',
-	array('Movie' => 'index,update,movies,genres'),
-	array('Movie' => 'update,movies,genres')
+	array(
+		'Movie' => 'index,update,movies',
+		'Genre' => 'index',
+	),
+	array(
+		'Movie' => 'update,movies',
+		'Genre' => 'index',
+	)
 );
 
 	// Add button save+new for movie records

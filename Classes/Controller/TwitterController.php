@@ -43,8 +43,7 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjs_ExtJS_
 		$this->initializeExtJSAction(FALSE, TRUE);
 		$this->addJsFile('ux.TYPO3.Twitter.js');
 		
-		
-		//make appLoader
+		// Make an appLoader
 		$appLoaderLabels = array(
 			$this->extensionName . ' Twitter Application', 
 			'Loading Core API...', 
@@ -57,8 +56,7 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjs_ExtJS_
 		
 		$GLOBALS['TSFE']->pageIncludes->addInlineComment('These examples show the possibility to work with ExtJS based on extbase plugin');
 		
-		$settings = Tx_Extbase_Dispatcher::getSettings();
-		$id = $settings['contentObjectData']['uid'];
+		$id = $this->settings['contentObjectData']['uid'];
 		$this->view->assign('ID', $id);
 		
 		$twitter = '
