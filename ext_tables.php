@@ -135,7 +135,7 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_feu
 if (TYPO3_MODE == 'BE') {
 	// ========== Module Blank
 
-	Tx_MvcExtjs_Utility_Module::registerModule(
+	Tx_Extbase_Utility_Extension::registerModule(
 		$_EXTKEY,
 		array(
 			'BlankModule' => 'first,second,third',
@@ -162,7 +162,7 @@ if (TYPO3_MODE == 'BE') {
 
 	// ========== Module OldStyle
 
-	Tx_MvcExtjs_Utility_Module::registerModule(
+	Tx_Extbase_Utility_Extension::registerModule(
 		$_EXTKEY,
 		array(
 			'OldStyleModule' => 'index'
