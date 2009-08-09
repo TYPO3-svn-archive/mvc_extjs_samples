@@ -53,11 +53,14 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_Ex
 	public function firstAction() {
 		$this->initializeExtJSAction();
 		
+		$this->toolbar->setButtonViewCallback('Ext.Msg.alert("Toolbar Button Clicked!", "You clicked on the VIEW button!");');
+		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
 				title: "Blank Module / First Action",
-				html: "Here is the really great Blank Module content with ' .
-					'<a href=\"' . $this->URIFor('mod.php', 'index', array(), 'SimpleForm') . '\">a link to the SimpleForm controller</a>.",
+				html: "<p>Here is the really great Blank Module content with ' .
+					'<a href=\"' . $this->URIFor('mod.php', 'index', array(), 'SimpleForm') . '\">a link to the SimpleForm controller</a>.</p>' .
+					'<p>BTW, did you clicked on the magnifier toolbar button?</p>",
 				border: false
 			});
 		');
@@ -72,6 +75,9 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_Ex
 	 */
 	public function secondAction() {
 		$this->initializeExtJSAction();
+		
+		$this->toolbar->setButtonEditCallback('Ext.Msg.alert("Toolbar Button Clicked!", "You clicked on the EDIT button!");');
+		$this->toolbar->setButtonSaveCallback('Ext.Msg.alert("Toolbar Button Clicked!", "You clicked on the SAVE button!");');
 		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
