@@ -38,7 +38,7 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_Ex
 	 * Initializes the menu entries.
 	 */
 	public function menuConfig() {
-		$this->setMenu(array(
+		$this->toolbar->setFunctionMenu(array(
 			'BlankModule->first' => 'My first action',
 			'BlankModule->second' => 'My second action',
 			'BlankModule->third' => 'My third action',
