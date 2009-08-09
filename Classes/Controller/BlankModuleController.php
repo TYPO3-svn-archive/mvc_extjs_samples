@@ -54,6 +54,11 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_Ex
 		$this->initializeExtJSAction();
 		
 		$this->toolbar->setButtonViewCallback('Ext.Msg.alert("Toolbar Button Clicked!", "You clicked on the VIEW button!");');
+		$this->toolbar->addButton(
+			'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
+			'Ext.Msg.alert("Movie Management", "You want to add a movie!");',
+			'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/extjs.Movie.xml:index.movie.add'
+		);
 		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({

@@ -14,8 +14,8 @@
 			<label index="index.filmedIn">Filmed In</label>
 			<label index="index.filmedIn.color">Color</label>
 			<label index="index.filmedIn.bw">Black and White</label>
-			<label index="index.movie.add">Add Movie</label>
-			<label index="index.movie.remove">Remove Movie</label>
+			<label index="index.movie.add">Add a movie</label>
+			<label index="index.movie.remove">Remove a movie</label>
 			<label index="index.form.title">Movie Information Form</label>
 			<label index="index.form.save">Save</label>
 			<label index="index.form.reset">Reset</label>
