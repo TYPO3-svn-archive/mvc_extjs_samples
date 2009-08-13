@@ -43,18 +43,7 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjs_ExtJS_
 		$this->initializeExtJSAction(FALSE, TRUE);
 		$this->addJsFile('ux.TYPO3.Twitter.js');
 		
-		// Make an appLoader
-		$appLoaderLabels = array(
-			$this->extensionName . ' Twitter Application', 
-			'Loading Core API...', 
-			'Loading UI Components...', 
-			'Initializing Application...'
-		);
-		$markUp = $this->pageIncludes->enableApplicationLoader($appLoaderLabels, '../' . $this->extRelPath . 'Resources/Public/Icons/typo3anim32.gif');
-		$this->addCssInlineBlock($markUp['CSS']);
-	   	$this->view->assign('loader', $markUp['HTML']);
-		
-		$GLOBALS['TSFE']->pageIncludes->addInlineComment('These examples show the possibility to work with ExtJS based on extbase plugin');
+		$GLOBALS['TSFE']->addInlineComment('These examples show the possibility to work with ExtJS based on extbase plugin');
 		
 		$id = $this->settings['contentObjectData']['uid'];
 		$this->view->assign('ID', $id);
@@ -76,7 +65,7 @@ class Tx_MvcExtjsSamples_Controller_TwitterController extends Tx_MvcExtjs_ExtJS_
 		$this->addJsInlineCode('
 			new Ext.ux.TYPO3.Twitter("MvcExtjsSamples-Twitter-' . $id . '", {' . $twitter . '});'
 		);
-		$this->addJsInlineCode($markUp['JAVASCRIPT']);
+		
 		
 		$this->outputJsCode();
 	}

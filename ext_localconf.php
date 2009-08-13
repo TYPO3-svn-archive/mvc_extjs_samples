@@ -5,7 +5,7 @@ if (!defined ('TYPO3_MODE')) {
 
 // ========== Plugin HelloWorld
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	'MvcExtjsSamples',
 	'HelloWorld',
 	array('HelloWorld' => 'index'),
@@ -15,7 +15,7 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 
 // ========== Plugin SimpleForm
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	'MvcExtjsSamples',
 	'SimpleForm',
 	array(
@@ -28,7 +28,7 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 
 // ========== Plugin Twitter
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	'MvcExtjsSamples',
 	'Twitter',
 	array('Twitter' => 'index'),
@@ -38,7 +38,7 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 
 // ========== Plugin Feeds
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	'MvcExtjsSamples',
 	'Feeds',
 	array('Feeds' => 'index,feeds'),
@@ -48,7 +48,7 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 
 // ========== Plugin PictureSlideShow
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	'MvcExtjsSamples',
 	'PictureSlideShow',
 	array('PictureSlideShow' => 'index'),
@@ -58,7 +58,7 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
 
 // ========== Plugin Movie
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	'MvcExtjsSamples',
 	'Movie',
 	array(
@@ -78,7 +78,7 @@ t3lib_extMgm::addUserTSConfig('
 
 // ========== Plugin FeUserAdmin
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	'MvcExtjsSamples',
 	'FeUserAdmin',
 	array('FeUserAdmin' => 'index,user'),

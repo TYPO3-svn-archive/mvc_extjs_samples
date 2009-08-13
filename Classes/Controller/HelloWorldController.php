@@ -41,12 +41,13 @@ class Tx_MvcExtjsSamples_Controller_HelloWorldController extends Tx_Extbase_MVC_
 	 */
 	public function indexAction() {
 			// Load ExtJS libraries and stylesheets
-		$GLOBALS['TSFE']->pageIncludes->loadExtJS();
+		$GLOBALS['TSFE']->backPath = 'typo3/';
+		$GLOBALS['TSFE']->loadExtJS();
+		$GLOBALS['TSFE']->enableExtJSQuickTips();
 		
 			// Show a message box when the page is ready
-		$GLOBALS['TSFE']->pageIncludes->addJsHandlerCode(
-			'Ext.Msg.alert("My Title", "Hello World!");',
-			t3lib_pageIncludes::JSHANDLER_EXTONREADY
+		$GLOBALS['TSFE']->addExtOnReadyCode(
+			'Ext.Msg.alert("My Title", "Hello World!");'
 		);
 	}
 	
