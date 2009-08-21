@@ -46,7 +46,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjs_Ext
 				// value 1249058971 is the same as in /Configuration/TypoScript/ajax.txt
 			$ajaxUrl = $this->URIBuilder->URIFor(NULL, 'index', array(), 'Genre', NULL, NULL, 1249058971);	
 		} else { // TYPO3_MODE === 'BE'
-			$ajaxUrl = $this->UriFor('mod.php', 'index', array(), 'Genre');
+			$ajaxUrl = $this->UriFor(NULL, 'index', array(), 'Genre');
 		}
 		
 			// Create a data store with movie genres
