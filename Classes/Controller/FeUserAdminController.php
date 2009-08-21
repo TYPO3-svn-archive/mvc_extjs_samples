@@ -49,7 +49,6 @@ class Tx_MvcExtjsSamples_Controller_FeUserAdminController extends Tx_MvcExtjs_Ex
 	 */
 	protected $frontendUserGroupsRepository;
 	
-	
 	/**
 	 * Index action for this controller.
 	 *
@@ -59,11 +58,9 @@ class Tx_MvcExtjsSamples_Controller_FeUserAdminController extends Tx_MvcExtjs_Ex
 		$this->initializeExtJSAction();
 		$this->addJsLibrary('ux.TYPO3.FeUserAdmin', 'ux.TYPO3.FeUserAdmin.js');
 		$this->addJsLibrary('ux.grid.RowEditor', 'ux.grid.RowEditor.js');
-		
 
 		$this->frontendUserRepository = t3lib_div::makeInstance('Tx_Extbase_Domain_Model_FrontendUserRepository'); 
 		$this->frontendUserModel = t3lib_div::makeInstance('Tx_Extbase_Domain_Model_FrontendUser', 'newname', 'newpass'); 
-
 
 		debug($this->frontendUserRepository->findAll());
 				
@@ -72,15 +69,12 @@ class Tx_MvcExtjsSamples_Controller_FeUserAdminController extends Tx_MvcExtjs_Ex
 		
 		//$this->pageIncludes->addInlineSetting($this->extJSNamespace, 'storeFields', array(array('name' => 'username')));
 		
-		
 		$this->settingsExtJS->assign('storeFields', Tx_MvcExtjsSamples_ExtJS_Utility::getJSONReader('Tx_Extbase_Domain_Model_FrontendUser', $this->frontendUserModel));
-		$this->settingsExtJS->assign('chartsUrl', 'typo3/contrib/extjs/resources/charts.swf');
+		$this->settingsExtJS->assign('chartsUrl', TYPO3_mainDir . 'contrib/extjs/resources/charts.swf');
 		$this->settingsExtJS->assign('div', '"MvcExtjsSamples-FeUserAdmin');
 		
 		//$cssFile  = $this->setting['cssFile'] ? $this->setting['cssFile'] : 'typo3conf/ext/mvc_extjs_samples/Resources/Public/CSS/carousel.css';
 		//$GLOBALS['TSFE']->pageIncludes->addCssFile($cssFile);
-
-		
 		
 			// Create twitter plugin
 		$this->addJsInlineCode($this->extJSNamespace . '.components.init();');

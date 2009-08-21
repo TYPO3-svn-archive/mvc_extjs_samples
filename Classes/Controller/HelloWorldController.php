@@ -41,7 +41,7 @@ class Tx_MvcExtjsSamples_Controller_HelloWorldController extends Tx_Extbase_MVC_
 	 */
 	public function indexAction() {
 			// Load ExtJS libraries and stylesheets
-		$GLOBALS['TSFE']->backPath = 'typo3/';
+		$GLOBALS['TSFE']->backPath = TYPO3_mainDir;
 		$GLOBALS['TSFE']->loadExtJS();
 		$GLOBALS['TSFE']->enableExtJSQuickTips();
 		
