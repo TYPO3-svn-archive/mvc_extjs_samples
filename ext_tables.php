@@ -137,6 +137,9 @@ if (TYPO3_MODE == 'BE') {
 
 	Tx_Extbase_Utility_Extension::registerModule(
 		$_EXTKEY,
+		'user',		// Make Blank module a submodule of 'user'
+		'blank',	// Submodule key
+		'',			// Position
 		array(
 			'BlankModule' => 'first,second,third',
 			'SimpleForm' => 'index',
@@ -146,15 +149,13 @@ if (TYPO3_MODE == 'BE') {
 			'access' => 'user,group',
 			'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
 			'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_mod_blank.xml',
-		),
-		'user',	// Make Blank module a submodule of 'user'
-		'blank'
+		)
 	);
 	
 	// ========== Legacy (SCbase) function
 	
 	t3lib_extMgm::insertModuleFunction(
-		'user_txmvcextjssamplesBlank',	// Insert legacy function into function menu of Module Blank
+		'user_MvcExtjsSamplesBlank',	// Insert legacy function into function menu of Module Blank
 		'tx_mvcextjssamples_modfunc1',
 		t3lib_extMgm::extPath($_EXTKEY) . 'modfunc1/class.tx_mvcextjssamples_modfunc1.php',
 		'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:moduleFunction.tx_mvcextjssamples_modfunc1'
@@ -164,6 +165,9 @@ if (TYPO3_MODE == 'BE') {
 
 	Tx_Extbase_Utility_Extension::registerModule(
 		$_EXTKEY,
+		'web',		// Make OldStyle module a submodule of 'web'
+		'oldstyle',	// Submodule key
+		'',			// Position
 		array(
 			'OldStyleModule' => 'index'
 		),
@@ -171,9 +175,7 @@ if (TYPO3_MODE == 'BE') {
 			'access' => 'user,group',
 			'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
 			'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/OldStyleModule.xml',
-		),
-		'web',	// Make OldStyle module a submodule of 'web'
-		'oldstyle'
+		)
 	);
 }
 
