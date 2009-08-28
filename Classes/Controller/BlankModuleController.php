@@ -106,10 +106,18 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_Ex
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
 				title: "Third Action",
-				html: "Very well, this is the third and last action available.",
+				html: "Very well, this is the third and last action available. Did you see that it creates a Flash message?",
 				border: false
 			});
 		');
+		
+			// Add a flash message 
+		$message = t3lib_div::makeInstance('t3lib_FlashMessage',
+			sprintf('Initiated by action "%s". Current date is %s', $this->request->getControllerActionName(), date('d.m.Y h:i:s', time())),
+			'Flash title: ' . $this->request->getPluginName(),
+			t3lib_FlashMessage::INFO
+		);
+		$this->pushFlashMessage($message);
 		
 		$this->renderExtJSModule('mod1');
 	}
