@@ -66,7 +66,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 			// TODO: Actually do this a bit prettier :-)
 		$updateUrl = $this->uriBuilder->reset()->uriFor('update');
 		$parts = explode('?', $updateUrl);
-		$updateUrl = $parts[0] . '?' . urlencode('tx_mvcextjssamples_movie[movie][uid]') . '=UID&' . $parts[1];
+		$updateUrl = $parts[0] . '?' . urlencode('tx_mvcextjssamples_movie[existingMovie][uid]') . '=UID&' . $parts[1];
 		$this->settingsExtJS->assign('updateUrl', $updateUrl);
 		
 			// Enable quick tips
@@ -106,7 +106,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 						// TODO: Add this to a new setExtbaseValues() method on Ext.form.BasicForm
 						var field, id;
 						for(id in values){
-							if(!Ext.isFunction(values[id]) && (field = movie_form.getForm().findField("updatedMovie[" + id + "]"))){
+							if(!Ext.isFunction(values[id]) && (field = movie_form.getForm().findField("tx_mvcextjssamples_movie[movie][" + id + "]"))){
 								try { // TODO: handle multiple fields (radio button filmedIn) 
 									field.setValue(values[id]);
 									if(movie_form.getForm().trackResetOnLoad){
@@ -220,23 +220,23 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 					minSize: 250,
 					items: [{
 						xtype: "hidden",
-						name: "updatedMovie[uid]"
+						name: "tx_mvcextjssamples_movie[movie][uid]"
 					},{
 						xtype: "hidden",
-						name: "__referrer[extensionName]",
+						name: "tx_mvcextjssamples_movie[__referrer][extensionName]",
 						value: "' . $this->request->getControllerExtensionName() . '"
 					},{
 						xtype: "hidden",
-						name: "__referrer[controllerName]",
+						name: "tx_mvcextjssamples_movie[__referrer][controllerName]",
 						value: "' . $this->request->getControllerName() . '"
 					},{
 						xtype: "hidden",
-						name: "__referrer[actionName]",
+						name: "tx_mvcextjssamples_movie[__referrer][actionName]",
 						value: "update"
 					},{
 						xtype: "textfield",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.title') . ',
-						name: "updatedMovie[title]",
+						name: "tx_mvcextjssamples_movie[movie][title]",
 						anchor: "100%",
 						allowBlank: false,
 						listeners: {
@@ -249,24 +249,24 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 					},{
 						xtype: "textfield",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.director') . ',
-						name: "updatedMovie[director]",
+						name: "tx_mvcextjssamples_movie[movie][director]",
 						anchor: "100%",
 						vtype: "name"
 					},/*{
 						xtype: "datefield",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.released') . ',
-						name: "updatedMovie[releaseDate]",
+						name: "tx_mvcextjssamples_movie[movie][releaseDate]",
 						disabledDays: [6]
 					},{
 						xtype: "radio",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.filmedIn') . ',
-						name: "updatedMovie[filmedIn]",
+						name: "tx_mvcextjssamples_movie[movie][filmedIn]",
 						boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.color') . '
 					},{
 						xtype: "radio",
 						hideLabel: false,
 						labelSeparator: "",
-						name: "updatedMovie[filmedIn]",
+						name: "tx_mvcextjssamples_movie[movie][filmedIn]",
 						boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.bw') . '
 					},{
 						xtype: "combo",
@@ -279,7 +279,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 					},*/{
 						xtype: "textarea",
 						fieldLabel: ' . $this->getExtJSLabelKey('index.tagline') . ',
-						name: "updatedMovie[tagline]",
+						name: "tx_mvcextjssamples_movie[movie][tagline]",
 						height: 80,
 						anchor: "100%"
 					}],
@@ -348,15 +348,15 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 	/**
 	 * Updates an existing movie.
 	 *
-	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie The existing, unmodified movie
-	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $updatedMovie A clone of the original movie with the updated values already applied
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie A clone of the original movie with the updated values already applied
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $existingMovie The existing, unmodified movie
 	 * @return void
 	 * @ajax
 	 */
-	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie, Tx_MvcExtjsSamples_Domain_Model_Movie $updatedMovie) {
+	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie, Tx_MvcExtjsSamples_Domain_Model_Movie $existingMovie) {
 		try {
 			$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
-			$movieRepository->replace($movie, $updatedMovie);
+			$movieRepository->replace($existingMovie, $movie);
 			
 			$persistenceManager = t3lib_div::makeInstance('Tx_Extbase_Persistence_Manager');
 			/* @var $persistenceManager Tx_Extbase_Persistence_Manager */
