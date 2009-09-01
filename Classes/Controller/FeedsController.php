@@ -47,7 +47,7 @@ class Tx_MvcExtjsSamples_Controller_FeedsController extends Tx_MvcExtjs_ExtJS_Co
 		$this->view->assign('ID', $id);
 		
 		$feedUrl = $this->settings['feedsUrl'];
-		$ajaxUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'feeds', array('feed' => $feedUrl, 'fid' => $id));
+		$ajaxUrl = $this->uriBuilder->uriFor('feeds', array('feed' => $feedUrl, 'fid' => $id));
 		
 			// Create the feed display
 		$this->addJsInlineCode('

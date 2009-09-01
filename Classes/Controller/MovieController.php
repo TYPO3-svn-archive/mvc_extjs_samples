@@ -64,7 +64,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 		$this->settingsExtJS->assign('iconsPath', $this->extRelPath . 'Resources/Public/Icons/');
 		
 			// TODO: Actually do this a bit prettier :-)
-		$updateUrl = $this->URIBuilder->URIFor($GLOBALS['TSFE']->id, 'update');
+		$updateUrl = $this->uriBuilder->reset()->uriFor('update');
 		$parts = explode('?', $updateUrl);
 		$updateUrl = $parts[0] . '?' . urlencode('tx_mvcextjssamples_movie[movie][uid]') . '=UID&' . $parts[1];
 		$this->settingsExtJS->assign('updateUrl', $updateUrl);
@@ -120,11 +120,14 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 			}();
 		');
 		
-			// Create a data stores
+			// Create a movie data store
 		$this->addJsInlineCode('
 			var moviesStore = new Ext.data.GroupingStore({
 				proxy: new Ext.data.HttpProxy({
-					url: "' . $this->URIBuilder->URIFor(NULL, 'movies', array(), NULL, NULL, NULL, 1249117053) . '"
+					url: "' . $this->uriBuilder
+					                    ->reset()
+					                    ->setTargetPageType(1249117053)
+					                    ->uriFor('movies') . '"
 				}),
 				sortInfo: {
 					field: "genre",
@@ -134,10 +137,16 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 				reader: ' . Tx_MvcExtjs_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Movie') . ',
 				autoLoad: true
 			});
-			
+		');
+		
+			// Create a genre data store
+		$this->addJsInlineCode('
 			var genresStore = new Ext.data.Store({
 				proxy: new Ext.data.HttpProxy({
-					url: "' . $this->URIBuilder->URIFor(NULL, 'index', array(), 'Genre', NULL, NULL, 1249117332) . '"
+					url: "' . $this->uriBuilder
+					                    ->reset()
+					                    ->setTargetPageType(1249117332)
+					                    ->uriFor('index', array(), 'Genre') . '"
 				}),
 				sortInfo: {
 					field: "name",

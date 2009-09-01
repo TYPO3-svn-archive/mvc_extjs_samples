@@ -64,7 +64,7 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_Ex
 			var mod1 = new Ext.Panel({
 				title: "Blank Module / First Action",
 				html: "<p>Here is the really great Blank Module content with ' .
-					'<a href=\"' . $this->URIFor('mod.php', 'index', array(), 'SimpleForm') . '\">a link to the SimpleForm controller</a>.</p>' .
+					'<a href=\"' . $this->uriBuilder->uriFor('index', array(), 'SimpleForm') . '\">a link to the SimpleForm controller</a>.</p>' .
 					'<p>BTW, did you clicked on the magnifier toolbar button?</p>",
 				border: false
 			});
