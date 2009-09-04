@@ -63,11 +63,11 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 		$this->settingsExtJS->assign('coverPath', $this->extRelPath . 'Resources/Public/Images/');
 		$this->settingsExtJS->assign('iconsPath', $this->extRelPath . 'Resources/Public/Icons/');
 		
-			// TODO: Actually do this a bit prettier :-)
-		$updateUrl = $this->uriBuilder->reset()->uriFor('update');
-		$parts = explode('?', $updateUrl);
-		$updateUrl = $parts[0] . '?' . urlencode('tx_mvcextjssamples_movie[existingMovie][uid]') . '=UID&' . $parts[1];
-		$this->settingsExtJS->assign('updateUrl', $updateUrl);
+		$this->uriBuilder->reset();
+		$this->uriBuilder->setArguments(array(
+			'tx_mvcextjssamples_movie[existingMovie][uid]' => 'UID',
+		));
+		$this->settingsExtJS->assign('updateUrl', $this->uriBuilder->uriFor('update'));
 		
 			// Enable quick tips
 		$this->enableExtJSQuickTips = TRUE;
