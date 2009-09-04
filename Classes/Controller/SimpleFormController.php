@@ -46,6 +46,7 @@ class Tx_MvcExtjsSamples_Controller_SimpleFormController extends Tx_MvcExtjs_Ext
 				// value 1249058971 is the same as in /Configuration/TypoScript/ajax.txt
 			$this->uriBuilder->setTargetPageType(1249058971);
 		}
+		$this->uriBuilder->setFormat('xml');
 		$ajaxUrl = $this->uriBuilder->uriFor('index', array(), 'Genre');
 		
 			// Create a data store with movie genres

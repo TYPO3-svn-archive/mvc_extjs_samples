@@ -26,10 +26,11 @@ Frontend plugin Movie needs following files:
 |   |   |   |-- extjs.Movie.xml
 |   |   |   `-- locallang_db.xml
 |   |   `-- Templates
+|   |       |-- Genre
+|   |       |   `-- index.xml
 |   |       `-- Movie
-|   |           |-- genres.html
 |   |           |-- index.html
-|   |           `-- movies.html
+|   |           `-- movies.xml
 |   `-- Public
 |       |-- Icons
 |       |   |-- icon_tx_mvcextjssamples_domain_model_genre.gif

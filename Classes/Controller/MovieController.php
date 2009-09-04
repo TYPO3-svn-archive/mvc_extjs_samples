@@ -127,6 +127,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 					url: "' . $this->uriBuilder
 					                    ->reset()
 					                    ->setTargetPageType(1249117053)
+					                    ->setFormat('xml')
 					                    ->uriFor('movies') . '"
 				}),
 				sortInfo: {
@@ -146,6 +147,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 					url: "' . $this->uriBuilder
 					                    ->reset()
 					                    ->setTargetPageType(1249117332)
+					                    ->setFormat('xml')
 					                    ->uriFor('index', array(), 'Genre') . '"
 				}),
 				sortInfo: {

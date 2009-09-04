@@ -18,8 +18,9 @@ Frontend plugin SimpleForm needs following files:
 |   |   |-- Language
 |   |   |   `-- extjs.SimpleForm.xml
 |   |   `-- Templates
+|   |       |-- Genre
+|   |       |   `-- index.xml
 |   |       `-- SimpleForm
-|   |           |-- genres.html
 |   |           `-- index.html
 |   `-- Public
 |       `-- Icons
