@@ -220,71 +220,102 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 					bodyStyle: "padding:5px;",
 					width: 250,
 					minSize: 250,
-					items: [{
-						xtype: "hidden",
-						name: "tx_mvcextjssamples_movie[movie][uid]"
-					},{
-						xtype: "hidden",
-						name: "tx_mvcextjssamples_movie[__referrer][extensionName]",
-						value: "' . $this->request->getControllerExtensionName() . '"
-					},{
-						xtype: "hidden",
-						name: "tx_mvcextjssamples_movie[__referrer][controllerName]",
-						value: "' . $this->request->getControllerName() . '"
-					},{
-						xtype: "hidden",
-						name: "tx_mvcextjssamples_movie[__referrer][actionName]",
-						value: "update"
-					},{
-						xtype: "textfield",
-						fieldLabel: ' . $this->getExtJSLabelKey('index.title') . ',
-						name: "tx_mvcextjssamples_movie[movie][title]",
-						anchor: "100%",
-						allowBlank: false,
-						listeners: {
-							specialKey: function(f,e) {
-								if (e.getKey() == e.ENTER) {
-									// Send form
-								}
-							}
-						}
-					},{
-						xtype: "textfield",
-						fieldLabel: ' . $this->getExtJSLabelKey('index.director') . ',
-						name: "tx_mvcextjssamples_movie[movie][director]",
-						anchor: "100%",
-						vtype: "name"
-					},/*{
-						xtype: "datefield",
-						fieldLabel: ' . $this->getExtJSLabelKey('index.released') . ',
-						name: "tx_mvcextjssamples_movie[movie][releaseDate]",
-						disabledDays: [6]
-					},{
-						xtype: "radio",
-						fieldLabel: ' . $this->getExtJSLabelKey('index.filmedIn') . ',
-						name: "tx_mvcextjssamples_movie[movie][filmedIn]",
-						boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.color') . '
-					},{
-						xtype: "radio",
-						hideLabel: false,
-						labelSeparator: "",
-						name: "tx_mvcextjssamples_movie[movie][filmedIn]",
-						boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.bw') . '
-					},{
-						xtype: "combo",
-						fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
-						name: "updatedMovie[genre]",
-						mode: "local",
-						store: genresStore,
-						displayField: "name",
-						width: 130
-					},*/{
-						xtype: "textarea",
-						fieldLabel: ' . $this->getExtJSLabelKey('index.tagline') . ',
-						name: "tx_mvcextjssamples_movie[movie][tagline]",
-						height: 80,
-						anchor: "100%"
-					}],
+		 			items: ' . Tx_MvcExtjs_ExtJS_Array::create()
+						->add(
+							Tx_MvcExtjs_ExtJS_Object::create()
+								->set('xtype', 'hidden')
+								->set('name',  'tx_mvcextjssamples_movie[movie][uid]')						
+						)
+						->add(
+							Tx_MvcExtjs_ExtJS_Object::create()
+								->set('xtype', 'hidden')
+								->set('name',  'tx_mvcextjssamples_movie[__referrer][extensionName]')
+								->set('value', $this->request->getControllerExtensionName())
+						)
+						->add(
+							Tx_MvcExtjs_ExtJS_Object::create()
+								->set('xtype', 'hidden')
+								->set('name',  'tx_mvcextjssamples_movie[__referrer][controllerName]')
+								->set('value', $this->request->getControllerName())
+						)
+						->add(
+							Tx_MvcExtjs_ExtJS_Object::create()
+								->set('xtype', 'hidden')
+								->set('name', 'tx_mvcextjssamples_movie[__referrer][actionName]')
+								->set('value', 'update')
+						)
+						->add(
+							Tx_MvcExtjs_ExtJS_Object::create()
+								->set('xtype', 'textfield')
+								->setRaw('fieldLabel', $this->getExtJSLabelKey('index.title'))
+								->set('name', 'tx_mvcextjssamples_movie[movie][title]')
+								->set('anchor', '100%')
+								->setRaw('allowBlank', 'false')
+								->setRaw('listeners',
+									'{
+										specialKey: function(f,e) {
+											if (e.getKey() == e.ENTER) {
+												// Send form
+											}
+										}
+									}')
+						)
+						->add(
+							Tx_MvcExtjs_ExtJS_Object::create()
+								->set('xtype', 'textfield')
+								->setRaw('fieldLabel', $this->getExtJSLabelKey('index.director'))
+								->set('name', 'tx_mvcextjssamples_movie[movie][director]')
+								->set('anchor', '100%')
+								->set('vtype', 'name')
+						)
+						/*
+						->add(
+							'{
+								xtype: "datefield",
+								fieldLabel: ' . $this->getExtJSLabelKey('index.released') . ',
+								name: "tx_mvcextjssamples_movie[movie][releaseDate]",
+								disabledDays: [6]
+							}'
+						)
+						->add(
+							'{
+								xtype: "radio",
+								fieldLabel: ' . $this->getExtJSLabelKey('index.filmedIn') . ',
+								name: "tx_mvcextjssamples_movie[movie][filmedIn]",
+								boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.color') . '
+							}'
+						)
+						->add(
+							'{
+								xtype: "radio",
+								hideLabel: false,
+								labelSeparator: "",
+								name: "tx_mvcextjssamples_movie[movie][filmedIn]",
+								boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.bw') . '
+							}'
+						)
+						->add(
+							'{
+								xtype: "combo",
+								fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
+								name: "updatedMovie[genre]",
+								mode: "local",
+								store: genresStore,
+								displayField: "name",
+								width: 130
+							}'
+						)
+						*/
+						->add(
+							Tx_MvcExtjs_ExtJS_Object::create()
+								->set('xtype', 'textarea')
+								->setRaw('fieldLabel', $this->getExtJSLabelKey('index.tagline'))
+								->set('name', 'tx_mvcextjssamples_movie[movie][tagline]')
+								->set('height', 80)
+								->set('anchor', '100%')
+						)
+						->build()
+					. ',
 					buttons: [{
 						text: ' . $this->getExtJSLabelKey('index.form.save') . ',
 						handler: function() {
