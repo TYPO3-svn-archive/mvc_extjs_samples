@@ -205,7 +205,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 					}]
 				},
 		');
-		
+
 			// Create the movie edit form
 		$this->addJsInlineCode('
 				{
@@ -221,34 +221,17 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 					width: 250,
 					minSize: 250,
 		 			items: ' . Tx_MvcExtjs_ExtJS_Array::create()
+						->addAll(Tx_MvcExtjs_ExtJS_Utility::getExtbaseFormElements($this->request, 'update'))
 						->add(
-							Tx_MvcExtjs_ExtJS_Object::create()
-								->set('xtype', 'hidden')
-								->set('name',  'tx_mvcextjssamples_movie[movie][uid]')						
+							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
+								->setXType('hidden')
+								->setObjectModelField('movie', 'uid')
 						)
 						->add(
-							Tx_MvcExtjs_ExtJS_Object::create()
-								->set('xtype', 'hidden')
-								->set('name',  'tx_mvcextjssamples_movie[__referrer][extensionName]')
-								->set('value', $this->request->getControllerExtensionName())
-						)
-						->add(
-							Tx_MvcExtjs_ExtJS_Object::create()
-								->set('xtype', 'hidden')
-								->set('name',  'tx_mvcextjssamples_movie[__referrer][controllerName]')
-								->set('value', $this->request->getControllerName())
-						)
-						->add(
-							Tx_MvcExtjs_ExtJS_Object::create()
-								->set('xtype', 'hidden')
-								->set('name', 'tx_mvcextjssamples_movie[__referrer][actionName]')
-								->set('value', 'update')
-						)
-						->add(
-							Tx_MvcExtjs_ExtJS_Object::create()
-								->set('xtype', 'textfield')
+							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
+								->setXType('textfield')
+								->setObjectModelField('movie', 'title')
 								->setRaw('fieldLabel', $this->getExtJSLabelKey('index.title'))
-								->set('name', 'tx_mvcextjssamples_movie[movie][title]')
 								->set('anchor', '100%')
 								->setRaw('allowBlank', 'false')
 								->setRaw('listeners',
@@ -261,10 +244,10 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 									}')
 						)
 						->add(
-							Tx_MvcExtjs_ExtJS_Object::create()
-								->set('xtype', 'textfield')
+							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
+								->setXType('textfield')
+								->setObjectModelField('movie', 'director')
 								->setRaw('fieldLabel', $this->getExtJSLabelKey('index.director'))
-								->set('name', 'tx_mvcextjssamples_movie[movie][director]')
 								->set('anchor', '100%')
 								->set('vtype', 'name')
 						)
@@ -307,10 +290,10 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 						)
 						*/
 						->add(
-							Tx_MvcExtjs_ExtJS_Object::create()
-								->set('xtype', 'textarea')
+							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
+								->setXType('textarea')
+								->setObjectModelField('movie', 'tagline')
 								->setRaw('fieldLabel', $this->getExtJSLabelKey('index.tagline'))
-								->set('name', 'tx_mvcextjssamples_movie[movie][tagline]')
 								->set('height', 80)
 								->set('anchor', '100%')
 						)
