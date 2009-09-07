@@ -76,13 +76,4 @@ t3lib_extMgm::addUserTSConfig('
 	options.saveDocNew.tx_mvcextjssamples_domain_model_movie=1
 ');
 
-// ========== Plugin FeUserAdmin
-
-Tx_Extbase_Utility_Extension::configurePlugin(
-	'MvcExtjsSamples',
-	'FeUserAdmin',
-	array('FeUserAdmin' => 'index,user'),
-	array('FeUserAdmin' => 'user')
-);
-
 ?>
