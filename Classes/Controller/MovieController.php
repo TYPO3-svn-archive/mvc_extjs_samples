@@ -64,9 +64,6 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 		$this->settingsExtJS->assign('iconsPath', $this->extRelPath . 'Resources/Public/Icons/');
 		
 		$this->uriBuilder->reset();
-		$this->uriBuilder->setArguments(array(
-			'tx_mvcextjssamples_movie[existingMovie][uid]' => 'UID',
-		));
 		$this->settingsExtJS->assign('updateUrl', $this->uriBuilder->uriFor('update'));
 		
 			// Enable quick tips
@@ -100,13 +97,14 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 						
 						var values = grid.getSelectionModel().getSelected().data;
 						
-						// Update form action URL
-						movie_form.getForm().url = ' . $this->settingsExtJS->getExtJS('updateUrl') . '.replace(/UID/, values.uid);
+						// Sets the form action URL
+						movie_form.getForm().url = ' . $this->settingsExtJS->getExtJS('updateUrl') . ';
 						
 						// TODO: Add this to a new setExtbaseValues() method on Ext.form.BasicForm
 						var field, id;
 						for(id in values){
-							if(!Ext.isFunction(values[id]) && (field = movie_form.getForm().findField("tx_mvcextjssamples_movie[movie][" + id + "]"))){
+							fieldId = (id == "uid") ? "__identity" : id;
+							if(!Ext.isFunction(values[id]) && (field = movie_form.getForm().findField("tx_mvcextjssamples_movie[movie][" + fieldId + "]"))){
 								try { // TODO: handle multiple fields (radio button filmedIn) 
 									field.setValue(values[id]);
 									if(movie_form.getForm().trackResetOnLoad){
@@ -221,11 +219,11 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 					width: 250,
 					minSize: 250,
 		 			items: ' . Tx_MvcExtjs_ExtJS_Array::create()
-						->addAll(Tx_MvcExtjs_ExtJS_Utility::getExtbaseFormElements($this->request, 'update'))
+						->addAll(Tx_MvcExtjs_ExtJS_Utility::getExtbaseFormElements($this->request, $this->request->getControllerActionName()))
 						->add(
 							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
 								->setXType('hidden')
-								->setObjectModelField('movie', 'uid')
+								->setObjectModelField('movie', '__identity')
 						)
 						->add(
 							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
@@ -362,17 +360,16 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 	}
 	
 	/**
-	 * Updates an existing movie.
+	 * Updates a movie.
 	 *
 	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie A clone of the original movie with the updated values already applied
-	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $existingMovie The existing, unmodified movie
 	 * @return void
 	 * @ajax
 	 */
-	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie, Tx_MvcExtjsSamples_Domain_Model_Movie $existingMovie) {
+	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie) {
 		try {
 			$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
-			$movieRepository->replace($existingMovie, $movie);
+			$movieRepository->update($movie);
 			
 			$persistenceManager = t3lib_div::makeInstance('Tx_Extbase_Persistence_Manager');
 			/* @var $persistenceManager Tx_Extbase_Persistence_Manager */

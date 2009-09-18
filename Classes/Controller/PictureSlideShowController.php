@@ -44,7 +44,7 @@ class Tx_MvcExtjsSamples_Controller_PictureSlideShowController extends Tx_MvcExt
 		$this->addJsLibrary('carousel_array', 'carousel.js');
 		
 		$cssFile  = $this->setting['cssFile'] ? $this->setting['cssFile'] : 'typo3conf/ext/mvc_extjs_samples/Resources/Public/CSS/carousel.css';
-		$GLOBALS['TSFE']->addCssFile($cssFile);
+		$GLOBALS['TSFE']->getPageRenderer()->addCssFile($cssFile);
 
 		$id = $this->settings['contentObjectData']['uid'];
 		$this->view->assign('ID', $id);
