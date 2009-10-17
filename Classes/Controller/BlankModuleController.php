@@ -117,7 +117,7 @@ class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_Ex
 			'Flash title: ' . $this->request->getPluginName(),
 			t3lib_FlashMessage::INFO
 		);
-		$this->pushFlashMessage($message);
+		t3lib_FlashMessageQueue::addMessage($message);
 		
 		$this->renderExtJSModule('mod1');
 	}
