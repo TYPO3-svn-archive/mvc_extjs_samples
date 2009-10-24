@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjsSamples_Controller_SimpleModuleFunctionController extends Tx_MvcExtjs_ExtJS_Controller_FunctionActionController {
+class Tx_MvcExtjsSamples_Controller_SimpleModuleFunctionController extends Tx_MvcExtjs_ExtJS_Controller_ExtensionObjectActionController {
 
 	/**
 	 * Initializes the menu entries.
