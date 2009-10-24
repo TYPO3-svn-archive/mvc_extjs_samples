@@ -13,6 +13,7 @@ return array(
 	'tx_mvcextjssamples_controller_oldstylemodulecontroller' => $extensionClassesPath . 'Controller/OldStyleModuleController.php',
 	'tx_mvcextjssamples_controller_pictureslideshowcontroller' => $extensionClassesPath . 'Controller/PictureSlideShowController.php',
 	'tx_mvcextjssamples_controller_simpleformcontroller' => $extensionClassesPath . 'Controller/SimpleFormController.php',
+	'tx_mvcextjssamples_controller_simplemodulefunctioncontroller' => $extensionClassesPath . 'Controller/SimpleModuleFunctionController.php',
 	'tx_mvcextjssamples_controller_twittercontroller' => $extensionClassesPath . 'Controller/TwitterController.php',
 	'tx_mvcextjssamples_domain_model_genre' => $extensionClassesPath . 'Domain/Model/Genre.php',
 	'tx_mvcextjssamples_domain_model_genrerepository' => $extensionClassesPath . 'Domain/Model/GenreRepository.php',

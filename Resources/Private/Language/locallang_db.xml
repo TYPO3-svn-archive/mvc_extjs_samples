@@ -21,6 +21,7 @@
 			<label index="tx_mvcextjssamples_domain_model_genre.name">Name</label>
 			
 			<label index="moduleFunction.tx_mvcextjssamples_modfunc1">Legacy Function</label>
+			<label index="moduleFunction.simple">Simple ExtJS Module Function</label>
 		</languageKey>
 	</data>
 </T3locallang>
