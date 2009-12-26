@@ -33,6 +33,18 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjsSamples_Controller_BlankModuleController extends Tx_MvcExtjs_ExtJS_Controller_ActionController {
+
+	public function initializeModuleMenu($moduleName) {
+		$this->moduleMenu['function'] = array(
+			'BlankModule->first' => 'My first action',
+			'BlankModule->second' => 'My second action',
+			'BlankModule->third' => 'My third action',
+		);
+
+			// Merge externally-added function menu entries
+		$scbase = t3lib_div::makeInstance('t3lib_SCbase');
+		$this->moduleMenu['function'] = $scbase->mergeExternalItems($moduleName, 'function', $this->moduleMenu['function']);
+	}
 	
 	/**
 	 * Initializes the menu entries.

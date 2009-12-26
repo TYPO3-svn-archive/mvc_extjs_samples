@@ -54,5 +54,14 @@ class Tx_MvcExtjsSamples_Controller_SimpleModuleFunctionController extends Tx_Mv
 		$this->view->assign('title', 'This is my title');
 	}
 
+	/**
+	 * Other action that is available from indexAction through a link.
+	 * 
+	 * @return string the rendered view
+	 */
+	public function otherAction() {
+		// Nothing to do
+	}
+
 }
 ?>

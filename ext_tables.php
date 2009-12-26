@@ -154,31 +154,31 @@ if (TYPO3_MODE == 'BE') {
 	
 	// ========== Extension Simple Module Function
 	
-	Tx_Extbase_Utility_Extension::registerModuleFunction(
-		$_EXTKEY,
-		'user_MvcExtjsSamplesBlank',	// Insert module function into function menu of Module Blank
-		array(
-			'SimpleModuleFunction' => 'index',
-		),
-		array(
-			'title'      => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:moduleFunction.simple',
-			'menuKey'    => 'function',
-			'workspaces' => '',
-		)
-	);
+	//Tx_Extbase_Utility_Extension::registerModuleFunction(
+	//	$_EXTKEY,
+	//	'user_MvcExtjsSamplesBlank',	// Insert module function into function menu of Module Blank
+	//	array(
+	//		'SimpleModuleFunction' => 'index,other',
+	//	),
+	//	array(
+	//		'title'      => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:moduleFunction.simple',
+	//		'menuKey'    => 'function',
+	//		'workspaces' => '',
+	//	)
+	//);
 	
-	Tx_Extbase_Utility_Extension::registerModuleFunction(
-		$_EXTKEY,
-		'web_info',	// Insert module function into function menu of Web > Info
-		array(
-			'SimpleModuleFunction' => 'index',
-		),
-		array(
-			'title'      => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:moduleFunction.simple',
-			'menuKey'    => 'function',
-			'workspaces' => '',
-		)
-	);
+	//Tx_Extbase_Utility_Extension::registerModuleFunction(
+	//	$_EXTKEY,
+	//	'web_info',	// Insert module function into function menu of Web > Info
+	//	array(
+	//		'SimpleModuleFunction' => 'index,other',
+	//	),
+	//	array(
+	//		'title'      => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:moduleFunction.simple',
+	//		'menuKey'    => 'function',
+	//		'workspaces' => '',
+	//	)
+	//);
 	
 	// ========== Legacy (SCbase) function
 	
