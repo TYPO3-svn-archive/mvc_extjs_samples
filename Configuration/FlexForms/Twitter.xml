@@ -6,7 +6,7 @@
 	<ROOT>
 		<type>array</type>
 		<el>
-			<twitterWidth>
+			<settings.twitterWidth>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:width</label>
 					<config>
@@ -17,8 +17,8 @@
 						<default>350</default>
 					</config>
 				</TCEforms>
-			</twitterWidth>
-			<twitterHeight>
+			</settings.twitterWidth>
+			<settings.twitterHeight>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:height</label>
 					<config>
@@ -29,8 +29,8 @@
 						<default>350</default>
 					</config>
 				</TCEforms>
-			</twitterHeight>
-			<twitterImageWidth>
+			</settings.twitterHeight>
+			<settings.twitterImageWidth>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:imageWidth</label>
 					<config>
@@ -41,8 +41,8 @@
 						<default>70</default>
 					</config>
 				</TCEforms>
-			</twitterImageWidth>
-			<twitterInterval>
+			</settings.twitterImageWidth>
+			<settings.twitterInterval>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:interval</label>
 					<config>
@@ -53,8 +53,8 @@
 						<default>30</default>
 					</config>
 				</TCEforms>
-			</twitterInterval>
-			<twitterType>
+			</settings.twitterInterval>
+			<settings.twitterType>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type</label>
 					<config>
@@ -71,8 +71,8 @@
 						</items>
 					</config>
 				</TCEforms>
-			</twitterType>
-			<twitterKeyword>
+			</settings.twitterType>
+			<settings.twitterKeyword>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:keyword</label>
 					<config>
@@ -83,7 +83,7 @@
 						<required>1</required>
 					</config>
 				</TCEforms>
-			</twitterKeyword>
+			</settings.twitterKeyword>
 		</el>
 	</ROOT>
 </T3DataStructure>

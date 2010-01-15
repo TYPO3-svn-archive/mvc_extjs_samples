@@ -6,7 +6,7 @@
 	<ROOT>
 		<type>array</type>
 		<el>
-			<feedsTitle>
+			<settings.feedsTitle>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Feeds.xml:title</label>
 					<config>
@@ -16,8 +16,8 @@
 						<default></default>
 					</config>
 				</TCEforms>
-			</feedsTitle>
-			<feedsUrl>
+			</settings.feedsTitle>
+			<settings.feedsUrl>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Feeds.xml:url</label>
 					<config>
@@ -27,8 +27,8 @@
 						<default></default>
 					</config>
 				</TCEforms>
-			</feedsUrl>
-			<feedsWidth>
+			</settings.feedsUrl>
+			<settings.feedsWidth>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Feeds.xml:width</label>
 					<config>
@@ -39,8 +39,8 @@
 						<default>350</default>
 					</config>
 				</TCEforms>
-			</feedsWidth>
-			<feedsHeight>
+			</settings.feedsWidth>
+			<settings.feedsHeight>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Feeds.xml:height</label>
 					<config>
@@ -51,8 +51,8 @@
 						<default>350</default>
 					</config>
 				</TCEforms>
-			</feedsHeight>
-			<feedsCount>
+			</settings.feedsHeight>
+			<settings.feedsCount>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Feeds.xml:count</label>
 					<config>
@@ -63,8 +63,8 @@
 						<default>0</default>
 					</config>
 				</TCEforms>
-			</feedsCount>
-			<feedsInterval>
+			</settings.feedsCount>
+			<settings.feedsInterval>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Feeds.xml:interval</label>
 					<config>
@@ -75,7 +75,7 @@
 						<default>30</default>
 					</config>
 				</TCEforms>
-			</feedsInterval>
+			</settings.feedsInterval>
 		</el>
 	</ROOT>
 </T3DataStructure>

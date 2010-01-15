@@ -6,7 +6,7 @@
 	<ROOT>
 		<type>array</type>
 		<el>
-			<pictureSlideShowWidth>
+			<settings.pictureSlideShowWidth>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:width</label>
 					<config>
@@ -17,8 +17,8 @@
 						<default>400</default>
 					</config>
 				</TCEforms>
-			</pictureSlideShowWidth>
-			<pictureSlideShowHeight>
+			</settings.pictureSlideShowWidth>
+			<settings.pictureSlideShowHeight>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:height</label>
 					<config>
@@ -29,8 +29,8 @@
 						<default>300</default>
 					</config>
 				</TCEforms>
-			</pictureSlideShowHeight>
-			<pictureSlideShowInterval>
+			</settings.pictureSlideShowHeight>
+			<settings.pictureSlideShowInterval>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:interval</label>
 					<config>
@@ -41,8 +41,8 @@
 						<default>3</default>
 					</config>
 				</TCEforms>
-			</pictureSlideShowInterval>
-			<pictureSlideShowShowPlayButton>
+			</settings.pictureSlideShowInterval>
+			<settings.pictureSlideShowShowPlayButton>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:ShowPlayButton</label>
 					<config>
@@ -50,8 +50,8 @@
 						<default>1</default>
 					</config>
 				</TCEforms>
-			</pictureSlideShowShowPlayButton>
-			<pictureSlideShowAutoplay>
+			</settings.pictureSlideShowShowPlayButton>
+			<settings.pictureSlideShowAutoplay>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:autoplay</label>
 					<config>
@@ -59,8 +59,8 @@
 						<default>1</default>
 					</config>
 				</TCEforms>
-			</pictureSlideShowAutoplay>
-			<pictureSlideShowPauseOnNavigate>
+			</settings.pictureSlideShowAutoplay>
+			<settings.pictureSlideShowPauseOnNavigate>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:PauseOnNavigate</label>
 					<config>
@@ -68,8 +68,8 @@
 						<default>1</default>
 					</config>
 				</TCEforms>
-			</pictureSlideShowPauseOnNavigate>
-			<pictureSlideShowFreezeOnHoover>
+			</settings.pictureSlideShowPauseOnNavigate>
+			<settings.pictureSlideShowFreezeOnHoover>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:FreezeOnHoover</label>
 					<config>
@@ -77,8 +77,8 @@
 						<default>1</default>
 					</config>
 				</TCEforms>
-			</pictureSlideShowFreezeOnHoover>
-			<pictureSlideShowNavigationOnHoover>
+			</settings.pictureSlideShowFreezeOnHoover>
+			<settings.pictureSlideShowNavigationOnHoover>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:NavigationOnHoover</label>
 					<config>
@@ -86,8 +86,8 @@
 						<default>1</default>
 					</config>
 				</TCEforms>
-			</pictureSlideShowNavigationOnHoover>
-			<pictureSlideShowTransitionType>
+			</settings.pictureSlideShowNavigationOnHoover>
+			<settings.pictureSlideShowTransitionType>
 				<TCEforms>
 					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:TransitionType</label>
 					<config>
@@ -104,9 +104,9 @@
 						</items>
 					</config>
 				</TCEforms>
-			</pictureSlideShowTransitionType>
+			</settings.pictureSlideShowTransitionType>
 			
-			<pictureSlideShowContentSection>
+			<settings.pictureSlideShowContentSection>
 				<tx_templavoila>
 					<title>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:contents</title>
 				</tx_templavoila>
@@ -114,44 +114,44 @@
 				<section>1</section>
 				<el>
 					<pictureSlideShowContent>
-					<type>array</type>
-					<tx_templavoila>
-						<title>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:content</title>
-					</tx_templavoila>
-					<el>
-						<picture>     
-							<TCEforms type="array">
-								<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:picture</label>
-								<config type="array">
-									<type>group</type>
-									<internal_type>file</internal_type>
-									<allowed>gif,png,jpg,jpeg</allowed>
-									<max_size>1000</max_size>
-									<uploadfolder>uploads/pics</uploadfolder>
-									<show_thumbs>1</show_thumbs>
-									<size>1</size>
-									<maxitems>1</maxitems>
-									<minitems>0</minitems>
-								</config>
-								<label>Image</label>
-							</TCEforms>
-						</picture>
-						<caption>     
-							<TCEforms type="array">
-								<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:caption</label>
-								<config type="array">
-									<type>input</type>
-									<size>30</size>
-									<default></default>
-								</config>
-								<label>Image</label>
-							</TCEforms>
-						</caption>
-						
-					</el>	
+						<type>array</type>
+						<tx_templavoila>
+							<title>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:content</title>
+						</tx_templavoila>
+						<el>
+							<picture>     
+								<TCEforms type="array">
+									<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:picture</label>
+									<config type="array">
+										<type>group</type>
+										<internal_type>file</internal_type>
+										<allowed>gif,png,jpg,jpeg</allowed>
+										<max_size>1000</max_size>
+										<uploadfolder>uploads/pics</uploadfolder>
+										<show_thumbs>1</show_thumbs>
+										<size>1</size>
+										<maxitems>1</maxitems>
+										<minitems>0</minitems>
+									</config>
+									<label>Image</label>
+								</TCEforms>
+							</picture>
+							<caption>     
+								<TCEforms type="array">
+									<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.PictureSlideShow.xml:caption</label>
+									<config type="array">
+										<type>input</type>
+										<size>30</size>
+										<default></default>
+									</config>
+									<label>Image</label>
+								</TCEforms>
+							</caption>
+							
+						</el>	
 					</pictureSlideShowContent>
 				</el>
-			</pictureSlideShowContentSection>
+			</settings.pictureSlideShowContentSection>
 		</el>
 	</ROOT>
 </T3DataStructure>
