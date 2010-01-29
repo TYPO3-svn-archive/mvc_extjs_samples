@@ -151,7 +151,23 @@ if (TYPO3_MODE == 'BE') {
 			'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_mod_blank.xml',
 		)
 	);
-	
+
+	Tx_Extbase_Utility_Extension::registerModule(
+		$_EXTKEY,
+		'user',       // Make Blank module a submodule of 'user'
+		'viewbased',  // Submodule key
+		'',           // Position
+		array(
+			'ViewBasedModule' => 'index',
+			'Genre' => 'index'
+		),
+		array(
+			'access' => 'user,group',
+			'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
+			'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_mod_viewbased.xml',
+		)
+	);
+
 	// ========== Extension Simple Module Function
 	
 	//Tx_Extbase_Utility_Extension::registerModuleFunction(

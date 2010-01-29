@@ -1,0 +1,1 @@
+Ext.StoreMgr.get('GenreStore').load();

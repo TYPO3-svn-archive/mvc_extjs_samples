@@ -1,3 +1,7 @@
+2010-01-29  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Added code for feature #6133: Supporting Views in mvc_extjs (Thanks to Dennis Ahrens)
+
 2009-10-17  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Released version 0.1.1 to TER
