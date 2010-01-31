@@ -40,6 +40,13 @@ plugin.tx_mvcextjssamples {
 }
 
 module.tx_mvcextjssamples {
-	persistence < plugin.tx_mvcextjssamples.persistence
-	view < plugin.tx_mvcextjssamples.view
+	persistence {
+			// Our records (from ext_tables_static+adt.sql) are stored at root
+		storagePid = 0
+	}
+	view {
+		templateRootPath = {$module.tx_mvcextjssamples.view.templateRootPath}
+		partialRootPath = {$module.tx_mvcextjssamples.view.partialRootPath}
+		layoutRootPath = {$module.tx_mvcextjssamples.view.layoutRootPath}
+	}
 }

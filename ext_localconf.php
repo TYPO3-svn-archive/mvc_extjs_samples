@@ -12,6 +12,14 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	array()
 );
 
+Tx_Extbase_Utility_Extension::configurePlugin(
+	'MvcExtjsSamples',
+	'ViewBasedModule',
+	array('ViewBasedModule' => 'index',
+		  'Genre' => 'index',
+	),
+	array()
+);
 
 // ========== Plugin SimpleForm
 
