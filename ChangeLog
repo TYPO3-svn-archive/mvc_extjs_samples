@@ -1,3 +1,12 @@
+2010-02-20  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Backported code from branch view
+
+2010-01-31  Dennis Ahrens  <dennis.ahrens@googlemail.com>
+
+	* Refactoring of the ViewHelpers in mvc_extjs causes changes in the template-files for the viewbasedmodule
+	* Configured the ViewBasedModuleController to be a Frontend Plugin
+
 2010-01-29  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Added code for feature #6133: Supporting Views in mvc_extjs (Thanks to Dennis Ahrens)

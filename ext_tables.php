@@ -11,6 +11,12 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'MVC ExtJS Samples - Hello World'
 );
 
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'ViewBasedModule',
+	'MVC ExtJS Samples - View Based Module'
+);
+
 	// Disable the display of layout, select_key and page fields
 $TCA['tt_content']['types']['list']['subtypes_excludelist']['mvcextjssamples_helloworld'] = 'layout,select_key,pages';
 
