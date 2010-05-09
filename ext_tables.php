@@ -165,7 +165,8 @@ if (TYPO3_MODE == 'BE') {
 		'',           // Position
 		array(
 			'ViewBasedModule' => 'index',
-			'Genre' => 'index'
+			'Genre' => 'index,update,create,delete',
+			'Movie' => 'movies,update,create,delete'
 		),
 		array(
 			'access' => 'user,group',

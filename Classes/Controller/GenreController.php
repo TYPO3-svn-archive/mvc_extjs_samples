@@ -35,18 +35,90 @@
 class Tx_MvcExtjsSamples_Controller_GenreController extends Tx_MvcExtjs_ExtJS_Controller_ActionController {
 	
 	/**
+	 * @var Tx_MvcExtjsSamples_Domain_Repository_GenreRepository
+	 */
+	protected $genreRepository;
+	
+	/**
+	 * Initializes the controller.
+	 * 
+	 * @return unknown_type
+	 */
+	public function initializeAction() {
+		$this->genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_GenreRepository');
+	}
+	
+	/**
 	 * Returns a list of genres as JSON.
 	 * 
-	 * @return string The rendered view
+	 * @return string
 	 */
 	public function indexAction() {
-		$genreRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_GenreRepository');
-		/* @var $genreRepository Tx_MvcExtjsSamples_Domain_Repository_GenreRepository */
-		
-			// Retrieve all genres from repository
-		$genres = $genreRepository->findAll();
-		
+		$genres = $this->genreRepository->findAll();
 		$this->view->assign('genres', $genres);
+	}
+	
+	/**
+	 * Updates a genre record
+	 * 
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Genre $genre
+	 * @dontverifyrequesthash
+	 * @return string
+	 */
+	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Genre $genre = NULL) {
+		try {
+			$this->genreRepository->update($genre);
+			$this->view->assign('data',$genre->_getProperties());
+			$this->view->assign('success',TRUE);
+			$this->view->assign('message','Genre updated');
+		} catch(Exception $e) {
+			$this->view->assign('data',array());
+			$this->view->assign('success',FALSE);
+			$this->view->assign('message','Genre update failed');
+			t3lib_div::sysLog($e->getTraceAsString(),'MvcExtjsSamples',1);
+		}
+	}
+	
+	/**
+	 * Creates a new genre record.
+	 * 
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Genre $genre
+	 * @dontverifyrequesthash
+	 * @return string
+	 */
+	public function createAction(Tx_MvcExtjsSamples_Domain_Model_Genre $genre = NULL) {
+		try {
+			$this->genreRepository->add($genre);
+			$persistenceManager = t3lib_div::makeInstance('Tx_Extbase_Persistence_Manager')->persistAll();
+			$this->view->assign('data',array($genre));
+			$this->view->assign('success',TRUE);
+			$this->view->assign('message','Genre updated');
+		} catch(Exception $e) {
+			$this->view->assign('data',array());
+			$this->view->assign('success',FALSE);
+			$this->view->assign('message','Genre update failed');
+			t3lib_div::sysLog($e->getTraceAsString(),'MvcExtjsSamples',1);
+		}
+	}
+	
+	/**
+	 * Deletes a genre record.
+	 * 
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Genre $genre
+	 * @dontverifyrequesthash
+	 * @return string
+	 */
+	public function deleteAction(Tx_MvcExtjsSamples_Domain_Model_Genre $genre = NULL) {
+		try {
+			$this->genreRepository->remove($genre);
+			$this->view->assign('success',TRUE);
+			$this->view->assign('message','Genre updated');
+		} catch(Exception $e) {
+			$this->view->assign('data',array());
+			$this->view->assign('success',FALSE);
+			$this->view->assign('message','Genre update failed');
+			t3lib_div::sysLog($e->getTraceAsString(),'MvcExtjsSamples',1);
+		}
 	}
 	
 }

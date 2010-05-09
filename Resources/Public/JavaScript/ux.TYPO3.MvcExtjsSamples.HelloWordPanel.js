@@ -4,7 +4,7 @@ MvcExtjsSamples.HelloWorldPanel = Ext.extend(Ext.Panel, {
 	constructor: function(config) {
 		config = Ext.apply({
 			title: 'Hello World',
-			region: "center",
+			region: "south",
 			html: 'just a hello world panel...'
 		}, config);
 

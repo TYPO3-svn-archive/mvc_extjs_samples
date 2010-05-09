@@ -64,7 +64,7 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 		$this->settingsExtJS->assign('iconsPath', $this->extRelPath . 'Resources/Public/Icons/');
 		
 		$this->uriBuilder->reset();
-		$this->settingsExtJS->assign('updateUrl', $this->uriBuilder->uriFor('update'));
+		$this->settingsExtJS->assign('updateUrl', $this->uriBuilder->setTargetPageType(1249117053)->uriFor('update',array('format' => 'json')));
 		
 			// Enable quick tips
 		$this->enableExtJSQuickTips = TRUE;
@@ -365,25 +365,21 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 	 *
 	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie A clone of the original movie with the updated values already applied
 	 * @return void
+	 * @dontverifyrequesthash
 	 * @ajax
 	 */
 	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie) {
 		try {
-			$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
-			$movieRepository->update($movie);
-			
-			$persistenceManager = t3lib_div::makeInstance('Tx_Extbase_Persistence_Manager');
-			/* @var $persistenceManager Tx_Extbase_Persistence_Manager */
-			
-			$persistenceManager->persistAll();
-						
-			echo '{success:true}';
-		} catch (Exception $e) {
-			echo '{success:false}';
+			$this->movieRepository->update($movie);
+			$this->view->assign('data',$movie->_getProperties());
+			$this->view->assign('success',TRUE);
+			$this->view->assign('message','Genre updated');
+		} catch(Exception $e) {
+			$this->view->assign('data',array());
+			$this->view->assign('success',FALSE);
+			$this->view->assign('message','Genre update failed');
+			t3lib_div::sysLog($e->getTraceAsString(),'MvcExtjsSamples',1);
 		}
-		
-			// Do not do further processing
-		exit;
 	}
 	
 	/**
@@ -392,14 +388,12 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 	 * @return string The rendered view
 	 */
 	public function moviesAction() {
-		$movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
-		/* @var $movieRepository Tx_MvcExtjsSamples_Domain_Repository_MovieRepository */
-		
 			// Retrieve all movies from repository
-		$movies = $movieRepository->findAll();
-		
+		$movies = $this->movieRepository->findAll();
 		$this->view->assign('movies', $movies);
 	}
+	
+	
 	
 }
 ?>
