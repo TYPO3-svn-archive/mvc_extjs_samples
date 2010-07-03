@@ -1,0 +1,5 @@
+{namespace ext=Tx_MvcExtjs_ViewHelpers}
+<ext:Json.MergeObjects>
+	<ext:Json.FlashMessages />
+	<ext:Json.Object ref="{chat}" />
+</ext:Json.MergeObjects>

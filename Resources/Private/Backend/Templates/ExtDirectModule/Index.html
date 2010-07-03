@@ -1,0 +1,28 @@
+{namespace ext=Tx_MvcExtjs_ViewHelpers}
+<ext:Be.moduleContainer
+	pageTitle="ExtDirectModule"
+	enableJumpToUrl="false"
+	enableClickMenu="false"
+	loadPrototype="true"
+	loadScriptaculous="true"
+	loadExtJs="true"
+	loadExtJsTheme="false"
+	extJsAdapter="prototype"
+	concatenate="false"
+	compressJs="false">
+	<!-- load needed JS Files -->
+	<ext:includeJsFile name="ux.TYPO3.MvcExtjs.DirectFlashMessageDispatcher.js" extKey="mvc_extjs" />
+	<ext:includeJsFile name="ux.TYPO3.MvcExtjs.FlashMessagesTabPanel.js" extKey="mvc_extjs" />
+	<ext:includeJsFile name="ux.TYPO3.MvcExtjs.UriBuilder.js" extKey="mvc_extjs" />
+	<ext:includeJsFile name="ExtDirect/Component/ChannelList.js" />
+	<ext:includeJsFile name="ExtDirect/Chat.js" />
+	
+	<ext:includeDirectApi namespace="MvcExtjsSamples.ExtDirect.Remote" />
+	
+	<ext:jsCode.jsonReader domainModel="Channel" />
+	<ext:jsCode.columnDefinition
+		domainModel="Channel"
+		hiddenColumns="{0:'messages',1:'_localizedUid',2:'_languageUid'}" />
+	
+	<ext:includeExtOnReadyFromFile name="ExtDirect/ExtOnReady.js" />
+</ext:Be.moduleContainer>

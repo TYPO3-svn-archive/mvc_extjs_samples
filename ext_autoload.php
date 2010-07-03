@@ -19,5 +19,11 @@ return array(
 	'tx_mvcextjssamples_domain_model_genrerepository' => $extensionClassesPath . 'Domain/Model/GenreRepository.php',
 	'tx_mvcextjssamples_domain_model_movie' => $extensionClassesPath . 'Domain/Model/Movie.php',
 	'tx_mvcextjssamples_domain_model_movierepository' => $extensionClassesPath . 'Domain/Model/MovieRepository.php',
+	'tx_mvcextjssamples_domain_model_chat' => $extensionClassesPath . 'Domain/Model/Chat.php',
+	'tx_mvcextjssamples_domain_model_channel' => $extensionClassesPath . 'Domain/Model/Channel.php',
+	'tx_mvcextjssamples_domain_model_message' => $extensionClassesPath . 'Domain/Model/Message.php',
+	'tx_mvcextjssamples_domain_model_backenduser' => $extensionClassesPath . 'Domain/Model/BackendUser.php',
+	'tx_mvcextjssamples_domain_model_backenduserrepository' => $extensionClassesPath . 'Domain/Model/Message.php',
+	'tx_mvcextjssamples_domain_repository_chatrepository' => $extensionClassesPath . 'Domain/Model/ChatRepository.php',
 );
 ?>

@@ -126,6 +126,48 @@ $TCA['tx_mvcextjssamples_domain_model_genre'] = array(
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_mvcextjssamples_domain_model_genre.gif',
 	),
 );
+	// Chat Module
+t3lib_extMgm::allowTableOnStandardPages('tx_mvcextjssamples_domain_model_chat');
+$TCA['tx_mvcextjssamples_domain_model_chat'] = array(
+	'ctrl' => array(
+		'title'	=> 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_chat',		
+		'label'	=> 'cruser_id',
+		'tstamp' => 'tstamp',
+		'default_sortby' => 'ORDER BY cruser_id',
+		'adminOnly' => 1,
+		'rootLevel' => 1,	
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/tca_chat.php',
+		//'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_mvcextjssamples_domain_model_genre.gif',
+	),
+);
+t3lib_extMgm::allowTableOnStandardPages('tx_mvcextjssamples_domain_model_channel');
+$TCA['tx_mvcextjssamples_domain_model_channel'] = array(
+	'ctrl' => array(
+		'title'	=> 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_channel',		
+		'label'	=> 'name',
+		'tstamp' => 'tstamp',
+		'default_sortby' => 'ORDER BY name',
+		'adminOnly' => 1,
+		'rootLevel' => 1,	
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/tca_chat.php',
+		//'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_mvcextjssamples_domain_model_genre.gif',
+	),
+);
+t3lib_extMgm::allowTableOnStandardPages('tx_mvcextjssamples_domain_model_message');
+$TCA['tx_mvcextjssamples_domain_model_message'] = array(
+	'ctrl' => array(
+		'title'	=> 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_message',		
+		'label'	=> 'text',
+		'tstamp' => 'tstamp',
+		'default_sortby' => 'ORDER BY text',
+		'adminOnly' => 1,
+		'rootLevel' => 1,	
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/tca_chat.php',
+		//'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_mvcextjssamples_domain_model_genre.gif',
+	),
+);
+
+
 
 // ========== Plugin FeUserAdmin
 
@@ -174,7 +216,23 @@ if (TYPO3_MODE == 'BE') {
 			'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_mod_viewbased.xml',
 		)
 	);
-
+	
+	Tx_Extbase_Utility_Extension::registerModule(
+		$_EXTKEY,
+		'user',       // Make Ext.Direct module a submodule of 'user'
+		'ExtDirect',  // Submodule key
+		'',           // Position
+		array(
+			'ExtDirectModule' => 'index',
+			'Chat' => 'connect,disconnect,query,createChannel,receiveChannels,sendMessage'
+		),
+		array(
+			'access' => 'user,group',
+			'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
+			'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_mod_extdirect.xml',
+		)
+	);
+	
 	// ========== Extension Simple Module Function
 	
 	//Tx_Extbase_Utility_Extension::registerModuleFunction(

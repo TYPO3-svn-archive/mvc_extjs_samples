@@ -1,0 +1,1 @@
+MvcExtjsSamples.ExtDirectModule.Chat.initApplication();
