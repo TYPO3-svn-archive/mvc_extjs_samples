@@ -10,7 +10,7 @@ $TCA['tx_mvcextjssamples_domain_model_chat'] = array (
 	),
 	'feInterface' => $TCA['tx_mvcextjssamples_domain_model_chat']['feInterface'],
 	'columns' => array(
-		'backendUser' => array(
+		'backend_user' => array(
 			'exclude' => 0,		
 			'label' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_chat.backenduser',		
 			'config' => array(
@@ -31,6 +31,17 @@ $TCA['tx_mvcextjssamples_domain_model_chat'] = array (
 				'MM' => 'tx_mvcextjssamples_chat_channel_mm',
 				'minitems' => 1,
 				'maxitems' => 1,
+			)
+		),
+		'last_query' => array(
+			'exclude' => 0,		
+			'label' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_chat.last_query',		
+			'config'  => array(
+				'type'    => 'input',
+				'size' => 12,
+				'checkbox' => 1,
+				'eval' => 'datetime, required',
+				'default' => time()
 			)
 		),
 	),
@@ -56,7 +67,7 @@ $TCA['tx_mvcextjssamples_domain_model_channel'] = array (
 				'type' => 'select',
 				'foreign_table' => 'tx_mvcextjssamples_domain_model_message',
 				'foreign_class' => 'Tx_MvcExtjsSamples_Domain_Model_Message',
-				'MM' => 'tx_mvcextjssamples_channel_message_mm',
+				'foreign_field' => 'channel',
 				'minitems' => 1,
 				'maxitems' => 1,
 			)
@@ -84,7 +95,7 @@ $TCA['tx_mvcextjssamples_domain_model_message'] = array (
 	),
 	'feInterface' => $TCA['tx_mvcextjssamples_domain_model_message']['feInterface'],
 	'columns' => array(
-		'backendUser' => array(
+		'backend_user' => array(
 			'exclude' => 0,		
 			'label' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_message.backenduser',		
 			'config' => array(
@@ -95,11 +106,33 @@ $TCA['tx_mvcextjssamples_domain_model_message'] = array (
 				'maxitems' => 1,
 			)
 		),
+		'channel' => array(
+			'exclude' => 0,		
+			'label' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_message.channel',		
+			'config' => array(
+				'type' => 'select',
+				'foreign_table' => 'tx_mMvcextjssamples_domain_model_channel',
+				'foreign_class' => 'Tx_MvcExtjsSamples_Domain_Model_Channel',
+				'minitems' => 1,
+				'maxitems' => 1,
+			)
+		),
 		'text' => array(
 			'exclude' => 0,		
 			'label' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_message.text',		
 			'config' => array(
 				'type' => 'input',
+			)
+		),
+		'creation_date' => array(
+			'exclude' => 0,		
+			'label' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_message.creation_date',		
+			'config'  => array(
+				'type'    => 'input',
+				'size' => 12,
+				'checkbox' => 1,
+				'eval' => 'datetime, required',
+				'default' => time()
 			)
 		),
 	),

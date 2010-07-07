@@ -50,12 +50,30 @@ class Tx_MvcExtjsSamples_Controller_ChatController extends Tx_Extbase_MVC_Contro
 	protected $channelRepository;
 	
 	/**
+	 * @var Tx_MvcExtjsSamples_Domain_Repository_MessageRepository
+	 */
+	protected $messageRepository;
+	
+	/**
 	 * @see Classes/MVC/Controller/Tx_Extbase_MVC_Controller_ActionController#initializeAction()
 	 */
 	public function initializeAction() {
 		$this->backendUserRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_BackendUserRepository');
 		$this->chatRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_ChatRepository');
 		$this->channelRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_ChannelRepository');
+		$this->messageRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MessageRepository');
+	}
+	
+	/**
+	 * Renders the whole HTML markup containing the JavaScript code.
+	 * Have a look at the template file!
+	 * 
+	 * @return string
+	 */
+	public function indexAction() {
+		// hand over data that is neccessary for building up the first markup
+		// maybe objects to fill up array stores or other settings
+		// TODO: LLL and user access - where to put the logic for those requests?
 	}
 	
 	/**
@@ -67,6 +85,7 @@ class Tx_MvcExtjsSamples_Controller_ChatController extends Tx_Extbase_MVC_Contro
 		$backendUser = $this->backendUserRepository->findCurrent();
 		$chat = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_Chat',$backendUser);
 		$this->chatRepository->add($chat);
+			// we persist here, because we want the response to include the uid.
 		Tx_Extbase_Dispatcher::getPersistenceManager()->persistAll();
 		$this->flashMessages->add('Connected with chat server',Tx_Extbase_MVC_Controller_FlashMessage::TYPE_OK);
 		$this->view->assign('chat',$chat);
@@ -81,64 +100,36 @@ class Tx_MvcExtjsSamples_Controller_ChatController extends Tx_Extbase_MVC_Contro
 	 */
 	public function disconnectAction(Tx_MvcExtjsSamples_Domain_Model_Chat $chat) {
 		$this->chatRepository->remove($chat);
-		Tx_Extbase_Dispatcher::getPersistenceManager()->persistAll();
 		$this->flashMessages->add('Disconnected!',Tx_Extbase_MVC_Controller_FlashMessage::TYPE_OK);
 	}
 	
 	/**
+	 * Join a Channel.
 	 * 
-	 * @return string
-	 */
-	public function receiveChannelsAction() {
-		$channels = $this->channelRepository->findAll();
-		t3lib_div::sysLog('channels: ' . print_r($channels,true),'MvcExtjsSamples',0);
-		$this->view->assign('channels',$channels);
-		$this->flashMessages->add('Channel list received',Tx_Extbase_MVC_Controller_FlashMessage::TYPE_OK);
-	}
-	
-	/**
-	 * Ask for the Chat('s changes).
-	 * TODO: Not sure where to manage that we just transfer new data on each query.
-	 * Answer with the full object (data) description.
-	 * 
-	 * @param Tx_MvcExtjsSamples_Domain_Model_Chat $chat
-	 * @return string
-	 * @dontverifyrequesthash
-	 */
-	public function queryAction(Tx_MvcExtjsSamples_Domain_Model_Chat $chat) {
-		$chat->setTstamp(new DateTime());
-		$this->view->assign('chat',$chat);
-	}
-	
-	/**
-	 * Creates a channel and adds it to the Chat.
-	 * 
-	 * @param string $name
-	 * @param Tx_MvcExtjsSamples_Domain_Model_Chat $chat
-	 * @return string
-	 * @dontverifyrequesthash
-	 */
-	public function createChannelAction($name, Tx_MvcExtjsSamples_Domain_Model_Chat $chat) {
-		$channel = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_Channel',$name);
-		$chat->addChannel($channel);
-		Tx_Extbase_Dispatcher::getPersistenceManager()->persistAll();
-		$this->flashMessages->add('Channel: ' . $name . ' succesfully created.',Tx_Extbase_MVC_Controller_FlashMessage::TYPE_OK);
-		$this->view->assign('channel',$channel);
-	}
-	
-	/**
-	 * Sends a new Message to a Channel.
-	 * 
-	 * @param string $text
 	 * @param Tx_MvcExtjsSamples_Domain_Model_Channel $channel
 	 * @param Tx_MvcExtjsSamples_Domain_Model_Chat $chat
 	 * @return string
 	 * @dontverifyrequesthash
 	 */
-	public function sendMessageAction($text, Tx_MvcExtjsSamples_Domain_Model_Channel $channel, Tx_MvcExtjsSamples_Domain_Model_Chat $chat) {
-		$message = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Model_Message', $text, $this->backendUserRepository->findCurrent());
-		$channel->addMessage($message);
-		$this->view->assign('message',$message);
+	public function joinChannelAction(Tx_MvcExtjsSamples_Domain_Model_Channel $channel, Tx_MvcExtjsSamples_Domain_Model_Chat $chat) {
+		$chat->addChannel($channel);
+		$this->flashMessages->add('Channel: ' . $name . ' succesfully joined.',Tx_Extbase_MVC_Controller_FlashMessage::TYPE_OK);
+		$this->view->assign('channel',$channel);
+	}
+	
+	/**
+	 * Query for new messages.
+	 * 
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Chat $chat
+	 * @return string
+	 * @dontverifyrequesthash
+	 */
+	public function queryAction(Tx_MvcExtjsSamples_Domain_Model_Chat $chat = NULL) {
+		t3lib_div::sysLog('lastMessage: ' . print_r($lastMessage,true),'MvcExtjsSamples',0);
+		$messages = $this->messageRepository->findByLastQuery($chat);
+		t3lib_div::sysLog('message: ' . print_r($messages,true),'MvcExtjsSamples',0);
+		$chat->setLastQuery(new DateTime());
+		$this->view->assign('messages',$messages);
 	}
 	
 }

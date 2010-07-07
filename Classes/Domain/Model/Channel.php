@@ -52,6 +52,7 @@ class Tx_MvcExtjsSamples_Domain_Model_Channel extends Tx_Extbase_DomainObject_Ab
 	 */
 	public function __construct($name='') {
 		$this->name = $name;
+		$this->messages = t3lib_div::makeInstance('Tx_Extbase_Persistence_ObjectStorage');
 	}
 	
 	/**

@@ -49,6 +49,11 @@ class Tx_MvcExtjsSamples_Domain_Model_Chat extends Tx_Extbase_DomainObject_Abstr
 	protected $start;
 	
 	/**
+	 * @var DateTime
+	 */
+	protected $lastQuery;
+	
+	/**
 	 * Default Constructor.
 	 * 
 	 * @param Default Constructor. $backendUser
@@ -56,6 +61,7 @@ class Tx_MvcExtjsSamples_Domain_Model_Chat extends Tx_Extbase_DomainObject_Abstr
 	public function __construct(Tx_MvcExtjsSamples_Domain_Model_BackendUser $backendUser = NULL) {
 		$this->backendUser = $backendUser;
 		$this->start = new DateTime();
+		$this->lastQuery = new DateTime();
 	}
 	
 	/**
@@ -65,6 +71,24 @@ class Tx_MvcExtjsSamples_Domain_Model_Chat extends Tx_Extbase_DomainObject_Abstr
 	 */
 	public function getStart() {
 		return $this->start;
+	}
+	
+	/**
+	 * Returns the name.
+	 * 
+	 * @return string
+	 */
+	public function getLastQuery() {
+		return $this->lastQuery;
+	}
+	
+	/**
+	 * 
+	 * @param DateTime $tstamp
+	 * @return void
+	 */
+	public function setLastQuery(DateTime $lastQuery) {
+		$this->lastQuery = $lastQuery;
 	}
 	
 	/**
@@ -87,7 +111,7 @@ class Tx_MvcExtjsSamples_Domain_Model_Chat extends Tx_Extbase_DomainObject_Abstr
 	}
 	
 	/**
-	 * Returns the channels.
+	 * Returns the Channels.
 	 * 
 	 * @return string
 	 */
@@ -96,13 +120,23 @@ class Tx_MvcExtjsSamples_Domain_Model_Chat extends Tx_Extbase_DomainObject_Abstr
 	}
 	
 	/**
-	 * Adds a Channel to the Chat.
+	 * Adds a Channel.
 	 * 
 	 * @param Tx_MvcExtjsSamples_Domain_Model_Channel $channel
 	 * @return void
 	 */
 	public function addChannel(Tx_MvcExtjsSamples_Domain_Model_Channel $channel) {
 		$this->channels->attach($channel);
+	}
+	
+	/**
+	 * Removes a Channel.
+	 * 
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Channel $channel
+	 * @return void
+	 */
+	public function removeChannel(Tx_MvcExtjsSamples_Domain_Model_Channel $channel) {
+		$this->channels->detach($channel);
 	}
 	
 	/**

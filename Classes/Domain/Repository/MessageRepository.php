@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010 Dennis Ahrens <dennis.ahrens@googlemail.com> 
+*  (c) 2010 Dennis Ahrens <dennis.ahrens@fh-hannover.de>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,28 +23,28 @@
 ***************************************************************/
 
 /**
- * The Ext.Direct Module shows up how to use extbase, fluid and extjs with support for Ext.Direct.
- * It should give an overview about how to use mvc_extjs.
+ * A Message Repository.
  *
- * @category    Controller
- * @package     TYPO3
- * @subpackage  tx_mvcextjssamples
- * @author      Dennis Ahrens <dennis.ahrens@googlemail.com> 
+ * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
+ * @author		Ruben Hohndorf <hohndorf@stud.fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
+ * @version     SVN: $Id:$
  */
-class Tx_MvcExtjsSamples_Controller_ExtDirectModuleController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_MvcExtjsSamples_Domain_Repository_MessageRepository extends Tx_Extbase_Persistence_Repository {
 	
 	/**
-	 * Renders the whole HTML markup containing the JavaScript code.
-	 * Have a look at the template file!
+	 * Finds all Messages related to a Chat('s joined Channels) and the last DateTime the Chat
+	 * has queried for data.
 	 * 
-	 * @return string
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Chat $chat
+	 * @return array
 	 */
-	public function indexAction() {
-		
+	public function findByLastQuery(Tx_MvcExtjsSamples_Domain_Model_Chat $chat) {
+		$query = $this->createQuery();
+		$channelConstraint = $query->equals('channel',$chat->getChannels());
+		$dateConstraint = $query->greaterThan('creationDate',$chat->getLastQuery());
+		return $query->matching($query->logicalAnd($channelConstraint, $dateConstraint))->execute();
 	}
 	
 }
-
 ?>

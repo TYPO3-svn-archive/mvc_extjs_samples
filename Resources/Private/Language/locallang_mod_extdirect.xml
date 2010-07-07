@@ -7,9 +7,9 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<!--  Texts for TYPO3 Backend integration -->
-			<label index="mlang_tabs_tab">Ext.Direct</label>
-			<label index="mlang_labels_tabdescr">Just Sample</label>
-			<label index="mlang_labels_tablabel">Ext.Direct functionality sample from MvcExtjsSamples</label>
+			<label index="mlang_tabs_tab">Ext.Direct Chat</label>
+			<label index="mlang_labels_tabdescr">Backenduser chat</label>
+			<label index="mlang_labels_tablabel">Ext.Direct functionality sample from MvcExtjsSamples using the domain chat</label>
 		</languageKey>
 	</data>
 </T3locallang>

@@ -132,7 +132,6 @@ $TCA['tx_mvcextjssamples_domain_model_chat'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_chat',		
 		'label'	=> 'cruser_id',
-		'tstamp' => 'tstamp',
 		'default_sortby' => 'ORDER BY cruser_id',
 		'adminOnly' => 1,
 		'rootLevel' => 1,	
@@ -145,7 +144,6 @@ $TCA['tx_mvcextjssamples_domain_model_channel'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_channel',		
 		'label'	=> 'name',
-		'tstamp' => 'tstamp',
 		'default_sortby' => 'ORDER BY name',
 		'adminOnly' => 1,
 		'rootLevel' => 1,	
@@ -158,7 +156,6 @@ $TCA['tx_mvcextjssamples_domain_model_message'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_db.xml:tx_mvcextjssamples_domain_model_message',		
 		'label'	=> 'text',
-		'tstamp' => 'tstamp',
 		'default_sortby' => 'ORDER BY text',
 		'adminOnly' => 1,
 		'rootLevel' => 1,	
@@ -223,12 +220,12 @@ if (TYPO3_MODE == 'BE') {
 		'ExtDirect',  // Submodule key
 		'',           // Position
 		array(
-			'ExtDirectModule' => 'index',
-			'Chat' => 'connect,disconnect,query,createChannel,receiveChannels,sendMessage'
+			'Chat' => 'index,connect,disconnect,joinChannel,query',
+			'Channel' => 'index,create,sendMessage'
 		),
 		array(
 			'access' => 'user,group',
-			'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/movie_add.png',
+			'icon'   => 'EXT:mvc_extjs_samples/Resources/Public/Icons/comments.png',
 			'labels' => 'LLL:EXT:mvc_extjs_samples/Resources/Private/Language/locallang_mod_extdirect.xml',
 		)
 	);

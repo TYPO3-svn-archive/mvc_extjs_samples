@@ -24,7 +24,7 @@
 ***************************************************************/
 
 /**
- * A Message - written by a Backend User at DateTime.
+ * A Message - written by a Backend User at DateTime belongs to a Channel.
  *
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
@@ -45,11 +45,42 @@ class Tx_MvcExtjsSamples_Domain_Model_Message extends Tx_Extbase_DomainObject_Ab
 	protected $backendUser;
 	
 	/**
+	 * @var DateTime
+	 */
+	protected $creationDate;
+	
+	/**
+	 * @var Tx_MvcExtjsSamples_Domain_Model_Channel
+	 */
+	protected $channel;
+	
+	/**
 	 * Default Constructor.
 	 */
-	public function __construct($text, Tx_MvcExtjsSamples_Domain_Model_BackendUser $beUser = NULL) {
+	public function __construct($text = '', Tx_MvcExtjsSamples_Domain_Model_BackendUser $beUser = NULL, $channel = NULL) {
 		$this->text = $text;
 		$this->backendUser = $beUser;
+		$this->creationDate = new DateTime();
+		$this->channel = $channel;
+	}
+	
+	/**
+	 * Gets the DateTime when this message was created.
+	 * 
+	 * @return DateTime
+	 */
+	public function getCreationDate() {
+		return $this->creationDate;
+	}
+	
+	/**
+	 * Sets the DateTime when this message was created.
+	 * 
+	 * @param DateTime $date
+	 * @return void
+	 */
+	public function setCreationDate(DateTime $date) {
+		$this->creationDate = $date;
 	}
 	
 	/**
@@ -86,8 +117,27 @@ class Tx_MvcExtjsSamples_Domain_Model_Message extends Tx_Extbase_DomainObject_Ab
 	 *
 	 * @return Tx_MvcExtjsSamples_Domain_Model_BackendUser
 	 */
-	public function getBackendUser(Tx_MvcExtjsSamples_Domain_Model_BackendUser $usergroup) {
+	public function getBackendUser() {
 		return $this->backendUser;
+	}
+	
+	/**
+	 * Sets the channel.
+	 *
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Channel $channel
+	 * @return void
+	 */
+	public function setChannel(Tx_MvcExtjsSamples_Domain_Model_Channel $channel) {
+		$this->channel = $channel;
+	}
+
+	/**
+	 * Returns the channel.
+	 *
+	 * @return Tx_MvcExtjsSamples_Domain_Model_Channel
+	 */
+	public function getChannel() {
+		return $this->channel;
 	}
 	
 }

@@ -46,8 +46,8 @@ CREATE TABLE tx_mvcextjssamples_domain_model_genre (
 CREATE TABLE tx_mvcextjssamples_domain_model_chat (
     uid int(11) NOT NULL auto_increment,
     pid int(11) DEFAULT '0' NOT NULL,
-    tstamp int(11) DEFAULT '0' NOT NULL,
-    backendUser int(11) DEFAULT '0' NOT NULL,
+    last_query int(11) DEFAULT '0' NOT NULL,
+    backend_user int(11) DEFAULT '0' NOT NULL,
     channels int(11) DEFAULT '0' NOT NULL,
     
     PRIMARY KEY (uid),
@@ -57,7 +57,6 @@ CREATE TABLE tx_mvcextjssamples_domain_model_chat (
 CREATE TABLE tx_mvcextjssamples_domain_model_channel (
     uid int(11) NOT NULL auto_increment,
     pid int(11) DEFAULT '0' NOT NULL,
-    tstamp int(11) DEFAULT '0' NOT NULL,
     name tinytext,
     messages int(11) DEFAULT '0' NOT NULL,
     
@@ -68,8 +67,9 @@ CREATE TABLE tx_mvcextjssamples_domain_model_channel (
 CREATE TABLE tx_mvcextjssamples_domain_model_message (
     uid int(11) NOT NULL auto_increment,
     pid int(11) DEFAULT '0' NOT NULL,
-    tstamp int(11) DEFAULT '0' NOT NULL,
-    backendUser int(11) DEFAULT '0' NOT NULL,
+    creation_date int(11) DEFAULT '0' NOT NULL,
+    backend_user int(11) DEFAULT '0' NOT NULL,
+    channel int(11) DEFAULT '0' NOT NULL,
     text tinytext,
     
     PRIMARY KEY (uid),
@@ -90,16 +90,6 @@ CREATE TABLE tx_mvcextjssamples_chat_channel_mm (
 );
 
 CREATE TABLE tx_mvcextjssamples_backenduser_message_mm (
-	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	
-	KEY uid_local (uid_local),
-	KEY uid_foreign (uid_foreign)
-);
-
-CREATE TABLE tx_mvcextjssamples_channel_message_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,

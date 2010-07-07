@@ -1,0 +1,6 @@
+{namespace ext=Tx_MvcExtjs_ViewHelpers}
+<ext:Json.Array>
+	<f:for each="{messages}" as="message" >
+		<ext:Json.Object ref="{message}" />
+	</f:for>
+</ext:Json.Array>
