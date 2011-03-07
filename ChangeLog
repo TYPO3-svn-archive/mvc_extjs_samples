@@ -1,3 +1,7 @@
+2011-03-07  Dennis Ahrens  <dennis.ahrens@fh-hannover.de>
+
+	* Implemented a Sample Module using the backported ExtJS module contained in MvcExtjs
+
 2010-01-31 Dennis Ahrens <dennis.ahrens@googlemail.com>
 
 	* Refactoring of the ViewHelpers in mvc_extjs causes changes in the template-files for the viewbasedmodule

@@ -1,4 +1,0 @@
-{namespace ext=Tx_MvcExtjs_ViewHelpers}
-<ext:Json.MergeObjects>
-	<ext:Json.Object ref="{message}" />
-</ext:Json.MergeObjects>

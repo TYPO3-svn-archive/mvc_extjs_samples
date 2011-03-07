@@ -4,26 +4,5 @@
 
 $extensionClassesPath = t3lib_extMgm::extPath('mvc_extjs_samples') . 'Classes/';
 return array(
-	'tx_mvcextjssamples_controller_blankmodulecontroller' => $extensionClassesPath . 'Controller/BlankModuleController.php',
-	'tx_mvcextjssamples_controller_feuseradmincontroller' => $extensionClassesPath . 'Controller/FeUserAdminController.php',
-	'tx_mvcextjssamples_controller_feedscontroller' => $extensionClassesPath . 'Controller/FeedsController.php',
-	'tx_mvcextjssamples_controller_genrecontroller' => $extensionClassesPath . 'Controller/GenreController.php',
-	'tx_mvcextjssamples_controller_helloworldcontroller' => $extensionClassesPath . 'Controller/HelloWorldController.php',
-	'tx_mvcextjssamples_controller_moviecontroller' => $extensionClassesPath . 'Controller/MovieController.php',
-	'tx_mvcextjssamples_controller_oldstylemodulecontroller' => $extensionClassesPath . 'Controller/OldStyleModuleController.php',
-	'tx_mvcextjssamples_controller_pictureslideshowcontroller' => $extensionClassesPath . 'Controller/PictureSlideShowController.php',
-	'tx_mvcextjssamples_controller_simpleformcontroller' => $extensionClassesPath . 'Controller/SimpleFormController.php',
-	'tx_mvcextjssamples_controller_simplemodulefunctioncontroller' => $extensionClassesPath . 'Controller/SimpleModuleFunctionController.php',
-	'tx_mvcextjssamples_controller_twittercontroller' => $extensionClassesPath . 'Controller/TwitterController.php',
-	'tx_mvcextjssamples_domain_model_genre' => $extensionClassesPath . 'Domain/Model/Genre.php',
-	'tx_mvcextjssamples_domain_model_genrerepository' => $extensionClassesPath . 'Domain/Model/GenreRepository.php',
-	'tx_mvcextjssamples_domain_model_movie' => $extensionClassesPath . 'Domain/Model/Movie.php',
-	'tx_mvcextjssamples_domain_model_movierepository' => $extensionClassesPath . 'Domain/Model/MovieRepository.php',
-	'tx_mvcextjssamples_domain_model_chat' => $extensionClassesPath . 'Domain/Model/Chat.php',
-	'tx_mvcextjssamples_domain_model_channel' => $extensionClassesPath . 'Domain/Model/Channel.php',
-	'tx_mvcextjssamples_domain_model_message' => $extensionClassesPath . 'Domain/Model/Message.php',
-	'tx_mvcextjssamples_domain_model_backenduser' => $extensionClassesPath . 'Domain/Model/BackendUser.php',
-	'tx_mvcextjssamples_domain_model_backenduserrepository' => $extensionClassesPath . 'Domain/Model/Message.php',
-	'tx_mvcextjssamples_domain_repository_chatrepository' => $extensionClassesPath . 'Domain/Model/ChatRepository.php',
 );
 ?>

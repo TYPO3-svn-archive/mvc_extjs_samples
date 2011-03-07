@@ -1,5 +1,0 @@
-{namespace ext=Tx_MvcExtjs_ViewHelpers}
-<ext:Json.MergeObjects>
-	<ext:Json.FlashMessages />
-	<ext:Json.StoreReadResponse data="{channels}" success="true" />
-</ext:Json.MergeObjects>

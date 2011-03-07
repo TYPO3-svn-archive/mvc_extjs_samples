@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module &quot;ViewBasedModule&quot; of extension MvcExtjsSamples</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<!--  Texts for TYPO3 Backend integration -->
+			<label index="mlang_tabs_tab">Movie Module</label>
+			<label index="mlang_labels_tabdescr">This module shows how MvcExtjs works together with extbase using ExtDirect.</label>
+			<label index="mlang_labels_tablabel">This module includes two Models, that have a 1:n Relation setted. You can create, delete, list and update them all.</label>
+		</languageKey>
+	</data>
+</T3locallang>

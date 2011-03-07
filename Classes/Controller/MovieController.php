@@ -32,23 +32,36 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Controller_ActionController {
+class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_MVC_Controller_ExtDirectActionController {
 
 	/**
 	 * @var Tx_MvcExtjsSamples_Domain_Repository_MovieRepository
 	 */
 	protected $movieRepository;
-
+	
+	/**
+	 * @var Tx_Extbase_Persistence_ManagerInterface
+	 * @inject
+	 */
+	protected $persistenceManager;
+	
+	/**
+	 * Injects the PersistenceManager.
+	 * 
+	 * @param Tx_Extbase_Persistence_ManagerInterface $persistenceManager
+	 */
+	public function injectPersistenceManager(Tx_Extbase_Persistence_ManagerInterface $persistenceManager) {
+		$this->persistenceManager = $persistenceManager;
+	}
+	
 	/**
 	 * Initializes the current action.
 	 *
 	 * @return void
 	 */
 	public function initializeAction() {
-			// Do not forget to call parent's initializeAction method
 		parent::initializeAction();
-		
-		$this->movieRepository = t3lib_div::makeInstance('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
+		$this->movieRepository = $this->objectManager->get('Tx_MvcExtjsSamples_Domain_Repository_MovieRepository');
 	}
 
 	/**
@@ -57,307 +70,62 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
-		$this->initializeExtJSAction();
+		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
+		$this->view->setConfiguration(array(
+			'data' => array(
+				'_descendAll' => self::resolveJsonViewConfiguration()
+			)
+		));
 		
-			// Store the relative path to image directories
-		$this->settingsExtJS->assign('coverPath', $this->extRelPath . 'Resources/Public/Images/');
-		$this->settingsExtJS->assign('iconsPath', $this->extRelPath . 'Resources/Public/Icons/');
+		$movies = $this->movieRepository->findAll();
+		$this->flashMessages->add('Loaded all Movies from Server side.','Movies loaded successfully', t3lib_FlashMessage::NOTICE);
 		
-		$this->uriBuilder->reset();
-		$this->settingsExtJS->assign('updateUrl', $this->uriBuilder->setTargetPageType(1249117053)->uriFor('update',array('format' => 'json')));
+		$this->view->assign('total', $movies->count());
+		$this->view->assign('data',$movies);
+		$this->view->assign('success',TRUE);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+	}
+	
+	/**
+	 * Creates a movie.
+	 * 
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie
+	 * @return string JSON output
+	 * @dontverifyrequesthash
+	 */
+	public function createAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie) {
+		$this->view->setVariablesToRender(array('data', 'success','flashMessages'));
+		$this->view->setConfiguration(array(
+			'data' =>  self::resolveJsonViewConfiguration()
+		));
+		$this->movieRepository->add($movie);
+		$this->persistenceManager->persistAll();
+		$this->flashMessages->add('Movie "' . $movie->getTitle() . '" has been created','Movie added', t3lib_FlashMessage::OK);
 		
-			// Enable quick tips
-		$this->enableExtJSQuickTips = TRUE;
-		$this->addJsInlineCode('
-			Ext.apply(Ext.QuickTips.getQuickTip(), {
-				maxWidth: 200,
-				minWidth: 100,
-				showDelay: 50,
-				trackMouse: true
-			});
-		');
+		$this->view->assign('success',TRUE);
+		$this->view->assign('data',$movie);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+	}
+	
+	/**
+	 * Deletes a movie.
+	 * 
+	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie
+	 * @return string JSON output
+	 * @dontverifyrequesthash
+	 */
+	public function destroyAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie) {
+		$this->view->setVariablesToRender(array('data', 'success','flashMessages'));
+		$this->view->setConfiguration(array(
+			'data' =>  self::resolveJsonViewConfiguration()
+		));
+		$this->movieRepository->remove($movie);
 		
-			// Create a validation type for the movie form
-		$this->addJsInlineCode('
-			Ext.form.VTypes.nameVal  = /^([A-Z]{1})[A-Za-z\-]+ ([A-Z]{1})[A-Za-z\-]+/;
-			Ext.form.VTypes.nameMask = /[A-Za-z\- ]/;
-			Ext.form.VTypes.nameText = "Invalid Director Name.";
-			Ext.form.VTypes.name = function(v) {
-				return Ext.form.VTypes.nameVal.test(v);
-			};
-		');
+		$this->flashMessages->add('Movie "' . $movie->getTitle() . '" has been deleted','Movie deleted', t3lib_FlashMessage::OK);
 		
-			// Create a few functions to manage movies
-		$this->addJsInlineCode('
-			var Movies = function() {
-				return {
-					editDetails : function(grid, index) {
-						var movie_form = Ext.getCmp("movie_view").findById("movie_form");
-						if (!movie_form.isVisible()) { movie_form.expand(); }
-						
-						var values = grid.getSelectionModel().getSelected().data;
-						
-						// Sets the form action URL
-						movie_form.getForm().url = ' . $this->settingsExtJS->getExtJS('updateUrl') . ';
-						
-						// TODO: Add this to a new setExtbaseValues() method on Ext.form.BasicForm
-						var field, id;
-						for(id in values){
-							fieldId = (id == "uid") ? "__identity" : id;
-							if(!Ext.isFunction(values[id]) && (field = movie_form.getForm().findField("tx_mvcextjssamples_movie[movie][" + fieldId + "]"))){
-								try { // TODO: handle multiple fields (radio button filmedIn) 
-									field.setValue(values[id]);
-									if(movie_form.getForm().trackResetOnLoad){
-										field.originalValue = field.getValue();
-									}
-								} catch (e) {}
-							}
-						} 
-					}
-				};
-			}();
-		');
-		
-			// Create a movie data store
-		$this->addJsInlineCode('
-			var moviesStore = new Ext.data.GroupingStore({
-				proxy: new Ext.data.HttpProxy({
-					url: "' . $this->uriBuilder
-					                    ->reset()
-					                    ->setTargetPageType(1249117053)
-					                    ->setFormat('xml')
-					                    ->uriFor('movies') . '"
-				}),
-				sortInfo: {
-					field: "genre",
-					direction: "ASC"
-				},
-				groupField: "genre",
-				reader: ' . Tx_MvcExtjs_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Movie') . ',
-				autoLoad: true
-			});
-		');
-		
-			// Create a genre data store
-		$this->addJsInlineCode('
-			var genresStore = new Ext.data.Store({
-				proxy: new Ext.data.HttpProxy({
-					url: "' . $this->uriBuilder
-					                    ->reset()
-					                    ->setTargetPageType(1249117332)
-					                    ->setFormat('xml')
-					                    ->uriFor('index', array(), 'Genre') . '"
-				}),
-				sortInfo: {
-					field: "name",
-					direction: "ASC"
-				},
-				reader: ' . Tx_MvcExtjs_ExtJS_Utility::getJSONReader('Tx_MvcExtjsSamples_Domain_Model_Genre') . ',
-				autoLoad: true
-			});
-		');
-		
-			// Create renderer functions
-		$this->addJsInlineCode('
-			function title_img(val, x, store) {
-				return "<img src=\"" + ' . $this->settingsExtJS->getExtJS('coverPath') . ' + "movie-" + store.data.uid + ".jpg\" style=\"width:50px; height:70px; float:left; margin-right:5px;\" />" +
-					"<b style=\"text-size:larger;\">" + val + "</b><br />" +
-					' . $this->getExtJSLabelKey('index.director') . ' + ": <i>" + store.data.director + "</i><br />" +
-					store.data.tagline;
-			}
-		');
-		
-			// [START] Complex layout (split among multiple call to $this->addJsInlineCode)
-		$this->addJsInlineCode('
-			var complexLayout = new Ext.Panel({
-				id: "movie_view",
-				height: 400,
-				layout: "border",
-				items: [
-		');
-		
-			// Create the toolbar
-		$this->addJsInlineCode('
-				{
-					region: "north",
-					xtype: "toolbar",
-					height: 28,
-					items: [{
-						xtype: "tbspacer"
-					},{
-						xtype: "tbbutton",
-						text: ' . $this->getExtJSLabelKey('index.movie.add') . ',
-						icon: ' . $this->settingsExtJS->getExtJS('iconsPath') . ' + "movie_add.png",
-						cls: "x-btn-text-icon",
-						handler: function(btn) {
-							Ext.Msg.alert("Movie", "Will now add a movie...");
-						}
-					},{
-						xtype: "tbbutton",
-						text: ' . $this->getExtJSLabelKey('index.movie.remove') . ',
-						icon: ' . $this->settingsExtJS->getExtJS('iconsPath') . ' + "movie_delete.png",
-						cls: "x-btn-text-icon",
-						handler: function(btn) {
-							Ext.Msg.alert("Movie", "Will now remove selected movie...");
-						}
-					}]
-				},
-		');
-
-			// Create the movie edit form
-		$this->addJsInlineCode('
-				{
-					region: "west",
-					xtype: "form",
-					id: "movie_form",
-					method: "post",
-					split: true,
-					collapsible: true,
-					collapsMode: "mini",
-					collapsed: true,
-					title: ' . $this->getExtJSLabelKey('index.form.title') . ',
-					bodyStyle: "padding:5px;",
-					width: 250,
-					minSize: 250,
-		 			items: ' . Tx_MvcExtjs_ExtJS_Array::create()
-						->addAll(Tx_MvcExtjs_ExtJS_Utility::getExtbaseFormElements($this->request, $this->request->getControllerActionName()))
-						->add(
-							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
-								->setXType('hidden')
-								->setObjectModelField('movie', '__identity')
-						)
-						->add(
-							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
-								->setXType('textfield')
-								->setObjectModelField('movie', 'title')
-								->setRaw('fieldLabel', $this->getExtJSLabelKey('index.title'))
-								->set('anchor', '100%')
-								->setRaw('allowBlank', 'false')
-								->setRaw('listeners',
-									'{
-										specialKey: function(f,e) {
-											if (e.getKey() == e.ENTER) {
-												// Send form
-											}
-										}
-									}')
-						)
-						->add(
-							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
-								->setXType('textfield')
-								->setObjectModelField('movie', 'director')
-								->setRaw('fieldLabel', $this->getExtJSLabelKey('index.director'))
-								->set('anchor', '100%')
-								->set('vtype', 'name')
-						)
-						/*
-						->add(
-							'{
-								xtype: "datefield",
-								fieldLabel: ' . $this->getExtJSLabelKey('index.released') . ',
-								name: "tx_mvcextjssamples_movie[movie][releaseDate]",
-								disabledDays: [6]
-							}'
-						)
-						->add(
-							'{
-								xtype: "radio",
-								fieldLabel: ' . $this->getExtJSLabelKey('index.filmedIn') . ',
-								name: "tx_mvcextjssamples_movie[movie][filmedIn]",
-								boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.color') . '
-							}'
-						)
-						->add(
-							'{
-								xtype: "radio",
-								hideLabel: false,
-								labelSeparator: "",
-								name: "tx_mvcextjssamples_movie[movie][filmedIn]",
-								boxLabel: ' . $this->getExtJSLabelKey('index.filmedIn.bw') . '
-							}'
-						)
-						->add(
-							'{
-								xtype: "combo",
-								fieldLabel: ' . $this->getExtJSLabelKey('index.genre') . ',
-								name: "updatedMovie[genre]",
-								mode: "local",
-								store: genresStore,
-								displayField: "name",
-								width: 130
-							}'
-						)
-						*/
-						->add(
-							Tx_MvcExtjs_ExtJS_FormElement::create($this->request)
-								->setXType('textarea')
-								->setObjectModelField('movie', 'tagline')
-								->setRaw('fieldLabel', $this->getExtJSLabelKey('index.tagline'))
-								->set('height', 80)
-								->set('anchor', '100%')
-						)
-						->build()
-					. ',
-					buttons: [{
-						text: ' . $this->getExtJSLabelKey('index.form.save') . ',
-						handler: function() {
-							Ext.getCmp("movie_view").findById("movie_form").getForm().submit({
-								success: function(f,a) {
-									// Refresh the grid as save worked
-									moviesStore.reload();
-								},
-								failure: function(f,a) {
-									console.log(a);
-									Ext.Msg.alert("Warning", a.result.errormsg);
-								}
-							});
-						}
-					},{
-						text: ' . $this->getExtJSLabelKey('index.form.reset') . ',
-						handler: function() {
-							Ext.getCmp("movie_view").findById("movie_form").getForm().reset();
-						}
-					}]
-				},
-		');
-		
-			// Create the list of movies as a grid
-		$this->addJsInlineCode('
-				{
-					region: "center",
-					xtype: "grid",
-					store: moviesStore,
-					stripeRows: true,
-					loadMask: true,
-					columns: [ 
-						{id: "title", header: ' . $this->getExtJSLabelKey('index.title') . ', dataIndex: "title", renderer: title_img},
-						{header: ' . $this->getExtJSLabelKey('index.director') . ', dataIndex: "director", hidden: true},
-						{header: ' . $this->getExtJSLabelKey('index.released') . ', dataIndex: "releaseDate", renderer: Ext.util.Format.dateRenderer("d.m.Y"), sortable: true},
-						{header: ' . $this->getExtJSLabelKey('index.genre') . ', dataIndex: "genre", hidden: true, renderer: function(v,r,o){return v.name;}},
-						{header: ' . $this->getExtJSLabelKey('index.tagline') . ', dataIndex: "tagline", hidden: true}
-					],
-					autoExpandColumn: "title",
-					listeners: {
-						rowdblclick: {
-							fn: Movies.editDetails
-						}
-					},
-					view: new Ext.grid.GroupingView(),
-					sm: new Ext.grid.RowSelectionModel({
-						singleSelect: true
-					})
-				}
-		');
-				
-			// [END] Complex layout: close it and... render it!
-		$this->addJsInlineCode('
-				]
-			});
-			
-			complexLayout.render("MvcExtjsSamples-Movie");
-		');
-		
-		$this->outputJsCode();
+		$this->view->assign('success',TRUE);
+		$this->view->assign('data',$movie);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
 	/**
@@ -366,34 +134,38 @@ class Tx_MvcExtjsSamples_Controller_MovieController extends Tx_MvcExtjs_ExtJS_Co
 	 * @param Tx_MvcExtjsSamples_Domain_Model_Movie $movie A clone of the original movie with the updated values already applied
 	 * @return void
 	 * @dontverifyrequesthash
-	 * @ajax
 	 */
 	public function updateAction(Tx_MvcExtjsSamples_Domain_Model_Movie $movie) {
-		try {
-			$this->movieRepository->update($movie);
-			$this->view->assign('data',$movie->_getProperties());
-			$this->view->assign('success',TRUE);
-			$this->view->assign('message','Genre updated');
-		} catch(Exception $e) {
-			$this->view->assign('data',array());
-			$this->view->assign('success',FALSE);
-			$this->view->assign('message','Genre update failed');
-			t3lib_div::sysLog($e->getTraceAsString(),'MvcExtjsSamples',1);
-		}
+		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
+		$this->view->setConfiguration(array(
+			'data' => self::resolveJsonViewConfiguration()
+		));
+		
+		$this->movieRepository->update($movie);
+		
+		$this->flashMessages->add('Movie "' . $movie->getTitle() . '" has been updated','Movie updated', t3lib_FlashMessage::OK);
+		
+		$this->view->assign('data',$movie);
+		$this->view->assign('success',TRUE);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
 	/**
-	 * Returns a list of movies as JSON.
+	 * Returns a configuration for the JsonView, that describes which fields should be rendered for
+	 * a forschungsprojekt record.
 	 * 
-	 * @return string The rendered view
+	 * @return array
 	 */
-	public function moviesAction() {
-			// Retrieve all movies from repository
-		$movies = $this->movieRepository->findAll();
-		$this->view->assign('movies', $movies);
+	static public function resolveJsonViewConfiguration() {
+		return array(
+					'_exposeObjectIdentifier' => TRUE,
+					'_only' => array('title','director','releaseDate','genre'),
+					'_descend' => array(
+						'releaseDate' => array(),
+						'genre' => Tx_MvcExtjsSamples_Controller_GenreController::resolveJsonViewConfiguration()
+					)
+				);
 	}
-	
-	
 	
 }
 ?>

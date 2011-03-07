@@ -1,32 +1,3 @@
-plugin.tx_mvcextjssamples.twitter {
- 	_CSS_DEFAULT_STYLE (
- 		 p.getMessage { white-space:normal;}
- 	)
-}
-
-plugin.tx_mvcextjssamples.feeds {
- 	_CSS_DEFAULT_STYLE (
- 		 p.message { white-space:normal;}
- 	)
-}
-
-plugin.tx_mvcextjssamples.pictureslideshow {
-	pictures = COA
-	pictures {
-	 	10 = TEXT
-	 	10.field = image
-	 	
-	 	20 = TEXT
-	 	20.field = uploads/pics/
-	 	
-	 	30 = TEXT
-	 	30.field.imagecaption
-	}
- 	_CSS_DEFAULT_STYLE (
- 		 div.PictureSlideShow { padding: 5px; height: 280px; width: 420px; background-color: #E6E6E0; }
- 	)
-}
-
 plugin.tx_mvcextjssamples {
 	persistence {
 			// Our records (from ext_tables_static+adt.sql) are stored at root
@@ -48,32 +19,5 @@ module.tx_mvcextjssamples {
 		templateRootPath = {$module.tx_mvcextjssamples.view.templateRootPath}
 		partialRootPath = {$module.tx_mvcextjssamples.view.partialRootPath}
 		layoutRootPath = {$module.tx_mvcextjssamples.view.layoutRootPath}
-	}
-}
-
-config.tx_extbase {
-	persistence {
-		enableAutomaticCacheClearing = 1
-		updateReferenceIndex = 0
-		classes {
-			Tx_MvcExtjsSamples_Domain_Model_BackendUser {
-				mapping {
-					tableName = be_users
-					columns {
-						usergroup.foreignClass = Tx_MvcExtjsSamples_Domain_Model_BackendUserGroup
-						lockToDomain.mapOnProperty = lockToDomain
-					}
-				}
-			}
-			Tx_MvcExtjsSamples_Domain_Model_BackendUserGroup {
-				mapping {
-					tableName = be_groups
-					columns {
-						subgroup.foreignClass = Tx_MvcExtjsSamples_Domain_Model_BackendUserGroup
-						lockToDomain.mapOnProperty = lockToDomain
-					}
-				}
-			}
-		}
 	}
 }

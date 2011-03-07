@@ -1,7 +1,8 @@
-
-Ext.namespace('MvcExtjsSamples.Genre'); 
-
-MvcExtjsSamples.Genre.GridPanel = Ext.extend(Ext.grid.GridPanel, {
+Ext.namespace('Ext.ux.TYPO3.MvcExtjsSamples.Genre'); 
+/**
+ * A GridPanel to display Genre records.
+ */
+Ext.ux.TYPO3.MvcExtjsSamples.Genre.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	constructor: function(config) {
 		
 		var editor = new Ext.ux.grid.RowEditor({
@@ -10,9 +11,11 @@ MvcExtjsSamples.Genre.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 
 		config = Ext.apply({
 			title: 'Genre List',
-			region: "center",
-			store: new MvcExtjsSamples.ViewBasedModule.GenreStore,
-			columns: MvcExtjsSamples.ViewBasedModule.GenreColumns,
+			columns: [{
+				dataIndex: 'name',
+				header: 'Name',
+				editor: new Ext.form.TextField()
+			}],
 			loadMask: {
 				msg: 'loading ...',
 			},
@@ -24,13 +27,19 @@ MvcExtjsSamples.Genre.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	            scope: this,
 	            handler: function(){
 	                var genre = new this.store.recordType({
-	                    name: 'New Genre',
+	                	name: 'New Genre'
 	                });
 	                editor.stopEditing();
 	                this.store.insert(0, genre);
-	                this.getView().refresh();
-	                this.getSelectionModel().selectRow(0);
-	                editor.startEditing(0);
+	                this.store.on('write', function(store, action, result, transaction, record) {
+	                	if (action == 'create') {
+	                		this.getView().refresh();
+	                		this.getSelectionModel().selectRow(0);
+	                		editor.startEditing(0);
+	                	}
+	                },this,{
+	                	single: true
+	                })
 	            }
 	        },{
                 icon: '../typo3/sysext/t3skin/icons/gfx/garbage.gif',
@@ -55,6 +64,6 @@ MvcExtjsSamples.Genre.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	        }]
 		}, config);
 
-		MvcExtjsSamples.Genre.GridPanel.superclass.constructor.call(this, config);
+		Ext.ux.TYPO3.MvcExtjsSamples.Genre.GridPanel.superclass.constructor.call(this, config);
 	}
 });

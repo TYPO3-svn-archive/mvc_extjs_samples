@@ -1,2 +1,0 @@
-{namespace mvcextjs=Tx_MvcExtjs_ViewHelpers}
-<mvcextjs:Json.StoreCreateResponse data="{data}" message="{message}" success="{success}" />
