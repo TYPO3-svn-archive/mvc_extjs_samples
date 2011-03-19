@@ -74,6 +74,7 @@ Ext.ux.TYPO3.MvcExtjsSamples.Movie.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				     */
 				    prepareValue: function(v) {
 				    	var object = {};
+				    	if (v == null) return {};
 				    	object[this.valueField] = v;
 				    	var r = this.findRecord(this.valueField, v);
 				    	if (r) {
