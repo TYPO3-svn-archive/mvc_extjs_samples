@@ -1,32 +1,3 @@
-plugin.tx_mvcextjssamples.twitter {
- 	_CSS_DEFAULT_STYLE (
- 		 p.getMessage { white-space:normal;}
- 	)
-}
-
-plugin.tx_mvcextjssamples.feeds {
- 	_CSS_DEFAULT_STYLE (
- 		 p.message { white-space:normal;}
- 	)
-}
-
-plugin.tx_mvcextjssamples.pictureslideshow {
-	pictures = COA
-	pictures {
-	 	10 = TEXT
-	 	10.field = image
-	 	
-	 	20 = TEXT
-	 	20.field = uploads/pics/
-	 	
-	 	30 = TEXT
-	 	30.field.imagecaption
-	}
- 	_CSS_DEFAULT_STYLE (
- 		 div.PictureSlideShow { padding: 5px; height: 280px; width: 420px; background-color: #E6E6E0; }
- 	)
-}
-
 plugin.tx_mvcextjssamples {
 	persistence {
 			// Our records (from ext_tables_static+adt.sql) are stored at root

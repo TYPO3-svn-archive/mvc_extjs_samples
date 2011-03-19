@@ -11,11 +11,11 @@ plugin.tx_mvcextjssamples {
 
 module.tx_mvcextjssamples {
 	view {
-			# cat=plugin.tx_mvcextjssamples/file; type=string; label=Path to template root (FE)
+			# cat=plugin.tx_mvcextjssamples/file; type=string; label=Path to template root (BE)
 		templateRootPath = EXT:mvc_extjs_samples/Resources/Private/Backend/Templates/
-			# cat=plugin.tx_mvcextjssamples/file; type=string; label=Path to template partials (FE)
+			# cat=plugin.tx_mvcextjssamples/file; type=string; label=Path to template partials (BE)
 		partialRootPath = EXT:mvc_extjs_samples/Resources/Private/Backend/Partials/
-			# cat=plugin.tx_mvcextjssamples/file; type=string; label=Path to template layouts (FE)
+			# cat=plugin.tx_mvcextjssamples/file; type=string; label=Path to template layouts (BE)
 		layoutRootPath = EXT:mvc_extjs_samples/Resources/Private/Backend/Layouts/
 	}
 }

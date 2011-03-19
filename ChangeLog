@@ -1,3 +1,12 @@
+2011-03-19 Dennis Ahrens <dennis.ahrens@fh-hannover.de>
+	
+	* Created a branch for the old samples called non_extdirect
+	* Merged changes from branch dispatcherrewrite
+
+2011-03-07  Dennis Ahrens  <dennis.ahrens@fh-hannover.de>
+
+	* Implemented a Sample Module using the backported ExtJS module contained in MvcExtjs
+
 2010-02-20  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Backported code from branch view
